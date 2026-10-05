@@ -1,0 +1,67 @@
+{
+  "projectSlug": "calimax",
+  "locale": "en",
+  "draft": false,
+  "title": "Calimax",
+  "seoDescription": "A unified e-commerce redesign for Calimax's mobile app and website, balancing a familiar regional brand with modern shopping flows and measurable commercial results.",
+  "summary": [
+    "Calimax is one of northwestern Mexico's most established supermarket chains, with strong brand recognition across Baja California and Sonora. The project covered both its mobile app and website—two independent channels that needed to work as one cohesive digital commerce experience.",
+    "I led the UX/UI work and coordinated two designers while owning client communication, design strategy, and creative direction. It was my first project with full ownership of a design team, aligning standards, distributing work, and maintaining consistency throughout the process."
+  ],
+  "year": "2023",
+  "client": "Calimax",
+  "url": "https://apps.apple.com/mx/app/calimax-app/id6504838972",
+  "category": "E-commerce",
+  "homepageOrder": 2,
+  "cover": {
+    "src": "/images/calimax-cover.webp",
+    "alt": "Calimax e-commerce website displayed on a laptop in a blue-and-red studio setting."
+  },
+  "problem": {
+    "title": "A familiar brand, a forgettable experience",
+    "paragraphs": [
+      "Customers and internal teams saw Calimax's app and website as outdated and poorly suited to online shopping. Navigation, product discovery, and checkout created friction that reduced engagement with the digital channels.",
+      "The strength of the brand added another layer of complexity: customers knew Calimax well, so every change carried a risk of disrupting the trust built around that familiarity."
+    ]
+  },
+  "objective": {
+    "title": "Evolving what customers already love",
+    "paragraphs": [
+      "The goal was to modernize both digital channels while making the core commerce journeys—product discovery, navigation, and checkout—significantly easier across app and web."
+    ],
+    "bullets": [
+      "Increase sales through the app and website",
+      "Improve the app-store rating",
+      "Grow weekly website visits"
+    ]
+  },
+  "process": {
+    "title": "From benchmark to outcome",
+    "stages": [
+      {"title":"Discover","body":"We benchmarked leading grocery and e-commerce apps to identify interaction patterns customers already understood and expected. This revealed where the Calimax experience lagged both visually and structurally, and which established mental models we could use."},
+      {"title":"Define","body":"The central challenge was modernizing a deeply familiar brand without alienating loyal customers. We framed the design direction as an evolution rather than a replacement, preserving recognition while improving each feature in detail."},
+      {"title":"Design","body":"We built a design system that refreshed the Calimax identity with a more dynamic visual language while keeping app and web consistent. New features used familiar commerce patterns identified during benchmarking. A comparative focus group helped us refine the main journeys with real feedback and reduce transition risk before final delivery."},
+      {"title":"Delivery","body":"Final deliverables included the complete design system, redesigned journeys for both platforms, and detailed UI specifications for engineering handoff. I presented the direction to Calimax stakeholders by connecting each decision to business goals and the value of the brand's existing relationship with customers."}
+    ]
+  },
+  "impact": {
+    "title": "Impact",
+    "description": "The redesign directly improved the main commercial indicators across both channels.",
+    "metrics": [
+      {"label":"Growth in app sales","value":"+20%"},
+      {"label":"Growth in web sales","value":"+15%"},
+      {"label":"App-store rating (previously 3.8)","value":"4.7★"},
+      {"label":"Increase in weekly website visits","value":"+35%"}
+    ]
+  },
+  "images": [
+    {"src":"/images/calimax-02.webp","alt":"Calimax mobile storefront displayed on a phone over a red chair."},
+    {"src":"/images/calimax-03.webp","alt":"Calimax product search results displayed on a laptop."},
+    {"src":"/images/calimax-04.webp","alt":"Product detail page from the redesigned Calimax website."},
+    {"src":"/images/calimax-05.webp","alt":"Redesigned Calimax mobile home screen with categories and promotions."},
+    {"src":"/images/calimax-06.webp","alt":"Calimax mobile checkout summary displayed on a phone."},
+    {"src":"/images/calimax-07.webp","alt":"Calimax sign-in experience displayed on a phone."},
+    {"src":"/images/calimax-08.webp","alt":"Calimax website home page displayed on a laptop."}
+  ],
+  "relatedSlug": "afore-movil"
+}

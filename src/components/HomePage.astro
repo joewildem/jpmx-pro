@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import ProjectCard from './ProjectCard.astro';
+import Contact from './Contact.astro';
+import type { CollectionEntry } from 'astro:content';
+type Home = CollectionEntry<'pages'>['data'];
+type Project = CollectionEntry<'projects'>['data'];
+interface Props { page: Home; projects: Project[]; }
+const { page, projects } = Astro.props;
+const locale = page.locale;
+---
+<BaseLayout title={page.seoTitle} description={page.seoDescription} locale={locale} path={locale === 'es' ? '/' : '/en/'}>
+  <div id="top"></div>
+  <Header locale={locale} />
+  <main>
+    <div class="hero-meta"><div class="container"><span>{page.location}</span><span class="availability">{page.availability}</span></div></div>
+    <section class="hero">
+      <div class="hero-content container" data-reveal>
+        <h1>{page.heroTitle}</h1>
+        <p class="hero-description">{page.heroDescription}</p>
+        <div class="button-row"><a class="button" href="#projects">{page.primaryCta}</a><a class="button button--accent" href="mailto:hello@jpmx.pro">{page.contactCta}</a></div>
+      </div>
+    </section>
+    <div class="now-bar"><div class="container"><span>{page.nowLabel}</span><span data-rotate data-items={JSON.stringify(page.nowItems)}>{page.nowItems[0]}</span></div></div>
+    <section class="section" id="projects">
+      <div class="container">
+        <p class="eyebrow" style="margin-bottom:28px">{page.projectsLabel}</p>
+        <div class="project-grid">{projects.map((project) => <ProjectCard project={project} locale={locale} />)}</div>
+      </div>
+    </section>
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <div class="about-copy" data-reveal>
+          <h2>{page.aboutTitle}</h2>
+          {page.aboutParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+          <div class="button-row" style="margin-top:28px"><a class="button" href="https://www.linkedin.com/in/joepalominoux/" target="_blank" rel="noreferrer">{page.linkedInLabel}</a><a class="button" href="/documents/joe-palomino-resume-2026.pdf" target="_blank">{page.resumeLabel}</a></div>
+        </div>
+        <div class="about-images" data-reveal><img src="/images/about-portrait.webp" alt={locale === 'es' ? 'Joe Palomino frente a un espejo.' : 'Joe Palomino standing in front of a mirror.'} loading="lazy" /><img src="/images/about-comics.webp" alt={locale === 'es' ? 'Colección de cómics y novelas gráficas.' : 'A collection of comic books and graphic novels.'} loading="lazy" /></div>
+      </div>
+    </section>
+    <section class="section" id="services">
+      <div class="container services-grid">
+        <h2 data-reveal>{page.servicesTitle}</h2>
+        <div>{page.services.map((service) => <article class="service" data-reveal><h3>{service.title}</h3><div class="skills">{service.skills.map((skill) => <span>{skill}</span>)}</div></article>)}</div>
+      </div>
+    </section>
+    <div class="ticker" aria-label={page.stats.join(', ')}><div class="ticker-track">{[...page.stats,...page.stats].map((stat) => <span>{stat}</span>)}</div></div>
+    <Contact page={page} />
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>

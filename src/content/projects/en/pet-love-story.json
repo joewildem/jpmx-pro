@@ -1,0 +1,10 @@
+{
+  "projectSlug":"pet-love-story","locale":"en","draft":true,"title":"Pet Love Story","seoDescription":"Draft case study.","summary":["Case study in progress."],"year":"2023","client":"Client","url":"","category":"Services","homepageOrder":99,
+  "cover":{"src":"/images/pet-love-story-cover.webp","alt":"Pet Love Story project cover."},
+  "problem":{"title":"Problem","paragraphs":[]},
+  "objective":{"title":"Objective","paragraphs":[],"bullets":[]},
+  "process":{"title":"Process","stages":[{"title":"Discover","body":""},{"title":"Define","body":""},{"title":"Design","body":""},{"title":"Delivery","body":""}]},
+  "impact":{"title":"Impact","description":"","metrics":[]},
+  "images":[{"src":"/images/pet-love-story-01.webp","alt":"Pet Love Story project image 1."},{"src":"/images/pet-love-story-02.webp","alt":"Pet Love Story project image 2."},{"src":"/images/pet-love-story-03.webp","alt":"Pet Love Story project image 3."}],
+  "relatedSlug":""
+}

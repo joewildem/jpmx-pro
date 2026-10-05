@@ -1,0 +1,68 @@
+{
+  "projectSlug": "afore-movil",
+  "locale": "en",
+  "draft": false,
+  "title": "Afore Móvil",
+  "seoDescription": "Afore Móvil is CONSAR's official app for Mexico's retirement savings system. I led the end-to-end UX/UI redesign for a large, diverse audience operating within strict regulatory constraints.",
+  "summary": [
+    "Afore Móvil is the official app of CONSAR, the regulatory body that oversees Mexico's retirement savings system. It serves millions of workers across multiple Afore institutions, each with its own brand identity. Redesigning it meant serving a large, diverse audience within strict regulatory constraints.",
+    "As Senior UX/UI Designer, I owned the end-to-end design process—from in-branch research and a heuristic evaluation of the existing app to stakeholder presentations, design system architecture, and moderated usability testing with real users."
+  ],
+  "year": "2023",
+  "client": "CONSAR",
+  "url": "https://apps.apple.com/mx/app/aforem%C3%B3vil/id1240001519",
+  "category": "Finance",
+  "homepageOrder": 1,
+  "cover": {
+    "src": "/images/afore-cover.webp",
+    "alt": "Three smartphones showing Afore Móvil home screens for BBVA, Profuturo, and Afore Azteca, each adapted to the institution's brand."
+  },
+  "problem": {
+    "title": "When the product is the problem",
+    "paragraphs": [
+      "The app averaged 2.5 stars across app stores. Reviews consistently described it as outdated, confusing, and unreliable, pushing people to visit a branch for tasks that should have been completed digitally.",
+      "Two core issues emerged: a visual experience that undermined trust and overly complex flows that users could not complete without help.",
+      "For a financial product regulated by government institutions, poor perceptions of quality and credibility had real consequences for users."
+    ]
+  },
+  "objective": {
+    "title": "Designing trust at scale",
+    "paragraphs": [
+      "The goal was to make the app feel modern, trustworthy, and capable, enabling people to complete complex retirement-related tasks independently. The solution had to work for millions of users with different levels of digital literacy and financial knowledge, registered across multiple Afore institutions under the same regulatory framework."
+    ],
+    "bullets": [
+      "Reduce flow abandonment through simpler processes",
+      "Raise the app-store rating above 4.0",
+      "Increase the number of transactions completed in the app"
+    ]
+  },
+  "process": {
+    "title": "From insight to interface",
+    "stages": [
+      {"title":"Discover","body":"We interviewed Afore advisors and customers in branches, meeting users in the context where they were solving the problems the app had failed to address. We paired this research with a heuristic evaluation based on Nielsen's ten usability heuristics to establish a clear baseline."},
+      {"title":"Define","body":"The research surfaced three critical pain points: low trust, technical language that excluded non-expert users, and processes burdened by unnecessary steps and requirements. We framed the UX direction around clarity, trust, and accessibility, and created voice-and-tone guidelines that replaced financial jargon with clear, empathetic language."},
+      {"title":"Design","body":"The central challenge was a multi-brand design system built on tokens and variables. Color palettes, logos, and brand assets needed to adapt dynamically to each user's Afore while every possible combination remained consistent and accessible. In parallel, we restructured transaction flows, removed redundant requirements, and validated each iteration through moderated usability testing."},
+      {"title":"Delivery","body":"Final deliverables included the complete design system and brand-token documentation, redesigned flows for the main transactions, detailed UI specifications for engineering handoff, and voice-and-tone guidelines. I presented the final direction to CONSAR stakeholders, connecting design decisions to research findings and implementation needs."}
+    ]
+  },
+  "impact": {
+    "title": "Impact",
+    "description": "The result is an app millions of people in Mexico can trust to manage their retirement savings independently and with less friction.",
+    "metrics": [
+      {"label":"Average app-store rating (previously 2.5)","value":"4.5 ★"},
+      {"label":"Increase in app-store downloads","value":"+20%"},
+      {"label":"Reduction in flow abandonment","value":"−15%"},
+      {"label":"Reduction in branch visits for transactions","value":"3→1"}
+    ]
+  },
+  "images": [
+    {"src":"/images/afore-02.webp","alt":"Afore Móvil CURP validation screen with consent controls and a clear primary action."},
+    {"src":"/images/afore-03.webp","alt":"Identity verification screen explaining facial recognition and the required ID document."},
+    {"src":"/images/afore-04.webp","alt":"Retirement calculator showing current balance, retirement age, savings contribution, and projected pension."},
+    {"src":"/images/afore-05.webp","alt":"ID capture flow scanning the front of a Mexican voter identification card."},
+    {"src":"/images/afore-06.webp","alt":"Payment method form for adding a debit card to Afore Móvil."},
+    {"src":"/images/afore-07.webp","alt":"Savings goal setup showing target amount, current progress, and target date."},
+    {"src":"/images/afore-08.webp","alt":"Multi-brand Afore Móvil dashboard adapted to the SURA identity."}
+  ],
+  "relatedSlug": "calimax"
+}

@@ -1,0 +1,14 @@
+---
+import type { CollectionEntry } from 'astro:content';
+type Project = CollectionEntry<'projects'>['data'];
+interface Props { project: Project; locale: 'es'|'en'; }
+const { project, locale } = Astro.props;
+const href = `${locale === 'en' ? '/en' : ''}/projects/${project.projectSlug}`;
+---
+<a class="project-card" href={href} data-reveal>
+  <img src={project.cover.src} alt={project.cover.alt} width="1800" height="1350" loading="lazy" />
+  <div class="project-card-copy">
+    <div class="project-card-meta"><span>{project.year}</span><span class="pill">{project.category}</span></div>
+    <h2>{project.title}</h2>
+  </div>
+</a>

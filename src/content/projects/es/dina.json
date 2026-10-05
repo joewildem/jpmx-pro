@@ -1,0 +1,90 @@
+{
+  "projectSlug": "dina",
+  "locale": "es",
+  "draft": true,
+  "title": "DINA",
+  "seoDescription": "A healthy snack subscription service that curates personalized snack boxes based on your dietary preferences",
+  "summary": [
+    "A healthy snack subscription service that curates personalized snack boxes based on your dietary preferences"
+  ],
+  "year": "2023",
+  "client": "Cliente",
+  "url": "jpmx.pro",
+  "category": "Transporte",
+  "homepageOrder": 3,
+  "cover": {
+    "src": "/images/dina-cover.webp",
+    "alt": "Vista principal del proyecto DINA"
+  },
+  "problem": {
+    "title": "Problem",
+    "paragraphs": [
+      "Finding healthy and convenient snack options that align with one's dietary preferences can be a challenge in today's fast-paced lifestyle. Many individuals struggle to navigate the overwhelming array of snack choices available, often resorting to unhealthy options due to limited time and information. Existing snack subscription services often lack personalization, leaving consumers with limited control over the snacks they receive and hindering their ability to maintain a balanced and nourishing diet."
+    ]
+  },
+  "objective": {
+    "title": "Objetctive",
+    "paragraphs": [
+      "Snackify is a game-changing healthy snack subscription service that solves the aforementioned challenges by curating personalized snack boxes tailored to individuals' specific dietary preferences. By leveraging advanced algorithms and an extensive selection of high-quality snacks, Snackify offers a convenient and customized solution for health-conscious consumers. With Snackify, individuals can discover new and exciting snacks that align with their dietary needs, fostering a balanced and enjoyable snacking experience."
+    ],
+    "bullets": []
+  },
+  "process": {
+    "title": "",
+    "stages": [
+      {
+        "title": "Descubrir",
+        "body": ""
+      },
+      {
+        "title": "Definir",
+        "body": ""
+      },
+      {
+        "title": "Diseñar",
+        "body": ""
+      },
+      {
+        "title": "Entrega",
+        "body": ""
+      }
+    ]
+  },
+  "impact": {
+    "title": "Impact",
+    "description": "Post launch, our analytics team tracked how the new feed affected our core metrics. The results showed a significant increase in the overall usage of our app.",
+    "metrics": [
+      {
+        "label": "KPI",
+        "value": "99"
+      },
+      {
+        "label": "KPI",
+        "value": "99"
+      },
+      {
+        "label": "KPI",
+        "value": "99"
+      },
+      {
+        "label": "KPI",
+        "value": "99"
+      }
+    ]
+  },
+  "images": [
+    {
+      "src": "/images/dina-01.webp",
+      "alt": "DINA: vista del producto 1"
+    },
+    {
+      "src": "/images/dina-02.webp",
+      "alt": "DINA: vista del producto 2"
+    },
+    {
+      "src": "/images/dina-03.webp",
+      "alt": "DINA: vista del producto 3"
+    }
+  ],
+  "relatedSlug": ""
+}

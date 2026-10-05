@@ -1,0 +1,7 @@
+---
+import HomePage from '../components/HomePage.astro';
+import { getHome, getPublishedProjects } from '../lib/content';
+const page = await getHome('es');
+const projects = await getPublishedProjects('es');
+---
+<HomePage page={page} projects={projects} />

@@ -1,0 +1,113 @@
+{
+  "projectSlug": "afore-movil",
+  "locale": "es",
+  "draft": false,
+  "title": "Afore Móvil",
+  "seoDescription": "Afore Móvil es la aplicación móvil oficial de CONSAR, el organismo regulador del sistema de ahorro para el retiro en México. La app atiende a millones de trabajadores a través de múltiples instituciones de Afore, cada una con su propia identidad de marca. El rediseño implicaba atender una audiencia masiva y diversa, bajo restricciones regulatorias estrictas.",
+  "summary": [
+    "Afore Móvil es la aplicación móvil oficial de CONSAR, el organismo regulador del sistema de ahorro para el retiro en México. La app atiende a millones de trabajadores a través de múltiples instituciones de Afore, cada una con su propia identidad de marca. El rediseño implicaba atender una audiencia masiva y diversa, bajo restricciones regulatorias estrictas.",
+    "Participé como Sr. UX/UI Designer, siendo responsable del proceso de diseño de extremo a extremo: desde la investigación en sucursales y la evaluación heurística de la app anterior, hasta las presentaciones con el cliente, la arquitectura del sistema de diseño y las pruebas de usabilidad moderadas con usuarios reales."
+  ],
+  "year": "2023",
+  "client": "CONSAR",
+  "url": "https://apps.apple.com/mx/app/aforem%C3%B3vil/id1240001519",
+  "category": "Finanzas",
+  "homepageOrder": 1,
+  "cover": {
+    "src": "/images/afore-cover.webp",
+    "alt": "Tres smartphones mostrando la pantalla principal de la app Afore Móvil con diferentes temas de marca — BBVA (rojo), Profuturo (azul) y Afore Azteca (verde) — con un saldo total de $285,645.19 MXN y acceso rápido a ahorro, calculadora de pensión y estado de cuenta."
+  },
+  "problem": {
+    "title": "Cuando el producto es el problema",
+    "paragraphs": [
+      "La app tenía una calificación promedio de 2.5 estrellas en las tiendas de aplicaciones. Las reseñas de los usuarios la describían consistentemente como anticuada, confusa y poco confiable, orillando a las personas a visitar sucursales físicas para trámites que deberían ser digitales.",
+      "Dos problemas centrales emergieron: una experiencia visual que disminuía la confianza, y procesos con demasiados pasos, imposibles de completar sin ayuda.",
+      "Para un producto financiero regulado por instituciones gubernamentales, la baja percepción de calidad y credibilidad tenía consecuencias reales para los usuarios."
+    ]
+  },
+  "objective": {
+    "title": "Diseñar confianza a escala",
+    "paragraphs": [
+      "El objetivo fue rediseñar la app para que fuera percibida como moderna, confiable y capaz, permitiendo a los usuarios completar trámites complejos de manera independiente, sin necesidad de visitar una sucursal. Lograrlo implicaba considerar millones de usuarios con distintos niveles de alfabetización digital, perfiles financieros diversos y registrados en diferentes instituciones de Afore, todo dentro de un mismo marco regulatorio."
+    ],
+    "bullets": [
+      "Reducir el abandono de flujos mediante procesos simplificados",
+      "Subir la calificación en tiendas por encima de 4.0",
+      "Aumentar el número de trámites realizados desde la app."
+    ]
+  },
+  "process": {
+    "title": "Del hallazgo a la interfaz",
+    "stages": [
+      {
+        "title": "Descubrir",
+        "body": "Realizamos entrevistas en sucursales con asesores de Afore y clientes, una decisión deliberada para encontrar a los usuarios en el contexto donde resolvían lo que la app no lograba hacer. Complementamos esto con una evaluación heurística de la app existente, documentando los hallazgos correspondientes a los 10 principios de Nielsen para establecer una línea base de fallas de usabilidad."
+      },
+      {
+        "title": "Definir",
+        "body": "La investigación inicial reveló tres puntos críticos de dolor: falta de confianza, lenguaje técnico que alejaba a los usuarios no expertos y trámites con pasos y requisitos innecesarios. Por ello, definimos una dirección de UX alrededor de tres pilares, claridad, confianza y accesibilidad, y establecimos un manual de voz y tono que sustituyó el lenguaje financiero técnico por uno claro y empático."
+      },
+      {
+        "title": "Diseñar",
+        "body": "El reto central del rediseño fue construir un sistema de diseño multi-marca: una arquitectura basada en tokens y variables donde las paletas de color, logos y activos de marca se adaptarían dinámicamente según la Afore en la que el usuario estuviera registrado. La complejidad estaba en garantizar que cada combinación de marca posible mantuviera consistencia visual y cumpliera los estándares de accesibilidad. Los tokens fueron la solución que hizo posible escalar el sistema sin comprometer ninguna de las dos. En paralelo, reestructuramos cada flujo de trámites, reduciendo el número de pasos y eliminando requisitos redundantes. Cada iteración pasó por pruebas de usabilidad moderadas antes de avanzar."
+      },
+      {
+        "title": "Entrega",
+        "body": "Los entregables finales incluyeron el sistema de diseño completo con documentación de tokens de marca, los flujos rediseñados para todos los trámites principales, las especificaciones de UI para el handoff de desarrollo y un manual de voz y tono para contenido escrito. Presenté el diseño final directamente a los stakeholders de CONSAR, justificando las decisiones del proceso y las consideraciones para la implementación en desarrollo."
+      }
+    ]
+  },
+  "impact": {
+    "title": "Impacto actual",
+    "description": "El resultado fue una app en la que millones de mexicanos pueden confiar para gestionar su ahorro para el retiro, de manera independiente y sin fricciones.",
+    "metrics": [
+      {
+        "label": "Calificación promedio en tiendas (antes 2.5)",
+        "value": "4.5 ★"
+      },
+      {
+        "label": "Aumento en descargas en tiendas",
+        "value": "+20%"
+      },
+      {
+        "label": "Reducción en abandono de flujos",
+        "value": "−15%"
+      },
+      {
+        "label": "Reducción en visitas a sucursal para trámites",
+        "value": "3→1"
+      }
+    ]
+  },
+  "images": [
+    {
+      "src": "/images/afore-02.webp",
+      "alt": "Pantalla móvil del paso de ingreso de CURP durante el registro de usuario. El formulario muestra el campo CURP completado, un enlace para consultarla y dos casillas de consentimiento marcadas. Un botón verde de \"Validar CURP\" aparece en la parte inferior."
+    },
+    {
+      "src": "/images/afore-03.webp",
+      "alt": "Pantalla móvil del paso de registro de identidad (paso 2 de 4). Explica que se usará reconocimiento facial para verificar la identidad, muestra una foto con detección de rostro y sugiere tener una identificación oficial a la mano. Incluye botones de \"Regresar\" y \"Continuar\"."
+    },
+    {
+      "src": "/images/afore-04.webp",
+      "alt": "Pantalla móvil de la calculadora de pensión. Muestra el saldo actual ($234,098.63 MXN), la edad de retiro (65 años), un campo para ingresar el ahorro mensual y los resultados estimados: ahorro total al retiro de $1,099,005.29 MXN y pensión mensual estimada de $7,079.98 MXN."
+    },
+    {
+      "src": "/images/afore-05.webp",
+      "alt": "Pantalla móvil del paso de captura de identificación durante el onboarding. La cámara escanea el frente de una credencial del INE, resaltada con un marco verde de detección. Se muestran pestañas para capturar el frente y reverso del documento."
+    },
+    {
+      "src": "/images/afore-06.webp",
+      "alt": "Pantalla móvil para agregar un medio de pago (paso 1 de 2). Muestra un formulario con campos para nombre del tarjetahabiente, banco, tipo de tarjeta (débito), número de tarjeta, CVV y fecha de expiración. Se ve el logo de Visa y un toggle para deducción fiscal. Incluye botones de \"Continuar\" y \"Regresar\"."
+    },
+    {
+      "src": "/images/afore-07.webp",
+      "alt": "Pantalla móvil para configurar una meta de ahorro (paso 2 de 2). El usuario tiene como objetivo $50,000 MXN para una meta profesional, con $10,000 ahorrados y fecha objetivo del 10 de octubre de 2024. Una barra de progreso muestra el 20% alcanzado, con $40,000 restantes. Se muestra un botón de \"Registrar meta\"."
+    },
+    {
+      "src": "/images/afore-08.webp",
+      "alt": "Pantalla principal de Afore Móvil adaptada a la identidad visual de SURA, con saldo total, accesos rápidos y contenido destacado."
+    }
+  ],
+  "relatedSlug": "calimax"
+}

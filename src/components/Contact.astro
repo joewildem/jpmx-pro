@@ -1,0 +1,13 @@
+---
+import type { CollectionEntry } from 'astro:content';
+type Home = CollectionEntry<'pages'>['data'];
+interface Props { page: Home; }
+const { page } = Astro.props;
+---
+<section class="contact section">
+  <div class="container" data-reveal>
+    <p class="eyebrow">{page.contactEyebrow}</p>
+    <h2>{page.contactTitle}</h2>
+    <a class="button button--accent" href="mailto:hello@jpmx.pro">{page.contactCta}</a>
+  </div>
+</section>

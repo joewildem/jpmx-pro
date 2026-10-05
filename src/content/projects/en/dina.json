@@ -1,0 +1,10 @@
+{
+  "projectSlug":"dina","locale":"en","draft":true,"title":"DINA","seoDescription":"Draft case study.","summary":["Case study in progress."],"year":"2023","client":"Client","url":"","category":"Transportation","homepageOrder":99,
+  "cover":{"src":"/images/dina-cover.webp","alt":"DINA project cover."},
+  "problem":{"title":"Problem","paragraphs":[]},
+  "objective":{"title":"Objective","paragraphs":[],"bullets":[]},
+  "process":{"title":"Process","stages":[{"title":"Discover","body":""},{"title":"Define","body":""},{"title":"Design","body":""},{"title":"Delivery","body":""}]},
+  "impact":{"title":"Impact","description":"","metrics":[]},
+  "images":[{"src":"/images/dina-01.webp","alt":"DINA project image 1."},{"src":"/images/dina-02.webp","alt":"DINA project image 2."},{"src":"/images/dina-03.webp","alt":"DINA project image 3."}],
+  "relatedSlug":""
+}

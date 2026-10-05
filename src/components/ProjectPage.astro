@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import Contact from './Contact.astro';
+import type { CollectionEntry } from 'astro:content';
+type Home = CollectionEntry<'pages'>['data'];
+type Project = CollectionEntry<'projects'>['data'];
+interface Props { project: Project; related?: Project; page: Home; }
+const { project, related, page } = Astro.props;
+const locale = project.locale;
+const path = `${locale === 'en' ? '/en' : ''}/projects/${project.projectSlug}`;
+const labels = locale === 'es'
+  ? { year:'Año', client:'Cliente', live:'Ver en vivo', category:'Categoría', app:'En App Store', related:'Ver también' }
+  : { year:'Year', client:'Client', live:'View live', category:'Category', app:'On the App Store', related:'See also' };
+const images = project.images;
+---
+<BaseLayout title={`${project.title} — Joe Palomino`} description={project.seoDescription} locale={locale} path={path} image={project.cover.src}>
+  <div id="top"></div>
+  <Header locale={locale} projectSlug={project.projectSlug} />
+  <main>
+    <section class="project-intro container">
+      <h1>{project.title}</h1>
+      <div class="project-summary">{project.summary.map((paragraph) => <p>{paragraph}</p>)}</div>
+      <dl class="project-meta">
+        <div class="meta-item"><dt>{labels.year}</dt><dd>{project.year}</dd></div>
+        <div class="meta-item"><dt>{labels.client}</dt><dd>{project.client}</dd></div>
+        <div class="meta-item"><dt>{labels.live}</dt><dd>{project.url ? <a href={project.url} target="_blank" rel="noreferrer" style="color:var(--accent)">{labels.app}</a> : '—'}</dd></div>
+        <div class="meta-item"><dt>{labels.category}</dt><dd>{project.category}</dd></div>
+      </dl>
+    </section>
+    <div class="project-hero" data-reveal><img src={project.cover.src} alt={project.cover.alt} width="1800" height="1350" /></div>
+    <section class="case-section container">
+      <div class="case-copy" data-reveal><h2>{project.problem.title}</h2><div class="case-copy-inner">{project.problem.paragraphs.map((paragraph) => <p>{paragraph}</p>)}</div></div>
+      {images.length > 1 && <div class="case-gallery">{images.slice(0,2).map((image) => <figure data-reveal><img src={image.src} alt={image.alt} loading="lazy" /></figure>)}</div>}
+    </section>
+    <section class="case-section container">
+      <div class="case-copy" data-reveal><h2>{project.objective.title}</h2><div class="case-copy-inner">{project.objective.paragraphs.map((paragraph) => <p>{paragraph}</p>)}{project.objective.bullets.length > 0 && <ul>{project.objective.bullets.map((bullet) => <li>{bullet}</li>)}</ul>}</div></div>
+      {images.length > 3 && <div class="case-gallery">{images.slice(2,4).map((image) => <figure data-reveal><img src={image.src} alt={image.alt} loading="lazy" /></figure>)}</div>}
+    </section>
+    <section class="case-section container">
+      <h2 style="margin-bottom:40px" data-reveal>{project.process.title}</h2>
+      <div class="process-grid" data-reveal>{project.process.stages.map((stage) => <div class="process-row"><h3>{stage.title}</h3><p>{stage.body}</p></div>)}</div>
+      {images.length > 4 && <div class="case-gallery">{images.slice(4,6).map((image) => <figure data-reveal><img src={image.src} alt={image.alt} loading="lazy" /></figure>)}</div>}
+      {images.length > 6 && <div class="case-gallery" style="grid-template-columns:1fr">{images.slice(6).map((image) => <figure data-reveal><img src={image.src} alt={image.alt} loading="lazy" /></figure>)}</div>}
+    </section>
+    <section class="case-section container">
+      <div class="case-copy" data-reveal><h2>{project.impact.title}</h2><p>{project.impact.description}</p><div class="metrics">{project.impact.metrics.map((metric) => <div class="metric"><span>{metric.label}</span><strong>{metric.value}</strong></div>)}</div></div>
+    </section>
+    {related && <section class="case-section container"><h2 style="margin-bottom:36px">{labels.related}</h2><a class="related-card" href={`${locale === 'en' ? '/en' : ''}/projects/${related.projectSlug}`}><img src={related.cover.src} alt="" /><div><span class="eyebrow">{related.category}</span><h3>{related.title}</h3></div><span aria-hidden="true">↗</span></a></section>}
+    <Contact page={page} />
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>

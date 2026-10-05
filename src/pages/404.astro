@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout title="Página no encontrada — Joe Palomino" description="La página que buscas no existe." locale="es" path="/404">
+  <Header locale="es" />
+  <main class="hero"><div class="hero-content container"><p class="eyebrow">404</p><h1>Página no encontrada</h1><p class="hero-description">La página que buscas cambió de lugar o ya no existe.</p><a class="button button--accent" href="/">Volver al inicio</a></div></main>
+  <Footer locale="es" />
+</BaseLayout>

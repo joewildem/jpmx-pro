@@ -1,0 +1,32 @@
+{
+  "locale": "es",
+  "seoTitle": "Joe Palomino — Senior Product Designer",
+  "seoDescription": "Portafolio de Joe Palomino, Senior Product Designer especializado en productos digitales, UX, sistemas de diseño y experiencias web.",
+  "location": "Trabajando desde México 🇲🇽",
+  "availability": "Disponible para proyectos y roles full-time",
+  "heroTitle": "¡Hola! Soy Joe Palomino, Senior Product Designer",
+  "heroDescription": "Diseño sistemas escalables y productos digitales que simplifican procesos complejos con un impacto medible.",
+  "primaryCta": "Ver mi trabajo",
+  "contactCta": "Contáctame",
+  "nowLabel": "Seguro ahora estoy:",
+  "nowItems": ["Escuchando a Alabama Shakes", "Viendo un juego de los St. Louis Cardinals", "Haciendo componentes y tokens", "Dirigiendo al Manchester United desde mi sofá", "Convirtiendo a la IA en mi copiloto"],
+  "projectsLabel": "Proyectos seleccionados",
+  "aboutTitle": "Sobre mí",
+  "aboutParagraphs": [
+    "Comencé en diseño gráfico, pero mi curiosidad me llevó hacia donde quería estar: Product Design. Hoy, tras seis años diseñando plataformas internas, apps, productos SaaS y sitios web, me enfoco en entender los procesos, identificar dónde se rompen y traducirlos en productos simples, coherentes y alineados con las personas y el negocio.",
+    "Me obsesionan la consistencia y los detalles visuales. Creo que una interacción o un componente bien diseñado ayuda a crear experiencias memorables y a generar confianza.",
+    "Fuera del trabajo disfruto la música, el cine, los deportes y la lectura. Me gusta crear, entender cómo funcionan las cosas y mantener mi curiosidad activa."
+  ],
+  "linkedInLabel": "Conectemos en LinkedIn",
+  "resumeLabel": "Descargar mi CV",
+  "servicesTitle": "¿Qué puedo hacer por ti?",
+  "services": [
+    {"title":"Product Design","skills":["UX Research","User Flows","Wireframing","Interaction Design","Usability Testing","Prototyping"]},
+    {"title":"Design Systems","skills":["Tokens","Components","Documentation","Guidelines","Accessibility","Libraries"]},
+    {"title":"Web Development","skills":["HTML","CSS / Tailwind","Web Animations","Astro","React","Low-code Build"]},
+    {"title":"Graphic Design","skills":["Art Direction","Branding","Editorial Design","Social Media","Layout & Composition","Visual Identity"]}
+  ],
+  "stats": ["Senior Product Designer", "+50 proyectos completados", "6 años de experiencia", "+15 clientes satisfechos"],
+  "contactEyebrow": "¿Tienes un proyecto en mente?",
+  "contactTitle": "CONSTRUYÁMOSLO JUNTOS"
+}

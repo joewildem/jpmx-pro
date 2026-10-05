@@ -1,0 +1,136 @@
+backend:
+  name: github
+  repo: joewildem/jpmx-pro
+  branch: main
+  base_url: https://jpmx.pro
+  auth_endpoint: api/auth
+
+site_url: https://jpmx.pro
+display_url: https://jpmx.pro
+logo_url: https://jpmx.pro/images/afore-cover.webp
+media_folder: public/uploads
+public_folder: /uploads
+
+i18n:
+  structure: multiple_folders
+  locales: [es, en]
+  default_locale: es
+
+collections:
+  - name: pages
+    label: Landing
+    format: json
+    files:
+      - name: home_es
+        label: Home — Español
+        file: src/content/pages/es/home.json
+        fields: &home_fields
+          - {label: Idioma, name: locale, widget: hidden, default: es}
+          - {label: Título SEO, name: seoTitle, widget: string}
+          - {label: Descripción SEO, name: seoDescription, widget: text}
+          - {label: Ubicación, name: location, widget: string}
+          - {label: Disponibilidad, name: availability, widget: string}
+          - {label: Título principal, name: heroTitle, widget: string}
+          - {label: Descripción principal, name: heroDescription, widget: text}
+          - {label: CTA principal, name: primaryCta, widget: string}
+          - {label: CTA contacto, name: contactCta, widget: string}
+          - {label: Etiqueta de estado, name: nowLabel, widget: string}
+          - {label: Estados rotativos, name: nowItems, widget: list, field: {label: Estado, name: item, widget: string}}
+          - {label: Etiqueta proyectos, name: projectsLabel, widget: string}
+          - {label: Título About, name: aboutTitle, widget: string}
+          - {label: Párrafos About, name: aboutParagraphs, widget: list, field: {label: Párrafo, name: paragraph, widget: text}}
+          - {label: Texto LinkedIn, name: linkedInLabel, widget: string}
+          - {label: Texto CV, name: resumeLabel, widget: string}
+          - {label: Título servicios, name: servicesTitle, widget: string}
+          - label: Servicios
+            name: services
+            widget: list
+            fields:
+              - {label: Título, name: title, widget: string}
+              - {label: Habilidades, name: skills, widget: list, field: {label: Habilidad, name: skill, widget: string}}
+          - {label: Métricas, name: stats, widget: list, field: {label: Métrica, name: stat, widget: string}}
+          - {label: Pre-título contacto, name: contactEyebrow, widget: string}
+          - {label: Título contacto, name: contactTitle, widget: string}
+      - name: home_en
+        label: Home — English
+        file: src/content/pages/en/home.json
+        fields: *home_fields
+
+  - name: projects
+    label: Proyectos
+    label_singular: Proyecto
+    folder: src/content/projects
+    format: json
+    extension: json
+    create: true
+    identifier_field: projectSlug
+    slug: "{{slug}}"
+    i18n: true
+    summary: "{{title}} · {{locale}} {{draft}}"
+    fields:
+      - {label: Slug, name: projectSlug, widget: string, i18n: duplicate}
+      - {label: Idioma, name: locale, widget: select, options: [es, en], i18n: true}
+      - {label: Borrador, name: draft, widget: boolean, default: true, i18n: duplicate}
+      - {label: Título, name: title, widget: string, i18n: true}
+      - {label: Descripción SEO, name: seoDescription, widget: text, i18n: true}
+      - {label: Introducción, name: summary, widget: list, i18n: true, field: {label: Párrafo, name: paragraph, widget: text}}
+      - {label: Año, name: year, widget: string, i18n: duplicate}
+      - {label: Cliente, name: client, widget: string, i18n: duplicate}
+      - {label: URL externa, name: url, widget: string, required: false, i18n: duplicate}
+      - {label: Categoría, name: category, widget: string, i18n: true}
+      - {label: Orden en home, name: homepageOrder, widget: number, value_type: int, i18n: duplicate}
+      - label: Portada
+        name: cover
+        widget: object
+        i18n: true
+        fields:
+          - {label: Imagen, name: src, widget: image, i18n: duplicate}
+          - {label: Texto alternativo, name: alt, widget: string, i18n: true}
+      - label: Problema
+        name: problem
+        widget: object
+        i18n: true
+        fields:
+          - {label: Título, name: title, widget: string}
+          - {label: Párrafos, name: paragraphs, widget: list, field: {label: Párrafo, name: paragraph, widget: text}}
+      - label: Objetivo
+        name: objective
+        widget: object
+        i18n: true
+        fields:
+          - {label: Título, name: title, widget: string}
+          - {label: Párrafos, name: paragraphs, widget: list, field: {label: Párrafo, name: paragraph, widget: text}}
+          - {label: Métricas objetivo, name: bullets, widget: list, field: {label: Métrica, name: bullet, widget: string}}
+      - label: Proceso
+        name: process
+        widget: object
+        i18n: true
+        fields:
+          - {label: Título, name: title, widget: string}
+          - label: Etapas
+            name: stages
+            widget: list
+            fields:
+              - {label: Título, name: title, widget: string}
+              - {label: Contenido, name: body, widget: text}
+      - label: Impacto
+        name: impact
+        widget: object
+        i18n: true
+        fields:
+          - {label: Título, name: title, widget: string}
+          - {label: Descripción, name: description, widget: text}
+          - label: Indicadores
+            name: metrics
+            widget: list
+            fields:
+              - {label: Etiqueta, name: label, widget: string}
+              - {label: Valor, name: value, widget: string}
+      - label: Galería
+        name: images
+        widget: list
+        i18n: true
+        fields:
+          - {label: Imagen, name: src, widget: image, i18n: duplicate}
+          - {label: Texto alternativo, name: alt, widget: string, i18n: true}
+      - {label: Slug relacionado, name: relatedSlug, widget: string, required: false, i18n: duplicate}

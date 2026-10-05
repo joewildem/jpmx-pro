@@ -1,0 +1,111 @@
+{
+  "projectSlug": "calimax",
+  "locale": "es",
+  "draft": false,
+  "title": "Calimax",
+  "seoDescription": "Calimax es una de las cadenas de supermercados más consolidadas del noroeste de México, con fuerte presencia y reconocimiento de marca en Baja California y Sonora. El proyecto abarcó tanto su app móvil como su sitio web, dos canales independientes que debían funcionar como una experiencia de comercio digital unificada.",
+  "summary": [
+    "Calimax es una de las cadenas de supermercados más consolidadas del noroeste de México, con fuerte presencia y reconocimiento de marca en Baja California y Sonora. El proyecto abarcó tanto su app móvil como su sitio web, dos canales independientes que debían funcionar como una experiencia de comercio digital unificada.",
+    "Lideré el esfuerzo de UX/UI como team lead, coordinando a dos diseñadores mientras me encargaba de la comunicación con el cliente, la estrategia de diseño y las decisiones de dirección. Fue el primer proyecto en el que tuve ownership completo sobre un equipo de diseño, lo que implicó alinear criterios, distribuir trabajo y mantener coherencia en las decisiones a lo largo del proceso."
+  ],
+  "year": "2023",
+  "client": "Calimax",
+  "url": "https://apps.apple.com/mx/app/calimax-app/id6504838972",
+  "category": "E-Commerce",
+  "homepageOrder": 2,
+  "cover": {
+    "src": "/images/calimax-cover.webp",
+    "alt": "Sitio de e-commerce de Calimax mostrado en una laptop dentro de una composición azul y roja."
+  },
+  "problem": {
+    "title": "Marca reconocida, experiencia olvidable",
+    "paragraphs": [
+      "La app y el sitio web de Calimax eran percibidos por los clientes y por la propia marca como anticuados y poco funcionales para la venta en línea. Los usuarios tenían dificultades con la navegación, la búsqueda de productos y el proceso de compra, lo que reducía el interés por los canales digitales.\nLa fortaleza de la marca añadía una capa de complejidad al problema: los usuarios tenían una familiaridad profunda con Calimax, lo que convertía cualquier cambio en su experiencia en un riesgo de confianza que había que gestionar con cuidado."
+    ]
+  },
+  "objective": {
+    "title": "Evolucionar lo que la gente ama",
+    "paragraphs": [
+      "El objetivo fue rediseñar los dos canales digitales principales para que se sintieran modernos y confiables, mejorando de manera significativa los flujos de comercio clave: búsqueda de productos, navegación y proceso de compra, en app y web de forma simultánea."
+    ],
+    "bullets": [
+      "Incrementar las ventas a través de app y sitio web",
+      "Mejorar la calificación en tiendas de aplicaciones",
+      "Aumentar las visitas semanales al sitio web"
+    ]
+  },
+  "process": {
+    "title": "Del benchmark al resultado",
+    "stages": [
+      {
+        "title": "Descubrir",
+        "body": "Realizamos un benchmark competitivo entre las principales apps de supermercado y e-commerce para identificar patrones de UX que los usuarios ya entendían y esperaban. El objetivo era entender qué modelos mentales ya estaban instalados en los usuarios y cómo Calimax podía aprovecharlos. Esto nos dio un panorama claro de dónde la experiencia quedaba rezagada visual y estructuralmente."
+      },
+      {
+        "title": "Definir",
+        "body": "El reto central era modernizar una marca profundamente familiar sin afectar a su base de usuarios leales. Definimos la dirección de diseño en torno a la evolución más que al reemplazo, lo que nos permitió preservar el reconocimiento de marca mientras mejorábamos cada funcionalidad a detalle."
+      },
+      {
+        "title": "Diseñar",
+        "body": "Construimos un sistema de diseño que revitalizara la identidad visual de Calimax con un aspecto más dinámico y moderno, manteniendo consistencia entre app y web. Las nuevas funcionalidades se diseñaron sobre los modelos mentales ya establecidos por los usuarios de la marca, integrando las mejores prácticas identificadas en el benchmark. Para validar el rediseño antes de la entrega final, realizamos un focus group comparando la experiencia anterior con la nueva, con lo que pudimos refinar flujos con base en reacciones reales y reducir el riesgo de la transición."
+      },
+      {
+        "title": "Entrega",
+        "body": "Los entregables finales incluyeron el sistema de diseño completo, los flujos rediseñados para ambas plataformas y las especificaciones de UI para el handoff de desarrollo. Presenté la dirección final a los stakeholders de Calimax, enmarcando las decisiones de diseño en el contexto de sus objetivos de negocio y el valor de marca construido con sus usuarios."
+      }
+    ]
+  },
+  "impact": {
+    "title": "Impacto actual",
+    "description": "El rediseño tuvo impacto directo en los principales indicadores comerciales de ambos canales.",
+    "metrics": [
+      {
+        "label": "Crecimiento en ventas por app",
+        "value": "+20%"
+      },
+      {
+        "label": "Crecimiento en ventas por web",
+        "value": "+15%"
+      },
+      {
+        "label": "Calificación en tiendas (antes 3.8)",
+        "value": "4.7★"
+      },
+      {
+        "label": "Aumento en visitas web semanales",
+        "value": "+35%"
+      }
+    ]
+  },
+  "images": [
+    {
+      "src": "/images/calimax-02.webp",
+      "alt": "Página de inicio de la app de Calimax mostrada sobre un sillón rojo."
+    },
+    {
+      "src": "/images/calimax-03.webp",
+      "alt": "Resultados de búsqueda de productos de Calimax mostrados en una laptop."
+    },
+    {
+      "src": "/images/calimax-04.webp",
+      "alt": "Detalle de producto del sitio de Calimax mostrado en una laptop."
+    },
+    {
+      "src": "/images/calimax-05.webp",
+      "alt": "Inicio de la app de Calimax con categorías, promociones y productos destacados."
+    },
+    {
+      "src": "/images/calimax-06.webp",
+      "alt": "Resumen de compra de Calimax mostrado en un teléfono."
+    },
+    {
+      "src": "/images/calimax-07.webp",
+      "alt": "Pantalla de inicio de sesión de la app de Calimax."
+    },
+    {
+      "src": "/images/calimax-08.webp",
+      "alt": "Página principal del e-commerce de Calimax mostrada en una laptop."
+    }
+  ],
+  "relatedSlug": "afore-movil"
+}

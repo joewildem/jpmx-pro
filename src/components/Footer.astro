@@ -1,0 +1,16 @@
+---
+const { locale } = Astro.props;
+const home = locale === 'es' ? '/' : '/en/';
+---
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>© Joe Palomino {new Date().getFullYear()}</span>
+    <nav class="footer-links" aria-label={locale === 'es' ? 'Navegación de pie' : 'Footer navigation'}>
+      <a href="#top">{locale === 'es' ? 'Ir arriba' : 'Back to top'}</a>
+      <a href={`${home}#about`}>{locale === 'es' ? 'Acerca de' : 'About'}</a>
+      <a href={`${home}#projects`}>{locale === 'es' ? 'Proyectos' : 'Projects'}</a>
+      <a href={`${home}#services`}>{locale === 'es' ? 'Servicios' : 'Services'}</a>
+    </nav>
+    <span>{locale === 'es' ? 'De México 🇲🇽 con amor' : 'From Mexico 🇲🇽 with love'}</span>
+  </div>
+</footer>

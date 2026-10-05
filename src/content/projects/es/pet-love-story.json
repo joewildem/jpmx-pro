@@ -1,0 +1,90 @@
+{
+  "projectSlug": "pet-love-story",
+  "locale": "es",
+  "draft": true,
+  "title": "Pet Love Story",
+  "seoDescription": "A meditation app that uses AI to customize your mindfulness practice and track your progress",
+  "summary": [
+    "A meditation app that uses AI to customize your mindfulness practice and track your progress"
+  ],
+  "year": "2023",
+  "client": "Cliente",
+  "url": "jpmx.pro",
+  "category": "Servicios",
+  "homepageOrder": 4,
+  "cover": {
+    "src": "/images/pet-love-story-cover.webp",
+    "alt": "Vista principal del proyecto Pet Love Story"
+  },
+  "problem": {
+    "title": "Problem",
+    "paragraphs": [
+      "In today's fast-paced and stressful world, finding time for mindfulness and meditation can be challenging. Many individuals struggle with maintaining a consistent meditation practice due to a lack of guidance, personalized approaches, and difficulty tracking progress. Existing meditation apps often offer generic content that fails to cater to individuals' specific needs, making it difficult to cultivate a sustainable and effective mindfulness routine."
+    ]
+  },
+  "objective": {
+    "title": "Objetctive",
+    "paragraphs": [
+      "Zengo is a revolutionary meditation app that addresses the aforementioned challenges by utilizing artificial intelligence to customize mindfulness practices and track users' progress. By leveraging AI algorithms, Zengo offers personalized meditation sessions tailored to users' unique goals, preferences, and skill levels. The app's advanced tracking features provide valuable insights into users' meditation journey, enabling them to monitor their progress and make informed adjustments to optimize their mindfulness practice."
+    ],
+    "bullets": []
+  },
+  "process": {
+    "title": "",
+    "stages": [
+      {
+        "title": "Descubrir",
+        "body": ""
+      },
+      {
+        "title": "Definir",
+        "body": ""
+      },
+      {
+        "title": "Diseñar",
+        "body": ""
+      },
+      {
+        "title": "Entrega",
+        "body": ""
+      }
+    ]
+  },
+  "impact": {
+    "title": "Impact",
+    "description": "Post launch, our analytics team tracked how the new feed affected our core metrics. The results showed a significant increase in the overall usage of our app.",
+    "metrics": [
+      {
+        "label": "KPI",
+        "value": "99"
+      },
+      {
+        "label": "KPI",
+        "value": "99"
+      },
+      {
+        "label": "KPI",
+        "value": "99"
+      },
+      {
+        "label": "KPI",
+        "value": "99"
+      }
+    ]
+  },
+  "images": [
+    {
+      "src": "/images/pet-love-story-01.webp",
+      "alt": "Pet Love Story: vista del producto 1"
+    },
+    {
+      "src": "/images/pet-love-story-02.webp",
+      "alt": "Pet Love Story: vista del producto 2"
+    },
+    {
+      "src": "/images/pet-love-story-03.webp",
+      "alt": "Pet Love Story: vista del producto 3"
+    }
+  ],
+  "relatedSlug": ""
+}
