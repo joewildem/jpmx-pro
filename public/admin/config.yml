@@ -35,7 +35,7 @@ collections:
           - {label: CTA principal, name: primaryCta, widget: string}
           - {label: CTA contacto, name: contactCta, widget: string}
           - {label: Etiqueta de estado, name: nowLabel, widget: string}
-          - {label: Estados rotativos, name: nowItems, widget: list, field: {label: Estado, name: item, widget: string}}
+          - {label: Estados rotativos, name: nowItems, widget: list, field: {label: Estado (2 líneas móvil/tablet), name: item, widget: text}}
           - {label: Scroll — inicio, name: scrollCueStart, widget: string}
           - {label: Scroll — final, name: scrollCueEnd, widget: string}
           - {label: Etiqueta proyectos, name: projectsLabel, widget: string}
