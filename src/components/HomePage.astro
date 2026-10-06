@@ -18,29 +18,31 @@ const heroTitleRole = heroTitleParts.length === 2 ? heroTitleParts[1] : '';
   <div id="top"></div>
   <Header locale={locale} />
   <main>
-    <div class="hero-meta"><div class="container"><span>{page.location}</span><span class="availability availability--meta">{page.availability}</span></div></div>
-    <section class="hero">
-      <div class="hero-content container" data-reveal>
-        <p class="availability availability--hero">{page.availability}</p>
-        <h1><span>{heroTitleLead}</span>{heroTitleRole && <span>{heroTitleRole}</span>}</h1>
-        <p class="hero-description">{page.heroDescription}</p>
-        <div class="button-row"><a class="button button--secondary" href="#projects">{page.primaryCta}</a><a class="button button--primary" href="mailto:hello@jpmx.pro">{page.contactCta}</a></div>
-      </div>
-    </section>
-    <div class="now-bar">
-      <div class="container">
-        <div class="now-status">
-          <span class="now-label">{page.nowLabel}</span>
-          <span class="now-activity-window" aria-live="polite">
-            <span class="now-activity-track" data-activity-rotator>
-              {[...page.nowItems, page.nowItems[0]].map((item) => <span class="now-activity">{item}</span>)}
-            </span>
-          </span>
+    <div class="hero-viewport">
+      <div class="hero-meta"><div class="container"><span>{page.location}</span><span class="availability availability--meta">{page.availability}</span></div></div>
+      <section class="hero">
+        <div class="hero-content container" data-reveal>
+          <p class="availability availability--hero">{page.availability}</p>
+          <h1><span>{heroTitleLead}</span>{heroTitleRole && <span>{heroTitleRole}</span>}</h1>
+          <p class="hero-description">{page.heroDescription}</p>
+          <div class="button-row"><a class="button button--secondary" href="#projects">{page.primaryCta}</a><a class="button button--primary" href="mailto:hello@jpmx.pro">{page.contactCta}</a></div>
         </div>
-        <div class="scroll-cue" aria-label={`${page.scrollCueStart} ${page.scrollCueEnd}`}>
-          <span class="scroll-cue-start">{page.scrollCueStart}</span>
-          <span class="scroll-cue-lottie" data-scroll-lottie aria-hidden="true"></span>
-          <span class="scroll-cue-end">{page.scrollCueEnd}</span>
+      </section>
+      <div class="now-bar">
+        <div class="container">
+          <div class="now-status">
+            <span class="now-label">{page.nowLabel}</span>
+            <span class="now-activity-window" aria-live="polite">
+              <span class="now-activity-track" data-activity-rotator>
+                {[...page.nowItems, page.nowItems[0]].map((item) => <span class="now-activity">{item}</span>)}
+              </span>
+            </span>
+          </div>
+          <div class="scroll-cue" aria-label={`${page.scrollCueStart} ${page.scrollCueEnd}`}>
+            <span class="scroll-cue-start">{page.scrollCueStart}</span>
+            <span class="scroll-cue-lottie" data-scroll-lottie aria-hidden="true"></span>
+            <span class="scroll-cue-end">{page.scrollCueEnd}</span>
+          </div>
         </div>
       </div>
     </div>
