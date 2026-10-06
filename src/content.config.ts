@@ -53,6 +53,8 @@ const pages = defineCollection({
     contactCta: z.string(),
     nowLabel: z.string(),
     nowItems: z.array(z.string()),
+    scrollCueStart: z.string(),
+    scrollCueEnd: z.string(),
     projectsLabel: z.string(),
     aboutTitle: z.string(),
     aboutParagraphs: z.array(z.string()),

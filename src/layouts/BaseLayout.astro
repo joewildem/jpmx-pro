@@ -37,12 +37,6 @@ const enPath = locale === 'en' ? path : `/en${path === '/' ? '/' : path}`;
         if (entry.isIntersecting) entry.target.classList.add('is-visible');
       }), { threshold: .12 });
       document.querySelectorAll('[data-reveal]').forEach((element) => observer.observe(element));
-      const rotating = document.querySelector('[data-rotate]');
-      if (rotating) {
-        const items = JSON.parse(rotating.getAttribute('data-items') || '[]');
-        let index = 0;
-        if (items.length > 1) setInterval(() => { index = (index + 1) % items.length; rotating.textContent = items[index]; }, 3600);
-      }
     </script>
   </body>
 </html>

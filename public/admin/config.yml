@@ -36,6 +36,8 @@ collections:
           - {label: CTA contacto, name: contactCta, widget: string}
           - {label: Etiqueta de estado, name: nowLabel, widget: string}
           - {label: Estados rotativos, name: nowItems, widget: list, field: {label: Estado, name: item, widget: string}}
+          - {label: Scroll — inicio, name: scrollCueStart, widget: string}
+          - {label: Scroll — final, name: scrollCueEnd, widget: string}
           - {label: Etiqueta proyectos, name: projectsLabel, widget: string}
           - {label: Título About, name: aboutTitle, widget: string}
           - {label: Párrafos About, name: aboutParagraphs, widget: list, field: {label: Párrafo, name: paragraph, widget: text}}

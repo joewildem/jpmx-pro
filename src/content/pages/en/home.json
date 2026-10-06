@@ -9,7 +9,9 @@
   "primaryCta": "View my work",
   "contactCta": "Get in touch",
   "nowLabel": "Chances are I'm:",
-  "nowItems": ["Listening to Alabama Shakes", "Watching a St. Louis Cardinals game", "Building components and tokens", "Managing Manchester United from my couch", "Making AI my copilot"],
+  "nowItems": ["Listening to Alabama Shakes", "Watching a St. Louis Cardinals game", "Building components and tokens", "Managing Manchester United from my couch", "Making AI my copilot", "In a meeting that could have been an email"],
+  "scrollCueStart": "Scroll to",
+  "scrollCueEnd": "see more",
   "projectsLabel": "Selected work",
   "aboutTitle": "About me",
   "aboutParagraphs": [

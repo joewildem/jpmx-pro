@@ -9,7 +9,9 @@
   "primaryCta": "Ver mi trabajo",
   "contactCta": "Contáctame",
   "nowLabel": "Seguro ahora estoy:",
-  "nowItems": ["Escuchando a Alabama Shakes", "Viendo un juego de los St. Louis Cardinals", "Haciendo componentes y tokens", "Dirigiendo al Manchester United desde mi sofá", "Convirtiendo a la IA en mi copiloto"],
+  "nowItems": ["Escuchando a Alabama Shakes", "Viendo un juego de los St. Louis Cardinals", "Haciendo componentes y tokens", "Dirigiendo al Manchester United desde mi sofá", "Convirtiendo a la IA en mi copiloto", "En una reunión que pudo ser un email"],
+  "scrollCueStart": "Desliza para",
+  "scrollCueEnd": "ver más",
   "projectsLabel": "Proyectos seleccionados",
   "aboutTitle": "Sobre mí",
   "aboutParagraphs": [

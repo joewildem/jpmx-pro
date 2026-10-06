@@ -27,7 +27,23 @@ const heroTitleRole = heroTitleParts.length === 2 ? heroTitleParts[1] : '';
         <div class="button-row"><a class="button button--secondary" href="#projects">{page.primaryCta}</a><a class="button button--primary" href="mailto:hello@jpmx.pro">{page.contactCta}</a></div>
       </div>
     </section>
-    <div class="now-bar"><div class="container"><span>{page.nowLabel}</span><span data-rotate data-items={JSON.stringify(page.nowItems)}>{page.nowItems[0]}</span></div></div>
+    <div class="now-bar">
+      <div class="container">
+        <div class="now-status">
+          <span class="now-label">{page.nowLabel}</span>
+          <span class="now-activity-window" aria-live="polite">
+            <span class="now-activity-track" data-activity-rotator>
+              {[...page.nowItems, page.nowItems[0]].map((item) => <span class="now-activity">{item}</span>)}
+            </span>
+          </span>
+        </div>
+        <div class="scroll-cue" aria-label={`${page.scrollCueStart} ${page.scrollCueEnd}`}>
+          <span class="scroll-cue-start">{page.scrollCueStart}</span>
+          <span class="scroll-cue-lottie" data-scroll-lottie aria-hidden="true"></span>
+          <span class="scroll-cue-end">{page.scrollCueEnd}</span>
+        </div>
+      </div>
+    </div>
     <section class="section" id="projects">
       <div class="container">
         <p class="eyebrow" style="margin-bottom:28px">{page.projectsLabel}</p>
@@ -55,3 +71,55 @@ const heroTitleRole = heroTitleParts.length === 2 ? heroTitleParts[1] : '';
   </main>
   <Footer locale={locale} />
 </BaseLayout>
+
+<script>
+  import lottie from 'lottie-web/build/player/lottie_light';
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll<HTMLElement>('[data-activity-rotator]').forEach((track) => {
+    const itemCount = track.children.length - 1;
+    if (reduceMotion || itemCount < 2) return;
+
+    let index = 0;
+    const moveToItem = () => {
+      const item = track.firstElementChild;
+      if (!(item instanceof HTMLElement)) return;
+      track.style.transform = `translateY(${-index * item.offsetHeight}px)`;
+    };
+
+    const showNextItem = () => {
+      window.setTimeout(() => {
+        index += 1;
+        moveToItem();
+
+        window.setTimeout(() => {
+          if (index !== itemCount) {
+            showNextItem();
+            return;
+          }
+
+          track.classList.add('is-resetting');
+          index = 0;
+          moveToItem();
+          requestAnimationFrame(() => requestAnimationFrame(() => track.classList.remove('is-resetting')));
+          showNextItem();
+        }, 650);
+      }, 4500);
+    };
+
+    window.addEventListener('resize', moveToItem);
+    showNextItem();
+  });
+
+  document.querySelectorAll<HTMLElement>('[data-scroll-lottie]').forEach((container) => {
+    lottie.loadAnimation({
+      container,
+      renderer: 'svg',
+      loop: !reduceMotion,
+      autoplay: !reduceMotion,
+      path: 'https://lottie.host/e35b105d-0108-437c-ad52-93e7d1d57e6f/r6YwDko1EG.json',
+      rendererSettings: { preserveAspectRatio: 'xMidYMid meet' },
+    });
+  });
+</script>
