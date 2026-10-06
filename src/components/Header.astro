@@ -19,11 +19,6 @@ const enHref = projectSlug ? `/en/projects/${projectSlug}` : '/en/';
       </span>
     </nav>
     <div class="mobile-controls">
-      <span class="language">
-        <a href={esHref} aria-current={locale === 'es' ? 'page' : undefined}>ES</a>
-        <span class="language-divider" aria-hidden="true">|</span>
-        <a href={enHref} aria-current={locale === 'en' ? 'page' : undefined}>EN</a>
-      </span>
       <button
         class="menu-toggle"
         type="button"
@@ -33,18 +28,27 @@ const enHref = projectSlug ? `/en/projects/${projectSlug}` : '/en/';
         data-open-label={locale === 'es' ? 'Abrir menú' : 'Open menu'}
         data-close-label={locale === 'es' ? 'Cerrar menú' : 'Close menu'}
       >
-        <span class="menu-toggle-label" aria-hidden="true">{locale === 'es' ? 'Menú' : 'Menu'}</span>
         <span class="menu-toggle-icon" aria-hidden="true"><i></i><i></i></span>
       </button>
     </div>
   </div>
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true" inert>
-    <nav class="mobile-menu-nav" aria-label={locale === 'es' ? 'Menú móvil' : 'Mobile menu'}>
-      <a href={`${home}#about`}><span>01</span>{locale === 'es' ? 'Acerca de' : 'About'}</a>
-      <a href={`${home}#projects`}><span>02</span>{locale === 'es' ? 'Proyectos' : 'Projects'}</a>
-      <a href={`${home}#services`}><span>03</span>{locale === 'es' ? 'Servicios' : 'Services'}</a>
-      <a href={`${home}#contact`}><span>04</span>{locale === 'es' ? 'Contacto' : 'Contact'}</a>
-    </nav>
+    <div class="mobile-menu-main">
+      <nav class="mobile-menu-nav" aria-label={locale === 'es' ? 'Menú móvil' : 'Mobile menu'}>
+        <a href={`${home}#about`}>{locale === 'es' ? 'Acerca de' : 'About'}</a>
+        <a href={`${home}#projects`}>{locale === 'es' ? 'Proyectos' : 'Projects'}</a>
+        <a href={`${home}#services`}>{locale === 'es' ? 'Servicios' : 'Services'}</a>
+        <a href={`${home}#contact`}>{locale === 'es' ? 'Contacto' : 'Contact'}</a>
+      </nav>
+      <div class="mobile-menu-actions">
+        <a class="button button--tertiary mobile-menu-cta" href="mailto:hello@jpmx.pro">Get in touch</a>
+        <span class="language mobile-menu-language" aria-label={locale === 'es' ? 'Seleccionar idioma' : 'Select language'}>
+          <a href={esHref} aria-current={locale === 'es' ? 'page' : undefined}>ES</a>
+          <span class="language-divider" aria-hidden="true">|</span>
+          <a href={enHref} aria-current={locale === 'en' ? 'page' : undefined}>EN</a>
+        </span>
+      </div>
+    </div>
     <div class="mobile-menu-footer">
       <span>{locale === 'es' ? 'Disponible para proyectos y roles full-time' : 'Available for projects and full-time roles'}</span>
       <a href="mailto:hello@jpmx.pro">hello@jpmx.pro</a>
