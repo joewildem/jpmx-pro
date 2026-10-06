@@ -3,6 +3,7 @@ import '../styles/global.css';
 import '@fontsource-variable/inter';
 import '@fontsource-variable/space-grotesk';
 import '@fontsource-variable/ibm-plex-sans';
+import ParticlesBackground from '../components/ParticlesBackground.astro';
 interface Props { title: string; description: string; locale: 'es'|'en'; path: string; image?: string; }
 const { title, description, locale, path, image = '/images/afore-cover.webp' } = Astro.props;
 const canonical = new URL(path, Astro.site);
@@ -31,6 +32,7 @@ const enPath = locale === 'en' ? path : `/en${path === '/' ? '/' : path}`;
     <title>{title}</title>
   </head>
   <body>
+    <ParticlesBackground />
     <slot />
     <script is:inline>
       const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
