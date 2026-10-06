@@ -8,7 +8,7 @@ const enHref = projectSlug ? `/en/projects/${projectSlug}` : '/en/';
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href={home}>JPMX</a>
-    <nav class="nav" aria-label={locale === 'es' ? 'Navegación principal' : 'Main navigation'}>
+    <nav class="nav nav--desktop" aria-label={locale === 'es' ? 'Navegación principal' : 'Main navigation'}>
       <span class="nav-sections"><a href={`${home}#about`}>{locale === 'es' ? 'Acerca de' : 'About'}</a></span>
       <span class="nav-sections"><a href={`${home}#projects`}>{locale === 'es' ? 'Proyectos' : 'Projects'}</a></span>
       <span class="nav-sections"><a href={`${home}#services`}>{locale === 'es' ? 'Servicios' : 'Services'}</a></span>
@@ -18,5 +18,65 @@ const enHref = projectSlug ? `/en/projects/${projectSlug}` : '/en/';
         <a href={enHref} aria-current={locale === 'en' ? 'page' : undefined}>EN</a>
       </span>
     </nav>
+    <div class="mobile-controls">
+      <span class="language">
+        <a href={esHref} aria-current={locale === 'es' ? 'page' : undefined}>ES</a>
+        <span class="language-divider" aria-hidden="true">|</span>
+        <a href={enHref} aria-current={locale === 'en' ? 'page' : undefined}>EN</a>
+      </span>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label={locale === 'es' ? 'Abrir menú' : 'Open menu'}
+        data-open-label={locale === 'es' ? 'Abrir menú' : 'Open menu'}
+        data-close-label={locale === 'es' ? 'Cerrar menú' : 'Close menu'}
+      >
+        <span class="menu-toggle-label" aria-hidden="true">{locale === 'es' ? 'Menú' : 'Menu'}</span>
+        <span class="menu-toggle-icon" aria-hidden="true"><i></i><i></i></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true" inert>
+    <nav class="mobile-menu-nav" aria-label={locale === 'es' ? 'Menú móvil' : 'Mobile menu'}>
+      <a href={`${home}#about`}><span>01</span>{locale === 'es' ? 'Acerca de' : 'About'}</a>
+      <a href={`${home}#projects`}><span>02</span>{locale === 'es' ? 'Proyectos' : 'Projects'}</a>
+      <a href={`${home}#services`}><span>03</span>{locale === 'es' ? 'Servicios' : 'Services'}</a>
+      <a href={`${home}#contact`}><span>04</span>{locale === 'es' ? 'Contacto' : 'Contact'}</a>
+    </nav>
+    <div class="mobile-menu-footer">
+      <span>{locale === 'es' ? 'Disponible para proyectos y roles full-time' : 'Available for projects and full-time roles'}</span>
+      <a href="mailto:hello@jpmx.pro">hello@jpmx.pro</a>
+    </div>
   </div>
 </header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('.site-header');
+  const menu = header?.querySelector<HTMLElement>('.mobile-menu');
+  const toggle = header?.querySelector<HTMLButtonElement>('.menu-toggle');
+  const mobileBreakpoint = window.matchMedia('(max-width: 809px)');
+
+  const setMenuOpen = (open: boolean) => {
+    if (!header || !menu || !toggle) return;
+    header.classList.toggle('menu-is-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? toggle.dataset.closeLabel! : toggle.dataset.openLabel!);
+    menu.setAttribute('aria-hidden', String(!open));
+    menu.inert = !open;
+    document.documentElement.classList.toggle('mobile-menu-open', open);
+  };
+
+  toggle?.addEventListener('click', () => setMenuOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenuOpen(false)));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
+      setMenuOpen(false);
+      toggle.focus();
+    }
+  });
+  mobileBreakpoint.addEventListener('change', (event) => {
+    if (!event.matches) setMenuOpen(false);
+  });
+</script>

@@ -4,7 +4,7 @@ type Home = CollectionEntry<'pages'>['data'];
 interface Props { page: Home; }
 const { page } = Astro.props;
 ---
-<section class="contact section">
+<section class="contact section" id="contact">
   <div class="container" data-reveal>
     <p class="eyebrow">{page.contactEyebrow}</p>
     <h2>{page.contactTitle}</h2>

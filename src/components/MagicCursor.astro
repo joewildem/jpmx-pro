@@ -6,7 +6,7 @@
 
   if (precisePointer.matches && !reducedMotion.matches) {
     document
-      .querySelectorAll<HTMLElement>('.brand, .nav a, .button, .footer-links a')
+      .querySelectorAll<HTMLElement>('.brand, .nav a, .button, .footer-links a, .menu-toggle, .mobile-menu a')
       .forEach((element) => element.classList.add('magic-hover'));
 
     try {
