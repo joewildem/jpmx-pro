@@ -10,6 +10,9 @@ type Project = CollectionEntry<'projects'>['data'];
 interface Props { page: Home; projects: Project[]; }
 const { page, projects } = Astro.props;
 const locale = page.locale;
+const heroTitleParts = page.heroTitle.split(/,\s+(?=Senior Product Designer$)/);
+const heroTitleLead = heroTitleParts.length === 2 ? `${heroTitleParts[0]},` : page.heroTitle;
+const heroTitleRole = heroTitleParts.length === 2 ? heroTitleParts[1] : '';
 ---
 <BaseLayout title={page.seoTitle} description={page.seoDescription} locale={locale} path={locale === 'es' ? '/' : '/en/'}>
   <div id="top"></div>
@@ -19,9 +22,9 @@ const locale = page.locale;
     <section class="hero">
       <div class="hero-content container" data-reveal>
         <p class="availability availability--hero">{page.availability}</p>
-        <h1>{page.heroTitle}</h1>
+        <h1><span>{heroTitleLead}</span>{heroTitleRole && <span>{heroTitleRole}</span>}</h1>
         <p class="hero-description">{page.heroDescription}</p>
-        <div class="button-row"><a class="button" href="#projects">{page.primaryCta}</a><a class="button button--accent" href="mailto:hello@jpmx.pro">{page.contactCta}</a></div>
+        <div class="button-row"><a class="button button--secondary" href="#projects">{page.primaryCta}</a><a class="button button--primary" href="mailto:hello@jpmx.pro">{page.contactCta}</a></div>
       </div>
     </section>
     <div class="now-bar"><div class="container"><span>{page.nowLabel}</span><span data-rotate data-items={JSON.stringify(page.nowItems)}>{page.nowItems[0]}</span></div></div>
@@ -36,7 +39,7 @@ const locale = page.locale;
         <div class="about-copy" data-reveal>
           <h2>{page.aboutTitle}</h2>
           {page.aboutParagraphs.map((paragraph) => <p>{paragraph}</p>)}
-          <div class="button-row" style="margin-top:28px"><a class="button" href="https://www.linkedin.com/in/joepalominoux/" target="_blank" rel="noreferrer">{page.linkedInLabel}</a><a class="button" href="/documents/joe-palomino-resume-2026.pdf" target="_blank">{page.resumeLabel}</a></div>
+          <div class="button-row" style="margin-top:28px"><a class="button button--secondary" href="https://www.linkedin.com/in/joepalominoux/" target="_blank" rel="noreferrer">{page.linkedInLabel}</a><a class="button button--secondary" href="/documents/joe-palomino-resume-2026.pdf" target="_blank">{page.resumeLabel}</a></div>
         </div>
         <div class="about-images" data-reveal><img src="/images/about-portrait.webp" alt={locale === 'es' ? 'Joe Palomino frente a un espejo.' : 'Joe Palomino standing in front of a mirror.'} loading="lazy" /><img src="/images/about-comics.webp" alt={locale === 'es' ? 'Colección de cómics y novelas gráficas.' : 'A collection of comic books and graphic novels.'} loading="lazy" /></div>
       </div>
