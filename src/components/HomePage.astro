@@ -15,9 +15,10 @@ const locale = page.locale;
   <div id="top"></div>
   <Header locale={locale} />
   <main>
-    <div class="hero-meta"><div class="container"><span>{page.location}</span><span class="availability">{page.availability}</span></div></div>
+    <div class="hero-meta"><div class="container"><span>{page.location}</span><span class="availability availability--meta">{page.availability}</span></div></div>
     <section class="hero">
       <div class="hero-content container" data-reveal>
+        <p class="availability availability--hero">{page.availability}</p>
         <h1>{page.heroTitle}</h1>
         <p class="hero-description">{page.heroDescription}</p>
         <div class="button-row"><a class="button" href="#projects">{page.primaryCta}</a><a class="button button--accent" href="mailto:hello@jpmx.pro">{page.contactCta}</a></div>
