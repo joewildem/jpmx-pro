@@ -12,7 +12,11 @@ const enHref = projectSlug ? `/en/projects/${projectSlug}` : '/en/';
       <span class="nav-sections"><a href={`${home}#about`}>{locale === 'es' ? 'Acerca de' : 'About'}</a></span>
       <span class="nav-sections"><a href={`${home}#projects`}>{locale === 'es' ? 'Proyectos' : 'Projects'}</a></span>
       <span class="nav-sections"><a href={`${home}#services`}>{locale === 'es' ? 'Servicios' : 'Services'}</a></span>
-      <span class="language"><a href={esHref} aria-current={locale === 'es' ? 'page' : undefined}>ES</a><a href={enHref} aria-current={locale === 'en' ? 'page' : undefined}>EN</a></span>
+      <span class="language">
+        <a href={esHref} aria-current={locale === 'es' ? 'page' : undefined}>ES</a>
+        <span aria-hidden="true">|</span>
+        <a href={enHref} aria-current={locale === 'en' ? 'page' : undefined}>EN</a>
+      </span>
     </nav>
   </div>
 </header>
