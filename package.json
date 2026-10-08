@@ -4,12 +4,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "particles:vendor": "node scripts/copy-particles.mjs",
-    "predev": "npm run particles:vendor",
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
-    "prebuild": "npm run particles:vendor",
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro check && ASTRO_TELEMETRY_DISABLED=1 astro build",
-    "prepreview": "npm run particles:vendor",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
     "images": "node scripts/optimize-images.mjs"
@@ -23,7 +19,6 @@
     "decap-cms-app": "^3.16.3",
     "lottie-web": "^5.13.0",
     "magicmouse.js": "^1.2.1",
-    "particles.js": "^2.0.0",
     "sharp": "^0.35.5"
   },
   "devDependencies": {
