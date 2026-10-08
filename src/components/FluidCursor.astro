@@ -1,0 +1,30 @@
+<canvas class="fluid-cursor" aria-hidden="true"></canvas>
+
+<script>
+  const canvas = document.querySelector<HTMLCanvasElement>('.fluid-cursor');
+  const precisePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  if (canvas && precisePointer.matches && !reducedMotion.matches) {
+    import('../lib/fluid/FluidSimulation')
+      .then(({ FluidSimulation }) => {
+        const simulation = new FluidSimulation(canvas);
+        const move = (event: PointerEvent) => {
+          if (!event.pointerType || event.pointerType === 'mouse' || event.pointerType === 'pen') {
+            simulation.move(event.clientX, event.clientY);
+          }
+        };
+        const visibility = () => (document.hidden ? simulation.stop() : simulation.start());
+
+        window.addEventListener('pointermove', move, { passive: true });
+        window.addEventListener('resize', simulation.resize, { passive: true });
+        window.addEventListener('blur', simulation.resetPointer);
+        document.documentElement.addEventListener('mouseleave', simulation.resetPointer);
+        document.addEventListener('visibilitychange', visibility);
+      })
+      .catch((error) => {
+        canvas.remove();
+        console.warn('The fluid cursor is not supported on this device.', error);
+      });
+  }
+</script>

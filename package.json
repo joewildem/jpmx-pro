@@ -19,10 +19,12 @@
     "decap-cms-app": "^3.16.3",
     "lottie-web": "^5.13.0",
     "magicmouse.js": "^1.2.1",
-    "sharp": "^0.35.5"
+    "sharp": "^0.35.5",
+    "three": "^0.186.1"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
+    "@types/three": "^0.186.0",
     "typescript": "^5.9.3"
   }
 }
