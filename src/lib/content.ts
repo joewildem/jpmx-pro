@@ -11,3 +11,14 @@ export async function getPublishedProjects(locale: 'es'|'en') {
   const entries = await getCollection('projects', ({ data }) => data.locale === locale && !data.draft);
   return entries.map((entry) => entry.data).sort((a,b) => a.homepageOrder - b.homepageOrder);
 }
+
+export async function getHomepageProjects(locale: 'es'|'en') {
+  const previewOrder = ['afore-movil', 'calimax', 'dina', 'pet-love-story'];
+  const entries = await getCollection('projects', ({ data }) =>
+    data.locale === locale && previewOrder.includes(data.projectSlug)
+  );
+
+  return entries
+    .map((entry) => entry.data)
+    .sort((a,b) => previewOrder.indexOf(a.projectSlug) - previewOrder.indexOf(b.projectSlug));
+}

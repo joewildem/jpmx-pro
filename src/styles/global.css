@@ -97,16 +97,18 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
 .project-marquee-group { display: flex; flex: 0 0 auto; align-items: center; gap: clamp(42px,6vw,96px); padding-right: clamp(42px,6vw,96px); }
 .project-marquee-item { color: #eee; font: italic 350 clamp(78px,12vw,184px)/.82 'Newsreader Variable', serif; font-variation-settings: 'opsz' 72; letter-spacing: -.055em; white-space: nowrap; }
 .projects-list { padding-top: clamp(64px,8vw,116px); }
-.project-grid { display: grid; grid-template-columns: repeat(12,minmax(0,1fr)); align-items: start; gap: clamp(72px,10vw,152px) clamp(18px,2.2vw,34px); }
-.project-card { display: block; min-width: 0; }
-.project-card:nth-child(4n + 1) { grid-column: 1 / span 7; }
-.project-card:nth-child(4n + 2) { grid-column: 9 / span 4; margin-top: clamp(72px,9vw,132px); }
-.project-card:nth-child(4n + 3) { grid-column: 2 / span 5; }
-.project-card:nth-child(4n + 4) { grid-column: 7 / span 6; margin-top: clamp(48px,6vw,88px); }
+.project-grid { position: relative; display: block; height: clamp(1500px,120vw,1750px); }
+.project-card { position: absolute; display: block; min-width: 0; }
+.project-card:nth-child(4n + 1) { top: 0; left: 0; width: 54%; }
+.project-card:nth-child(4n + 2) { top: clamp(180px,18vw,260px); right: 0; width: 31%; }
+.project-card:nth-child(4n + 3) { top: clamp(690px,58vw,835px); left: 8%; width: 36%; }
+.project-card:nth-child(4n + 4) { top: clamp(920px,78vw,1120px); right: 4%; width: 52%; }
 .project-card-media { position: relative; overflow: clip; aspect-ratio: 4 / 3; border-radius: clamp(14px,1.4vw,22px); background: #151515; }
 .project-card:nth-child(even) .project-card-media { aspect-ratio: 1 / 1; }
+.project-card:nth-child(3) .project-card-media { aspect-ratio: 4 / 5; }
+.project-card:nth-child(4) .project-card-media { aspect-ratio: 16 / 10; }
 .project-card img { height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.2,.7,.2,1); }
-.project-card:hover img { transform: scale(1.035); }
+.project-card:not([data-preview]):hover img { transform: scale(1.035); }
 .project-card-copy { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding-top: 14px; color: #eee; font: 500 16px/1.2 'IBM Plex Sans Variable', sans-serif; letter-spacing: .01em; text-transform: uppercase; }
 .project-card-copy span { flex: 0 0 auto; color: var(--muted); }
 .project-card h2 { overflow: hidden; font: inherit; text-overflow: ellipsis; white-space: nowrap; }
@@ -233,9 +235,11 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
   .menu-is-open .mobile-menu-footer { opacity: 1; transform: none; transition-delay: .46s; }
   .hero-content { padding-block: clamp(32px, 7dvh, 62px); }
   .section { padding: 80px 0; }
-  .project-grid { grid-template-columns: repeat(8,minmax(0,1fr)); gap: 64px 16px; }
-  .project-card:nth-child(odd) { grid-column: 1 / span 5; margin-top: 0; }
-  .project-card:nth-child(even) { grid-column: 4 / span 5; margin-top: 48px; }
+  .project-grid { display: flex; height: auto; flex-direction: column; gap: 88px; }
+  .project-card:nth-child(n) { position: relative; inset: auto; }
+  .project-card:nth-child(odd) { width: 72%; margin-right: auto; }
+  .project-card:nth-child(even) { width: 62%; margin-left: auto; }
+  .project-card:nth-child(3) { margin-left: 8%; }
   .project-card-copy { padding-top: 12px; font-size: 14px; }
   .about-grid,.services-grid { grid-template-columns: 1fr; }
   .about-images { order: 2; }
@@ -275,9 +279,11 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
   .project-marquee { padding-block: 52px; }
   .project-marquee-item { font-size: 72px; }
   .projects-list { padding-top: 56px; }
-  .project-grid { display: flex; flex-direction: column; gap: 52px; }
+  .project-grid { gap: 64px; }
   .project-card:nth-child(odd) { width: 100%; }
-  .project-card:nth-child(even) { width: 82%; margin-top: 0; margin-left: auto; }
+  .project-card:nth-child(even) { width: 82%; margin-left: auto; }
+  .project-card:nth-child(3) { width: 76%; margin-left: 8%; }
+  .project-card:nth-child(4) { width: 92%; }
   .project-card-copy { gap: 16px; font-size: 12px; }
   .mobile-menu { padding-top: calc(64px + clamp(34px,7vh,56px)); padding-bottom: 24px; }
   .mobile-menu-nav a { padding-block: 12px; font-size: clamp(32px,10vw,42px); }

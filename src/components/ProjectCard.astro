@@ -4,8 +4,9 @@ type Project = CollectionEntry<'projects'>['data'];
 interface Props { project: Project; locale: 'es'|'en'; }
 const { project, locale } = Astro.props;
 const href = `${locale === 'en' ? '/en' : ''}/projects/${project.projectSlug}`;
+const CardTag = project.draft ? 'article' : 'a';
 ---
-<a class="project-card" href={href} data-reveal>
+<CardTag class="project-card" href={project.draft ? undefined : href} data-preview={project.draft ? '' : undefined} data-reveal>
   <div class="project-card-media">
     <img src={project.cover.src} alt={project.cover.alt} width="1800" height="1350" loading="lazy" />
   </div>
@@ -13,4 +14,4 @@ const href = `${locale === 'en' ? '/en' : ''}/projects/${project.projectSlug}`;
     <h2>{project.title}</h2>
     <span>{project.year}</span>
   </div>
-</a>
+</CardTag>
