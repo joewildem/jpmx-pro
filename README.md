@@ -2,6 +2,8 @@
 
 Portfolio bilingüe de Joe Palomino construido con Astro, Decap CMS y Cloudflare Pages.
 
+El inventario vivo de bibliotecas, referencias y materiales utilizados está en [`docs/recursos.md`](docs/recursos.md).
+
 ## Desarrollo local
 
 Requiere Node 24.
