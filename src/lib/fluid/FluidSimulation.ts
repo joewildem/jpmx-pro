@@ -1,10 +1,11 @@
-// Adapted from three-fluid-sim by Andrés Valencia Téllez (MIT).
-// Original project: https://github.com/amsXYZ/three-fluid-sim
+// Adapted from WebGL Fluid Simulation by Pavel Dobryakov (MIT).
+// Original project: https://github.com/PavelDoGreat/WebGL-Fluid-Simulation
 // See ./LICENSE for the upstream license.
 import {
   BufferAttribute,
   BufferGeometry,
   ClampToEdgeWrapping,
+  Color,
   HalfFloatType,
   LinearFilter,
   Mesh,
@@ -23,11 +24,26 @@ import {
 } from 'three';
 
 const SIMULATION = {
-  scale: 0.5,
-  iterations: 32,
-  colorDecay: 0.01,
-  timeStep: 1 / 60,
-  radius: 0.3,
+  quality: 'high',
+  simResolution: 128,
+  dyeResolution: 1024,
+  densityDissipation: 2.7,
+  velocityDissipation: 4,
+  pressure: 0.44,
+  pressureIterations: 20,
+  curl: 0,
+  splatRadius: 0.23,
+  splatForce: 6000,
+  shading: false,
+  colorful: true,
+  paused: false,
+  bloom: true,
+  bloomResolution: 256,
+  bloomIntensity: 0.8,
+  bloomThreshold: 0.8,
+  sunrays: true,
+  sunraysResolution: 196,
+  sunraysWeight: 1,
 } as const;
 
 const VERTEX_SHADER = `
@@ -111,10 +127,11 @@ const ADVECTION_SHADER = `
   uniform sampler2D velocity;
   uniform float timeDelta;
   uniform float decay;
+  uniform vec2 velocityTexelSize;
 
   void main() {
-    vec2 previous = clamp(vUV - timeDelta * texture2D(velocity, vUV).xy, 0.001, 0.999);
-    gl_FragColor = texture2D(source, previous) * (1.0 - decay);
+    vec2 previous = clamp(vUV - timeDelta * texture2D(velocity, vUV).xy * velocityTexelSize, 0.001, 0.999);
+    gl_FragColor = texture2D(source, previous) / (1.0 + decay * timeDelta);
   }
 `;
 
@@ -127,15 +144,27 @@ const SPLAT_SHADER = `
   uniform float radius;
   uniform float force;
   uniform float isDye;
+  uniform vec3 splatColor;
 
   void main() {
     vec2 scaledUV = (vUV - 0.5) * aspect + aspect * 0.5;
     vec2 delta = scaledUV - pointer.xy;
     float influence = exp(-dot(delta, delta) / max(radius * radius, 0.0001));
     vec4 current = texture2D(source, vUV);
-    vec2 impulse = pointer.zw * influence * force;
-    vec2 addition = mix(impulse, vec2(length(pointer.zw) * influence * force * 0.42), isDye);
-    gl_FragColor = current + vec4(addition, 0.0, 0.0);
+    vec3 impulse = vec3(pointer.zw * influence * force, 0.0);
+    vec3 addition = mix(impulse, splatColor * influence, isDye);
+    gl_FragColor = current + vec4(addition, 0.0);
+  }
+`;
+
+const CLEAR_SHADER = `
+  precision highp float;
+  varying vec2 vUV;
+  uniform sampler2D source;
+  uniform float value;
+
+  void main() {
+    gl_FragColor = texture2D(source, vUV) * value;
   }
 `;
 
@@ -188,18 +217,87 @@ const GRADIENT_SHADER = `
   }
 `;
 
-const LUMINANCE_SHADER = `
+const BLOOM_PREFILTER_SHADER = `
+  precision highp float;
+  varying vec2 vUV;
+  uniform sampler2D source;
+  uniform float threshold;
+
+  void main() {
+    vec3 color = texture2D(source, vUV).rgb;
+    float brightness = max(color.r, max(color.g, color.b));
+    float contribution = max(brightness - threshold, 0.0) / max(brightness, 0.0001);
+    gl_FragColor = vec4(color * contribution, 1.0);
+  }
+`;
+
+const BLUR_SHADER = `
+  precision highp float;
+  varying vec2 vUV;
+  uniform sampler2D source;
+  uniform vec2 direction;
+
+  void main() {
+    vec3 color = texture2D(source, vUV).rgb * 0.29411764;
+    color += texture2D(source, vUV - direction * 1.33333333).rgb * 0.35294117;
+    color += texture2D(source, vUV + direction * 1.33333333).rgb * 0.35294117;
+    gl_FragColor = vec4(color, 1.0);
+  }
+`;
+
+const SUNRAYS_MASK_SHADER = `
+  precision highp float;
+  varying vec2 vUV;
+  uniform sampler2D source;
+
+  void main() {
+    vec3 color = texture2D(source, vUV).rgb;
+    float brightness = max(color.r, max(color.g, color.b));
+    float mask = 1.0 - min(max(brightness * 20.0, 0.0), 0.8);
+    gl_FragColor = vec4(mask, 0.0, 0.0, 1.0);
+  }
+`;
+
+const SUNRAYS_SHADER = `
+  precision highp float;
+  varying vec2 vUV;
+  uniform sampler2D source;
+  uniform float weight;
+
+  void main() {
+    vec2 coordinate = vUV;
+    vec2 direction = (vUV - 0.5) * (0.3 / 16.0);
+    float illuminationDecay = 1.0;
+    float ray = texture2D(source, vUV).r;
+    for (int i = 0; i < 16; i++) {
+      coordinate -= direction;
+      ray += texture2D(source, coordinate).r * illuminationDecay * weight;
+      illuminationDecay *= 0.95;
+    }
+    gl_FragColor = vec4(ray * 0.7, 0.0, 0.0, 1.0);
+  }
+`;
+
+const DISPLAY_SHADER = `
   precision highp float;
   varying vec2 vUV;
   uniform sampler2D colorBuffer;
+  uniform sampler2D bloomBuffer;
+  uniform sampler2D sunraysBuffer;
+  uniform float bloomIntensity;
+
+  vec3 linearToGamma(vec3 color) {
+    color = max(color, vec3(0.0));
+    return max(1.055 * pow(color, vec3(0.416666667)) - 0.055, vec3(0.0));
+  }
 
   void main() {
-    vec3 color = abs(texture2D(colorBuffer, vUV).rgb);
-    float luminance = dot(color, vec3(0.2125, 0.7154, 0.0721));
-    // A soft exponential response preserves translucent wisps instead of
-    // clipping the density into opaque white shapes.
-    float smoke = 1.0 - exp(-luminance * 5.0);
-    gl_FragColor = vec4(vec3(smoke * 0.72), smoke * 0.28);
+    vec3 color = texture2D(colorBuffer, vUV).rgb;
+    vec3 bloom = linearToGamma(texture2D(bloomBuffer, vUV).rgb) * bloomIntensity;
+    float sunrays = texture2D(sunraysBuffer, vUV).r;
+    color = (color + bloom) * sunrays;
+    float alpha = clamp(max(color.r, max(color.g, color.b)), 0.0, 0.72);
+    gl_FragColor = vec4(color, alpha);
   }
 `;
 
@@ -210,30 +308,39 @@ export class FluidSimulation {
   private color: DoubleTarget;
   private pressure: DoubleTarget;
   private divergence: WebGLRenderTarget;
+  private bloom: WebGLRenderTarget;
+  private bloomTemp: WebGLRenderTarget;
+  private sunrays: WebGLRenderTarget;
+  private sunraysTemp: WebGLRenderTarget;
   private resolution = new Vector2();
   private aspect = new Vector2();
   private pointer = new Vector4();
+  private splatColor = new Color();
   private previousPointer = new Vector2();
   private hasPointer = false;
   private hasSplat = false;
   private frame = 0;
   private lastInput = 0;
+  private lastFrame = performance.now();
   private disposed = false;
 
   private advection = createPass(ADVECTION_SHADER, {
     source: null,
     velocity: null,
-    timeDelta: SIMULATION.timeStep,
+    timeDelta: 1 / 60,
     decay: 0,
+    velocityTexelSize: new Vector2(),
   });
   private splat = createPass(SPLAT_SHADER, {
     source: null,
     pointer: this.pointer,
     aspect: this.aspect,
-    radius: SIMULATION.radius,
-    force: 1.35,
+    radius: 0.05,
+    force: SIMULATION.splatForce,
     isDye: 0,
+    splatColor: this.splatColor,
   });
+  private clearPass = createPass(CLEAR_SHADER, { source: null, value: SIMULATION.pressure });
   private divergencePass = createPass(DIVERGENCE_SHADER, {
     velocity: null,
     texelSize: new Vector2(),
@@ -248,7 +355,22 @@ export class FluidSimulation {
     pressure: null,
     texelSize: new Vector2(),
   });
-  private composition = createPass(LUMINANCE_SHADER, { colorBuffer: null });
+  private bloomPrefilter = createPass(BLOOM_PREFILTER_SHADER, {
+    source: null,
+    threshold: SIMULATION.bloomThreshold,
+  });
+  private blur = createPass(BLUR_SHADER, { source: null, direction: new Vector2() });
+  private sunraysMask = createPass(SUNRAYS_MASK_SHADER, { source: null });
+  private sunraysPass = createPass(SUNRAYS_SHADER, {
+    source: null,
+    weight: SIMULATION.sunraysWeight,
+  });
+  private composition = createPass(DISPLAY_SHADER, {
+    colorBuffer: null,
+    bloomBuffer: null,
+    sunraysBuffer: null,
+    bloomIntensity: SIMULATION.bloomIntensity,
+  });
 
   constructor(private canvas: HTMLCanvasElement) {
     this.renderer = new WebGLRenderer({
@@ -267,11 +389,18 @@ export class FluidSimulation {
       throw new Error('Floating-point render targets are not available.');
     }
 
-    const { width, height } = this.getSimulationSize();
+    const { width, height } = this.getResolution(SIMULATION.simResolution);
+    const dyeSize = this.getResolution(SIMULATION.dyeResolution);
+    const bloomSize = this.getResolution(SIMULATION.bloomResolution);
+    const sunraysSize = this.getResolution(SIMULATION.sunraysResolution);
     this.velocity = new DoubleTarget(width, height);
-    this.color = new DoubleTarget(width, height);
+    this.color = new DoubleTarget(dyeSize.width, dyeSize.height);
     this.pressure = new DoubleTarget(width, height);
     this.divergence = makeTarget(width, height);
+    this.bloom = makeTarget(bloomSize.width, bloomSize.height);
+    this.bloomTemp = makeTarget(bloomSize.width, bloomSize.height);
+    this.sunrays = makeTarget(sunraysSize.width, sunraysSize.height);
+    this.sunraysTemp = makeTarget(sunraysSize.width, sunraysSize.height);
     this.resize();
     this.clearTargets();
   }
@@ -294,6 +423,7 @@ export class FluidSimulation {
     if (Math.hypot(dx, dy) < 0.00025) return;
 
     this.pointer.set(x, y, dx, dy);
+    this.splatColor.setHSL((performance.now() * 0.0001) % 1, 1, 0.5).multiplyScalar(0.15);
     this.hasSplat = true;
     this.lastInput = performance.now();
     this.canvas.classList.add('is-active');
@@ -303,17 +433,26 @@ export class FluidSimulation {
   resize = () => {
     if (this.disposed) return;
     this.renderer.setSize(window.innerWidth, window.innerHeight, false);
-    const { width, height } = this.getSimulationSize();
+    const { width, height } = this.getResolution(SIMULATION.simResolution);
+    const dyeSize = this.getResolution(SIMULATION.dyeResolution);
+    const bloomSize = this.getResolution(SIMULATION.bloomResolution);
+    const sunraysSize = this.getResolution(SIMULATION.sunraysResolution);
     this.resolution.set(width, height);
-    this.aspect.set(width / height, 1);
+    this.aspect.set(window.innerWidth / Math.max(window.innerHeight, 1), 1);
     this.velocity.resize(width, height);
-    this.color.resize(width, height);
+    this.color.resize(dyeSize.width, dyeSize.height);
     this.pressure.resize(width, height);
     this.divergence.setSize(width, height);
+    this.bloom.setSize(bloomSize.width, bloomSize.height);
+    this.bloomTemp.setSize(bloomSize.width, bloomSize.height);
+    this.sunrays.setSize(sunraysSize.width, sunraysSize.height);
+    this.sunraysTemp.setSize(sunraysSize.width, sunraysSize.height);
     const texelSize = new Vector2(1 / width, 1 / height);
+    this.advection.material.uniforms.velocityTexelSize.value.copy(texelSize);
     this.divergencePass.material.uniforms.texelSize.value.copy(texelSize);
     this.pressurePass.material.uniforms.texelSize.value.copy(texelSize);
     this.gradient.material.uniforms.texelSize.value.copy(texelSize);
+    this.splat.material.uniforms.radius.value = Math.sqrt((SIMULATION.splatRadius / 100) * Math.max(this.aspect.x, 1));
   };
 
   start() {
@@ -337,19 +476,18 @@ export class FluidSimulation {
     this.color.dispose();
     this.pressure.dispose();
     this.divergence.dispose();
+    this.bloom.dispose();
+    this.bloomTemp.dispose();
+    this.sunrays.dispose();
+    this.sunraysTemp.dispose();
     this.renderer.dispose();
   }
 
-  private getSimulationSize() {
-    const scale = Math.min(
-      SIMULATION.scale,
-      960 / Math.max(window.innerWidth, 1),
-      540 / Math.max(window.innerHeight, 1),
-    );
-    return {
-      width: Math.max(2, Math.round(window.innerWidth * scale)),
-      height: Math.max(2, Math.round(window.innerHeight * scale)),
-    };
+  private getResolution(shortSide: number) {
+    const aspect = Math.max(window.innerWidth, window.innerHeight) / Math.max(Math.min(window.innerWidth, window.innerHeight), 1);
+    return window.innerWidth > window.innerHeight
+      ? { width: Math.round(shortSide * aspect), height: shortSide }
+      : { width: shortSide, height: Math.round(shortSide * aspect) };
   }
 
   private clear(target: WebGLRenderTarget) {
@@ -366,6 +504,10 @@ export class FluidSimulation {
       this.pressure.read,
       this.pressure.write,
       this.divergence,
+      this.bloom,
+      this.bloomTemp,
+      this.sunrays,
+      this.sunraysTemp,
     ].forEach((target) => this.clear(target));
     this.renderer.setRenderTarget(null);
   }
@@ -379,10 +521,15 @@ export class FluidSimulation {
     this.frame = 0;
     if (this.disposed || document.hidden) return;
 
+    const now = performance.now();
+    const timeDelta = Math.min((now - this.lastFrame) / 1000, 1 / 60);
+    this.lastFrame = now;
+
     const velocityUniforms = this.advection.material.uniforms;
     velocityUniforms.source.value = this.velocity.read.texture;
     velocityUniforms.velocity.value = this.velocity.read.texture;
-    velocityUniforms.decay.value = 0;
+    velocityUniforms.timeDelta.value = timeDelta;
+    velocityUniforms.decay.value = SIMULATION.velocityDissipation;
     this.draw(this.advection, this.velocity.write);
     this.velocity.swap();
 
@@ -390,7 +537,7 @@ export class FluidSimulation {
       const splatUniforms = this.splat.material.uniforms;
       splatUniforms.source.value = this.velocity.read.texture;
       splatUniforms.isDye.value = 0;
-      splatUniforms.force.value = 1.35;
+      splatUniforms.force.value = SIMULATION.splatForce;
       this.draw(this.splat, this.velocity.write);
       this.velocity.swap();
     }
@@ -398,7 +545,11 @@ export class FluidSimulation {
     this.divergencePass.material.uniforms.velocity.value = this.velocity.read.texture;
     this.draw(this.divergencePass, this.divergence);
 
-    for (let iteration = 0; iteration < SIMULATION.iterations; iteration += 1) {
+    this.clearPass.material.uniforms.source.value = this.pressure.read.texture;
+    this.draw(this.clearPass, this.pressure.write);
+    this.pressure.swap();
+
+    for (let iteration = 0; iteration < SIMULATION.pressureIterations; iteration += 1) {
       this.pressurePass.material.uniforms.pressure.value = this.pressure.read.texture;
       this.pressurePass.material.uniforms.divergence.value = this.divergence.texture;
       this.draw(this.pressurePass, this.pressure.write);
@@ -412,7 +563,7 @@ export class FluidSimulation {
 
     velocityUniforms.source.value = this.color.read.texture;
     velocityUniforms.velocity.value = this.velocity.read.texture;
-    velocityUniforms.decay.value = SIMULATION.colorDecay;
+    velocityUniforms.decay.value = SIMULATION.densityDissipation;
     this.draw(this.advection, this.color.write);
     this.color.swap();
 
@@ -420,16 +571,41 @@ export class FluidSimulation {
       const splatUniforms = this.splat.material.uniforms;
       splatUniforms.source.value = this.color.read.texture;
       splatUniforms.isDye.value = 1;
-      splatUniforms.force.value = 0.34;
+      splatUniforms.force.value = 1;
       this.draw(this.splat, this.color.write);
       this.color.swap();
       this.hasSplat = false;
     }
 
-    this.composition.material.uniforms.colorBuffer.value = this.color.read.texture;
+    this.bloomPrefilter.material.uniforms.source.value = this.color.read.texture;
+    this.draw(this.bloomPrefilter, this.bloom);
+    for (let iteration = 0; iteration < 3; iteration += 1) {
+      this.blur.material.uniforms.source.value = this.bloom.texture;
+      this.blur.material.uniforms.direction.value.set(1 / this.bloom.width, 0);
+      this.draw(this.blur, this.bloomTemp);
+      this.blur.material.uniforms.source.value = this.bloomTemp.texture;
+      this.blur.material.uniforms.direction.value.set(0, 1 / this.bloom.height);
+      this.draw(this.blur, this.bloom);
+    }
+
+    this.sunraysMask.material.uniforms.source.value = this.color.read.texture;
+    this.draw(this.sunraysMask, this.sunraysTemp);
+    this.sunraysPass.material.uniforms.source.value = this.sunraysTemp.texture;
+    this.draw(this.sunraysPass, this.sunrays);
+    this.blur.material.uniforms.source.value = this.sunrays.texture;
+    this.blur.material.uniforms.direction.value.set(1 / this.sunrays.width, 0);
+    this.draw(this.blur, this.sunraysTemp);
+    this.blur.material.uniforms.source.value = this.sunraysTemp.texture;
+    this.blur.material.uniforms.direction.value.set(0, 1 / this.sunrays.height);
+    this.draw(this.blur, this.sunrays);
+
+    const compositionUniforms = this.composition.material.uniforms;
+    compositionUniforms.colorBuffer.value = this.color.read.texture;
+    compositionUniforms.bloomBuffer.value = this.bloom.texture;
+    compositionUniforms.sunraysBuffer.value = this.sunrays.texture;
     this.draw(this.composition, null);
 
-    if (performance.now() - this.lastInput < 6500) {
+    if (now - this.lastInput < 6500) {
       this.frame = requestAnimationFrame(this.render);
     } else {
       this.canvas.classList.remove('is-active');

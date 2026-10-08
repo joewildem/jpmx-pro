@@ -55,11 +55,12 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
 .language-divider { color: var(--muted); }
 .mobile-controls,.mobile-menu { display: none; }
 .fluid-cursor { position: fixed; z-index: 0; inset: 0; width: 100vw; height: 100dvh; pointer-events: none; opacity: 0; transition: opacity .3s ease; }
-.fluid-cursor.is-active { opacity: .56; }
+.fluid-cursor.is-active { opacity: .78; }
 .custom-cursor { position: fixed; z-index: 10000; top: 0; left: 0; width: 28px; height: 28px; pointer-events: none; opacity: 0; transition: opacity .18s ease; will-change: transform; }
 .custom-cursor::before { content: ''; position: absolute; inset: 0; border: 1px solid rgba(238,238,238,.72); border-radius: 50%; background: transparent; transform: scale(1); transition: transform .24s cubic-bezier(.22,1,.36,1), border-color .24s ease, background-color .24s ease; }
 .custom-cursor.is-visible { opacity: 1; }
 .custom-cursor.is-clickable::before { border-color: #eee; background: #eee; transform: scale(.43); }
+.custom-cursor.is-clickable.is-accent::before { border-color: var(--accent); background: var(--accent); }
 
 @media (hover: hover) and (pointer: fine) {
   html,body,a,button,input,select,textarea,label,[role='button'],[data-cursor='clickable'],[tabindex]:not([tabindex='-1']) { cursor: none !important; }
