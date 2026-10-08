@@ -14,6 +14,10 @@ const locale = page.locale;
 const heroTitleParts = page.heroTitle.split(/,\s+(?=Senior Product Designer$)/);
 const heroTitleLead = heroTitleParts.length === 2 ? `${heroTitleParts[0]},` : page.heroTitle;
 const heroTitleRole = heroTitleParts.length === 2 ? heroTitleParts[1] : '';
+const heroName = 'Joe Palomino';
+const heroNameIndex = heroTitleLead.indexOf(heroName);
+const heroTitleBeforeName = heroNameIndex >= 0 ? heroTitleLead.slice(0, heroNameIndex) : heroTitleLead;
+const heroTitleAfterName = heroNameIndex >= 0 ? heroTitleLead.slice(heroNameIndex + heroName.length) : '';
 ---
 <BaseLayout title={page.seoTitle} description={page.seoDescription} locale={locale} path={locale === 'es' ? '/' : '/en/'}>
   <div id="top"></div>
@@ -24,7 +28,10 @@ const heroTitleRole = heroTitleParts.length === 2 ? heroTitleParts[1] : '';
       <section class="hero">
         <div class="hero-content container" data-reveal>
           <p class="availability availability--hero">{page.availability}</p>
-          <h1><span>{heroTitleLead}</span>{heroTitleRole && <span>{heroTitleRole}</span>}</h1>
+          <h1>
+            <span>{heroTitleBeforeName}{heroNameIndex >= 0 && <span class="hero-name">{heroName}</span>}{heroTitleAfterName}</span>
+            {heroTitleRole && <span>{heroTitleRole}</span>}
+          </h1>
           <p class="hero-description">{page.heroDescription}</p>
           <div class="button-row"><a class="button button--secondary" href="#projects">{page.primaryCta}</a><a class="button button--primary" href="mailto:hello@jpmx.pro">{page.contactCta}</a></div>
         </div>
