@@ -1,4 +1,8 @@
-<span class="custom-cursor" aria-hidden="true"></span>
+<span class="custom-cursor" aria-hidden="true">
+  <svg class="custom-cursor-arrow" viewBox="0 0 50 50" fill="none" focusable="false">
+    <path d="M11 39 39 11M18 11h21v21" />
+  </svg>
+</span>
 
 <script>
   const cursor = document.querySelector<HTMLElement>('.custom-cursor');
@@ -40,6 +44,7 @@
       const eventTarget = event.target instanceof Element ? event.target : null;
       cursor.classList.toggle('is-clickable', Boolean(eventTarget?.closest(clickableSelector)));
       cursor.classList.toggle('is-accent', Boolean(eventTarget?.closest('.button--primary, .button--tertiary, [data-cursor-color="accent"]')));
+      cursor.classList.toggle('is-project', Boolean(eventTarget?.closest('[data-cursor="project"]')));
     }, { passive: true });
 
     document.documentElement.addEventListener('mouseleave', () => cursor.classList.remove('is-visible'));
