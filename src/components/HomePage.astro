@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
 import ProjectCard from './ProjectCard.astro';
+import ProjectMarquee from './ProjectMarquee.astro';
 import Contact from './Contact.astro';
 import type { CollectionEntry } from 'astro:content';
 type Home = CollectionEntry<'pages'>['data'];
@@ -46,9 +47,9 @@ const heroTitleRole = heroTitleParts.length === 2 ? heroTitleParts[1] : '';
         </div>
       </div>
     </div>
-    <section class="section" id="projects">
-      <div class="container">
-        <p class="eyebrow" style="margin-bottom:28px">{page.projectsLabel}</p>
+    <section class="section projects-section" id="projects">
+      <ProjectMarquee label={page.projectsLabel} />
+      <div class="container projects-list">
         <div class="project-grid">{projects.map((project) => <ProjectCard project={project} locale={locale} />)}</div>
       </div>
     </section>
