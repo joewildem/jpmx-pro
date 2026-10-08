@@ -22,6 +22,14 @@ import {
   WebGLRenderTarget,
 } from 'three';
 
+const SIMULATION = {
+  scale: 0.5,
+  iterations: 32,
+  colorDecay: 0.01,
+  timeStep: 1 / 60,
+  radius: 0.3,
+} as const;
+
 const VERTEX_SHADER = `
   precision highp float;
   attribute vec2 position;
@@ -188,8 +196,10 @@ const LUMINANCE_SHADER = `
   void main() {
     vec3 color = abs(texture2D(colorBuffer, vUV).rgb);
     float luminance = dot(color, vec3(0.2125, 0.7154, 0.0721));
-    float light = smoothstep(0.001, 0.09, luminance);
-    gl_FragColor = vec4(vec3(light), light * 0.5);
+    // A soft exponential response preserves translucent wisps instead of
+    // clipping the density into opaque white shapes.
+    float smoke = 1.0 - exp(-luminance * 5.0);
+    gl_FragColor = vec4(vec3(smoke * 0.72), smoke * 0.28);
   }
 `;
 
@@ -213,15 +223,15 @@ export class FluidSimulation {
   private advection = createPass(ADVECTION_SHADER, {
     source: null,
     velocity: null,
-    timeDelta: 1 / 60,
+    timeDelta: SIMULATION.timeStep,
     decay: 0,
   });
   private splat = createPass(SPLAT_SHADER, {
     source: null,
     pointer: this.pointer,
     aspect: this.aspect,
-    radius: 0.075,
-    force: 2.2,
+    radius: SIMULATION.radius,
+    force: 1.35,
     isDye: 0,
   });
   private divergencePass = createPass(DIVERGENCE_SHADER, {
@@ -331,7 +341,11 @@ export class FluidSimulation {
   }
 
   private getSimulationSize() {
-    const scale = Math.min(0.42, 720 / Math.max(window.innerWidth, 1), 460 / Math.max(window.innerHeight, 1));
+    const scale = Math.min(
+      SIMULATION.scale,
+      960 / Math.max(window.innerWidth, 1),
+      540 / Math.max(window.innerHeight, 1),
+    );
     return {
       width: Math.max(2, Math.round(window.innerWidth * scale)),
       height: Math.max(2, Math.round(window.innerHeight * scale)),
@@ -368,7 +382,7 @@ export class FluidSimulation {
     const velocityUniforms = this.advection.material.uniforms;
     velocityUniforms.source.value = this.velocity.read.texture;
     velocityUniforms.velocity.value = this.velocity.read.texture;
-    velocityUniforms.decay.value = 0.006;
+    velocityUniforms.decay.value = 0;
     this.draw(this.advection, this.velocity.write);
     this.velocity.swap();
 
@@ -376,7 +390,7 @@ export class FluidSimulation {
       const splatUniforms = this.splat.material.uniforms;
       splatUniforms.source.value = this.velocity.read.texture;
       splatUniforms.isDye.value = 0;
-      splatUniforms.force.value = 2.2;
+      splatUniforms.force.value = 1.35;
       this.draw(this.splat, this.velocity.write);
       this.velocity.swap();
     }
@@ -384,7 +398,7 @@ export class FluidSimulation {
     this.divergencePass.material.uniforms.velocity.value = this.velocity.read.texture;
     this.draw(this.divergencePass, this.divergence);
 
-    for (let iteration = 0; iteration < 18; iteration += 1) {
+    for (let iteration = 0; iteration < SIMULATION.iterations; iteration += 1) {
       this.pressurePass.material.uniforms.pressure.value = this.pressure.read.texture;
       this.pressurePass.material.uniforms.divergence.value = this.divergence.texture;
       this.draw(this.pressurePass, this.pressure.write);
@@ -398,7 +412,7 @@ export class FluidSimulation {
 
     velocityUniforms.source.value = this.color.read.texture;
     velocityUniforms.velocity.value = this.velocity.read.texture;
-    velocityUniforms.decay.value = 0.018;
+    velocityUniforms.decay.value = SIMULATION.colorDecay;
     this.draw(this.advection, this.color.write);
     this.color.swap();
 
@@ -406,7 +420,7 @@ export class FluidSimulation {
       const splatUniforms = this.splat.material.uniforms;
       splatUniforms.source.value = this.color.read.texture;
       splatUniforms.isDye.value = 1;
-      splatUniforms.force.value = 1.7;
+      splatUniforms.force.value = 0.34;
       this.draw(this.splat, this.color.write);
       this.color.swap();
       this.hasSplat = false;

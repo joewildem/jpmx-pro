@@ -1,0 +1,47 @@
+<span class="custom-cursor" aria-hidden="true"></span>
+
+<script>
+  const cursor = document.querySelector<HTMLElement>('.custom-cursor');
+  const precisePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const clickableSelector = [
+    'a',
+    'button',
+    'input',
+    'select',
+    'textarea',
+    'label',
+    '[role="button"]',
+    '[data-cursor="clickable"]',
+    '[tabindex]:not([tabindex="-1"])',
+  ].join(',');
+
+  if (cursor && precisePointer.matches) {
+    const target = { x: -40, y: -40 };
+    const position = { x: -40, y: -40 };
+    let initialized = false;
+
+    const render = () => {
+      position.x += (target.x - position.x) * 0.24;
+      position.y += (target.y - position.y) * 0.24;
+      cursor.style.transform = `translate3d(${position.x}px, ${position.y}px, 0) translate(-50%, -50%)`;
+      requestAnimationFrame(render);
+    };
+
+    window.addEventListener('pointermove', (event) => {
+      if (event.pointerType && event.pointerType !== 'mouse' && event.pointerType !== 'pen') return;
+      target.x = event.clientX;
+      target.y = event.clientY;
+      if (!initialized) {
+        position.x = target.x;
+        position.y = target.y;
+        initialized = true;
+      }
+      cursor.classList.add('is-visible');
+      cursor.classList.toggle('is-clickable', event.target instanceof Element && Boolean(event.target.closest(clickableSelector)));
+    }, { passive: true });
+
+    document.documentElement.addEventListener('mouseleave', () => cursor.classList.remove('is-visible'));
+    window.addEventListener('blur', () => cursor.classList.remove('is-visible'));
+    render();
+  }
+</script>
