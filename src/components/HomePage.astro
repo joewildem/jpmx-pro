@@ -57,6 +57,7 @@ const heroTitleAfterName = heroNameIndex >= 0 ? heroTitleLead.slice(heroNameInde
     <section class="section projects-section" id="projects">
       <ProjectMarquee label={page.projectsLabel} />
       <div class="container projects-list">
+        <div class="projects-more"><a class="button button--secondary" href="https://www.linkedin.com/in/joepalominoux/" target="_blank" rel="noreferrer">{locale === 'es' ? 'Ver más proyectos' : 'See more work'}</a></div>
         <div class="project-grid">{projects.map((project) => <ProjectCard project={project} locale={locale} />)}</div>
       </div>
     </section>

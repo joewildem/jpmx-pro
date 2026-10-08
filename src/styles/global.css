@@ -96,13 +96,14 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
 .project-marquee-track { display: flex; width: max-content; will-change: transform; }
 .project-marquee-group { display: flex; flex: 0 0 auto; align-items: center; gap: clamp(42px,6vw,96px); padding-right: clamp(42px,6vw,96px); }
 .project-marquee-item { color: #eee; font: italic 350 clamp(78px,12vw,184px)/.82 'Newsreader Variable', serif; font-variation-settings: 'opsz' 72; letter-spacing: -.055em; white-space: nowrap; }
-.projects-list { padding-top: 0; }
-.project-grid { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,.82fr) minmax(0,2fr); align-items: start; gap: clamp(52px,5vw,76px) clamp(12px,1.1vw,18px); }
+.projects-list { position: relative; width: calc(100% - 32px); padding-top: 0; }
+.projects-more { position: absolute; z-index: 2; right: 0; bottom: calc(100% + 20px); }
+.project-grid { display: grid; grid-template-columns: minmax(0,679fr) minmax(0,480fr) minmax(0,1176fr); align-items: start; gap: 64px 16px; }
 .project-card { display: block; min-width: 0; }
 .project-card-media { position: relative; overflow: clip; aspect-ratio: 4 / 3; border-radius: clamp(14px,1.4vw,22px); background: #151515; }
-.project-card:nth-child(3n + 1) .project-card-media { aspect-ratio: 4 / 5; }
+.project-card:nth-child(3n + 1) .project-card-media { aspect-ratio: 1 / 1; }
 .project-card:nth-child(3n + 2) .project-card-media { aspect-ratio: 1 / 1; }
-.project-card:nth-child(3n) .project-card-media { aspect-ratio: 5 / 4; }
+.project-card:nth-child(3n) .project-card-media { aspect-ratio: 1176 / 940; }
 .project-card img { height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.2,.7,.2,1); }
 .project-card:not([data-preview]):hover img { transform: scale(1.035); }
 .project-card-copy { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding-top: 14px; color: #eee; font: 500 16px/1.2 'IBM Plex Sans Variable', sans-serif; letter-spacing: .01em; text-transform: uppercase; }
@@ -272,6 +273,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
   .scroll-cue-end { grid-area: 2 / 2; }
   .project-marquee { padding: 52px 0 28px; }
   .project-marquee-item { font-size: 72px; }
+  .projects-more { position: static; display: flex; justify-content: flex-end; margin-bottom: 16px; }
   .project-grid { grid-template-columns: 1fr; gap: 52px; }
   .project-card:nth-child(n) { grid-column: auto; width: 100%; margin: 0; }
   .project-card-copy { gap: 16px; font-size: 12px; }

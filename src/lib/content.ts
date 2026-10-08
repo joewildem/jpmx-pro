@@ -13,7 +13,7 @@ export async function getPublishedProjects(locale: 'es'|'en') {
 }
 
 export async function getHomepageProjects(locale: 'es'|'en') {
-  const previewOrder = ['afore-movil', 'calimax', 'dina', 'pet-love-story'];
+  const previewOrder = ['afore-movil', 'calimax', 'dina'];
   const entries = await getCollection('projects', ({ data }) =>
     data.locale === locale && previewOrder.includes(data.projectSlug)
   );
