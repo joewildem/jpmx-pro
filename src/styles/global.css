@@ -62,9 +62,9 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
 .custom-cursor.is-visible { opacity: 1; }
 .custom-cursor.is-clickable::before { border-color: #eee; background: #eee; transform: scale(.43); }
 .custom-cursor.is-clickable.is-accent::before { border-color: var(--accent); background: var(--accent); }
-.custom-cursor-arrow { position: absolute; z-index: 1; top: 20px; left: 20px; width: 50px; height: 50px; opacity: 0; stroke: #eee; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; transform: scale(.72); transition: opacity .18s ease, transform .3s cubic-bezier(.22,1,.36,1); }
+.custom-cursor-arrow { position: absolute; z-index: 1; top: 20px; left: 20px; width: 50px; height: 50px; opacity: 0; stroke: #0b0b0b; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; transform: scale(.72); transition: opacity .18s ease, transform .3s cubic-bezier(.22,1,.36,1); }
 .custom-cursor.is-project { width: 90px; height: 90px; }
-.custom-cursor.is-project::before { inset: 0; border-color: transparent; background: rgba(11,11,11,.6); backdrop-filter: blur(7px); transform: scale(1); }
+.custom-cursor.is-project::before { inset: 0; border-color: transparent; background: rgba(238,238,238,.6); backdrop-filter: blur(7px); transform: scale(1); }
 .custom-cursor.is-project .custom-cursor-arrow { opacity: 1; transform: scale(1); }
 
 @media (hover: hover) and (pointer: fine) {
