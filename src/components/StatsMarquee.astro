@@ -1,0 +1,75 @@
+---
+import GlobeMark from './GlobeMark.astro';
+
+interface Props { stats: string[]; }
+const { stats } = Astro.props;
+---
+
+<div class="ticker" aria-label={stats.join(', ')} data-stats-marquee>
+  <div class="ticker-track" aria-hidden="true" data-stats-marquee-track>
+    {[0, 1].map(() => (
+      <div class="ticker-group" data-stats-marquee-group>
+        {stats.map((stat) => (
+          <span class="ticker-item">
+            <span>{stat}</span>
+            <GlobeMark />
+          </span>
+        ))}
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  const reduceStatsMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll<HTMLElement>('[data-stats-marquee]').forEach((marquee) => {
+    const track = marquee.querySelector<HTMLElement>('[data-stats-marquee-track]');
+    const group = marquee.querySelector<HTMLElement>('[data-stats-marquee-group]');
+    if (!track || !group || reduceStatsMotion) return;
+
+    let offset = 0;
+    let direction = -1;
+    let velocity = -54;
+    let previousScrollY = window.scrollY;
+    let previousTime = performance.now();
+    let isVisible = false;
+
+    const getSpeed = () => window.innerWidth < 480 ? 34 : window.innerWidth < 810 ? 44 : 54;
+
+    const handleScroll = () => {
+      const nextScrollY = window.scrollY;
+      const delta = nextScrollY - previousScrollY;
+      if (Math.abs(delta) > 1) direction = delta > 0 ? -1 : 1;
+      previousScrollY = nextScrollY;
+    };
+
+    const render = (time: number) => {
+      const deltaTime = Math.min((time - previousTime) / 1000, 0.05);
+      previousTime = time;
+
+      if (isVisible) {
+        const targetVelocity = direction * getSpeed();
+        velocity += (targetVelocity - velocity) * Math.min(1, deltaTime * 7);
+        offset += velocity * deltaTime;
+
+        const width = group.offsetWidth;
+        if (width > 0) {
+          while (offset <= -width) offset += width;
+          while (offset > 0) offset -= width;
+        }
+        track.style.transform = `translate3d(${offset}px, 0, 0)`;
+      }
+
+      requestAnimationFrame(render);
+    };
+
+    new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      previousTime = performance.now();
+    }, { rootMargin: '15% 0px' }).observe(marquee);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    requestAnimationFrame(render);
+  });
+</script>
