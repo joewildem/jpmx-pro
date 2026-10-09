@@ -150,10 +150,10 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
 .ticker + .contact { border-top: 0; }
 .contact { position: relative; isolation: isolate; display: grid; width: 100%; min-height: 100vh; min-height: 100dvh; overflow: hidden; place-items: center; background: var(--bg); text-align: center; }
 .contact .container { position: relative; z-index: 1; }
-.contact-message { display: flex; margin-bottom: 40px; flex-direction: column; align-items: center; gap: 0; }
+.contact-message { display: flex; margin-bottom: 40px; flex-direction: column; align-items: center; gap: 12px; }
 .contact-message p,.contact-message h2 { margin: 0; color: #eee; font-size: clamp(22px,4.444vw,64px); font-weight: 400; line-height: 1.08; letter-spacing: -.025em; white-space: nowrap; }
 .contact-message p { font-family: 'IBM Plex Sans Variable', sans-serif; }
-.contact-message h2 { font-family: 'Newsreader Variable', serif; font-variation-settings: 'opsz' 72; }
+.contact-message h2 { font-family: 'Newsreader Variable', serif; font-style: italic; font-variation-settings: 'opsz' 72; }
 .site-footer { border-top: 1px solid var(--line); background: var(--bg); }
 .footer-inner { width: var(--page); min-height: 110px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 30px; color: var(--muted); font-size: .65rem; text-transform: uppercase; }
 .footer-links { display: flex; gap: 24px; }
