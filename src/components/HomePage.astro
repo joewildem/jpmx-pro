@@ -66,9 +66,9 @@ const heroTitleAfterName = heroNameIndex >= 0 ? heroTitleLead.slice(heroNameInde
         <div class="services-heading"><h2 data-reveal>{page.servicesTitle}</h2></div>
         <div class="services-list">
           {page.services.map((service, index) => (
-            <article class="service" tabindex="0" aria-labelledby={`service-${index}`} data-reveal>
+            <article class="service" aria-labelledby={`service-${index}`} data-reveal>
               <h3 id={`service-${index}`}>{service.title}</h3>
-              <div class="skills">{service.skills.map((skill) => <span>{skill}</span>)}</div>
+              <ul class="skills">{service.skills.map((skill) => <li>{skill}</li>)}</ul>
             </article>
           ))}
         </div>
