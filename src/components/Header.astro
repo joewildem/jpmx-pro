@@ -1,15 +1,16 @@
 ---
-interface Props { locale: 'es'|'en'; projectSlug?: string; }
-const { locale, projectSlug } = Astro.props;
+interface Props { locale: 'es'|'en'; projectSlug?: string; page?: 'about'; }
+const { locale, projectSlug, page } = Astro.props;
 const home = locale === 'es' ? '/' : '/en/';
-const esHref = projectSlug ? `/projects/${projectSlug}` : '/';
-const enHref = projectSlug ? `/en/projects/${projectSlug}` : '/en/';
+const about = locale === 'es' ? '/about' : '/en/about';
+const esHref = projectSlug ? `/projects/${projectSlug}` : page === 'about' ? '/about' : '/';
+const enHref = projectSlug ? `/en/projects/${projectSlug}` : page === 'about' ? '/en/about' : '/en/';
 ---
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href={home}>JPMX</a>
     <nav class="nav nav--desktop" aria-label={locale === 'es' ? 'Navegación principal' : 'Main navigation'}>
-      <span class="nav-sections"><a href={`${home}#about`}>{locale === 'es' ? 'Acerca de' : 'About'}</a></span>
+      <span class="nav-sections"><a href={about}>{locale === 'es' ? 'Acerca de' : 'About'}</a></span>
       <span class="nav-sections"><a href={`${home}#projects`}>{locale === 'es' ? 'Proyectos' : 'Projects'}</a></span>
       <span class="nav-sections"><a href={`${home}#services`}>{locale === 'es' ? 'Servicios' : 'Services'}</a></span>
       <span class="language">
@@ -35,7 +36,7 @@ const enHref = projectSlug ? `/en/projects/${projectSlug}` : '/en/';
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true" inert>
     <div class="mobile-menu-main">
       <nav class="mobile-menu-nav" aria-label={locale === 'es' ? 'Menú móvil' : 'Mobile menu'}>
-        <a href={`${home}#about`}>{locale === 'es' ? 'Acerca de' : 'About'}</a>
+        <a href={about}>{locale === 'es' ? 'Acerca de' : 'About'}</a>
         <a href={`${home}#projects`}>{locale === 'es' ? 'Proyectos' : 'Projects'}</a>
         <a href={`${home}#services`}>{locale === 'es' ? 'Servicios' : 'Services'}</a>
         <a href={`${home}#contact`}>{locale === 'es' ? 'Contacto' : 'Contact'}</a>

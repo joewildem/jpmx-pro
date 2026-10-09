@@ -1,0 +1,6 @@
+---
+import AboutPage from '../../components/AboutPage.astro';
+import { getHome } from '../../lib/content';
+const page = await getHome('en');
+---
+<AboutPage page={page} />

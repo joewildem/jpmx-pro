@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import type { CollectionEntry } from 'astro:content';
+
+type Home = CollectionEntry<'pages'>['data'];
+interface Props { page: Home; }
+const { page } = Astro.props;
+const locale = page.locale;
+const path = locale === 'es' ? '/about' : '/en/about';
+const title = locale === 'es' ? `Sobre mí — Joe Palomino` : `About me — Joe Palomino`;
+---
+<BaseLayout title={title} description={page.seoDescription} locale={locale} path={path}>
+  <div id="top"></div>
+  <Header locale={locale} page="about" />
+  <main class="about-page">
+    <section class="section about-page-section">
+      <div class="container about-grid">
+        <div class="about-copy" data-reveal>
+          <h1>{page.aboutTitle}</h1>
+          {page.aboutParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+          <div class="button-row about-actions">
+            <a class="button button--secondary" href="https://www.linkedin.com/in/joepalominoux/" target="_blank" rel="noreferrer">{page.linkedInLabel}</a>
+            <a class="button button--secondary" href="/documents/joe-palomino-resume-2026.pdf" target="_blank">{page.resumeLabel}</a>
+          </div>
+        </div>
+        <div class="about-images" data-reveal>
+          <img src="/images/about-portrait.webp" alt={locale === 'es' ? 'Joe Palomino frente a un espejo.' : 'Joe Palomino standing in front of a mirror.'} />
+          <img src="/images/about-comics.webp" alt={locale === 'es' ? 'Colección de cómics y novelas gráficas.' : 'A collection of comic books and graphic novels.'} />
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>
