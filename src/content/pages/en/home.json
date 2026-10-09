@@ -35,7 +35,7 @@
   ],
   "linkedInLabel": "Connect on LinkedIn",
   "resumeLabel": "Download my résumé",
-  "servicesTitle": "How I can help",
+  "servicesTitle": "What I do",
   "services": [
     {"title":"Product Design","skills":["UX Research","User Flows","Wireframing","Interaction Design","Usability Testing","Prototyping"]},
     {"title":"Design Systems","skills":["Tokens","Components","Documentation","Guidelines","Accessibility","Libraries"]},
