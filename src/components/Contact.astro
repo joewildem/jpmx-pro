@@ -6,8 +6,10 @@ const { page } = Astro.props;
 ---
 <section class="contact section" id="contact">
   <div class="container" data-reveal>
-    <p class="eyebrow">{page.contactEyebrow}</p>
-    <h2>{page.contactTitle}</h2>
+    <div class="contact-message">
+      <p>{page.contactEyebrow}</p>
+      <h2>{page.contactTitle}</h2>
+    </div>
     <a class="button button--primary" href="mailto:hello@jpmx.pro">{page.contactCta}</a>
   </div>
 </section>
