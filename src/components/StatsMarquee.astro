@@ -30,12 +30,12 @@ const { stats } = Astro.props;
 
     let offset = 0;
     let direction = -1;
-    let velocity = -54;
+    let velocity = -68;
     let previousScrollY = window.scrollY;
     let previousTime = performance.now();
     let isVisible = false;
 
-    const getSpeed = () => window.innerWidth < 480 ? 34 : window.innerWidth < 810 ? 44 : 54;
+    const getSpeed = () => window.innerWidth < 480 ? 42 : window.innerWidth < 810 ? 56 : 68;
 
     const handleScroll = () => {
       const nextScrollY = window.scrollY;

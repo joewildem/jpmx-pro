@@ -145,7 +145,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
 .ticker { overflow: hidden; width: 100%; height: 200px; background: linear-gradient(180deg,#ff7c48 0%,var(--accent) 100%); }
 .ticker-track { display: flex; width: max-content; height: 100%; will-change: transform; }
 .ticker-group { display: flex; flex: 0 0 auto; height: 100%; align-items: center; }
-.ticker-item { display: flex; height: 100%; padding-right: clamp(32px,3vw,48px); align-items: center; gap: clamp(32px,3vw,48px); color: #eee; font: 400 clamp(76px,8.333vw,120px)/1 var(--display); letter-spacing: -.045em; white-space: nowrap; }
+.ticker-item { display: flex; height: 100%; padding-right: clamp(32px,3vw,48px); align-items: center; gap: clamp(32px,3vw,48px); color: #eee; font: 400 clamp(76px,6.944vw,100px)/1 var(--display); letter-spacing: -.045em; white-space: nowrap; }
 .ticker-item .globe-mark { width: clamp(92px,8.9vw,128px); height: auto; flex: 0 0 auto; fill: currentColor; }
 .ticker + .contact { border-top: 0; }
 .contact { text-align: center; min-height: 520px; display: grid; place-items: center; }
@@ -267,7 +267,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
   .service h3 { font-size: clamp(30px,5vw,38px); line-height: 1; }
   .skills li { height: 68px; grid-template-columns: 44px minmax(0,1fr); column-gap: 10px; }
   .skill-index,.skill-name { font-size: clamp(20px,3vw,24px); }
-  .ticker-item { font-size: clamp(64px,11vw,88px); }
+  .ticker-item { font-size: clamp(64px,9.4vw,76px); }
   .ticker-item .globe-mark { width: clamp(82px,16vw,112px); }
   .footer-inner { padding: 28px 0; align-items: flex-start; flex-direction: column; }
   .footer-links { flex-wrap: wrap; gap: 14px 22px; }
