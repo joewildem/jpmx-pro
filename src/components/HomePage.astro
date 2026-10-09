@@ -63,12 +63,28 @@ const heroTitleAfterName = heroNameIndex >= 0 ? heroTitleLead.slice(heroNameInde
     </section>
     <section class="services-section" id="services">
       <div class="container services-shell">
-        <div class="services-heading"><h2 data-reveal>{page.servicesTitle}</h2></div>
+        <div class="services-heading">
+          <div class="services-intro" data-reveal>
+            <h2>{page.servicesTitle}</h2>
+            <p>{page.servicesDescription}</p>
+            <a class="button button--secondary services-cta" href="mailto:hello@jpmx.pro">
+              {locale === 'es' ? 'Hablemos' : 'Get in touch'}
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 15 15 5M7 5h8v8" /></svg>
+            </a>
+          </div>
+        </div>
         <div class="services-list">
           {page.services.map((service, index) => (
             <article class="service" aria-labelledby={`service-${index}`} data-reveal>
               <h3 id={`service-${index}`}>{service.title}</h3>
-              <ul class="skills">{service.skills.map((skill) => <li>{skill}</li>)}</ul>
+              <ul class="skills">
+                {service.skills.map((skill, skillIndex) => (
+                  <li>
+                    <span class="skill-index">{String(skillIndex + 1).padStart(2, '0')}</span>
+                    <span class="skill-name">{skill}</span>
+                  </li>
+                ))}
+              </ul>
             </article>
           ))}
         </div>

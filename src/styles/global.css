@@ -127,15 +127,21 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
 .about-images { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .about-images img { height: 520px; object-fit: cover; border-radius: 24px; }
 .services-section { border-top: 1px solid var(--line); scroll-margin-top: 64px; }
-.services-shell { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(520px,.9fr); align-items: start; border-inline: 1px solid var(--line); }
-.services-heading { position: sticky; top: 64px; height: calc(100vh - 64px); height: calc(100dvh - 64px); padding: 100px 40px 40px; }
+.services-shell { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); align-items: start; border-inline: 1px solid var(--line); }
+.services-heading { position: sticky; top: 64px; display: flex; height: calc(100vh - 64px); height: calc(100dvh - 64px); padding: 40px; align-items: center; }
+.services-intro { width: 100%; }
 .services-heading h2 { max-width: 620px; font-family: 'Newsreader Variable', serif; font-size: 92px; font-style: italic; font-weight: 400; font-variation-settings: 'opsz' 72; line-height: 83.72px; letter-spacing: normal; }
+.services-heading p { max-width: 470px; margin: 54px 0 0; color: var(--muted); font: 300 18px/1.5 'IBM Plex Sans Variable', sans-serif; }
+.services-cta { gap: 12px; margin-top: 32px; }
+.services-cta svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .services-list { min-width: 0; }
-.service { min-width: 0; min-height: 440px; padding: clamp(56px,6vw,88px) 24px; border-bottom: 1px solid var(--line); }
-.service:last-child { border-bottom: 0; }
+.service { display: flex; min-width: 0; min-height: calc(100vh - 64px); min-height: calc(100dvh - 64px); padding: 64px 40px; flex-direction: column; justify-content: center; }
 .service h3 { margin-bottom: 44px; font: 400 38px/38px var(--display); letter-spacing: normal; }
-.skills { display: flex; flex-direction: column; gap: 16px; padding: 0 0 0 24px; margin: 0; color: var(--muted); font: 400 20px/24px 'IBM Plex Sans Variable', sans-serif; letter-spacing: normal; list-style: none; }
-.skills li { height: 41px; padding: 0 0 17px; border-bottom: 1px solid var(--line); }
+.skills { padding: 0; margin: 0; font-family: 'IBM Plex Sans Variable', sans-serif; letter-spacing: normal; list-style: none; }
+.skills li { display: grid; height: 76px; border-bottom: 1px solid rgba(238,238,238,.2); grid-template-columns: 49px minmax(0,1fr); column-gap: 12px; align-items: center; }
+.skill-index,.skill-name { font-size: 26px; font-weight: 300; line-height: 1; }
+.skill-index { color: #737373; }
+.skill-name { color: #eee; }
 .ticker { overflow: hidden; border-block: 1px solid var(--line); background: #222; }
 .ticker-track { display: flex; width: max-content; animation: ticker 28s linear infinite; }
 .ticker span { padding: 20px 38px; white-space: nowrap; font-size: .78rem; }
@@ -252,13 +258,14 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
   .about-images { order: 2; }
   .about-images img { height: 360px; border-radius: 14px; }
   .services-shell { grid-template-columns: 1fr; }
-  .services-heading { position: static; height: auto; padding: 64px var(--inner-padding); }
+  .services-heading { position: static; height: auto; padding: 72px var(--inner-padding); }
   .services-heading h2 { max-width: 520px; font-size: clamp(46px,8vw,64px); line-height: .91; }
+  .services-heading p { margin-top: 36px; font-size: 17px; }
   .services-list { border-left: 0; }
-  .service { min-height: 0; padding: 52px var(--inner-padding); }
+  .service { min-height: 0; padding: 64px var(--inner-padding); }
   .service h3 { font-size: clamp(30px,5vw,38px); line-height: 1; }
-  .skills { font-size: clamp(18px,2.6vw,20px); line-height: 1.2; }
-  .skills li { height: clamp(39px,5.34vw,41px); padding-bottom: 17px; }
+  .skills li { height: 68px; grid-template-columns: 44px minmax(0,1fr); column-gap: 10px; }
+  .skill-index,.skill-name { font-size: clamp(20px,3vw,24px); }
   .footer-inner { padding: 28px 0; align-items: flex-start; flex-direction: column; }
   .footer-links { flex-wrap: wrap; gap: 14px 22px; }
   .project-intro { padding: 64px 0 48px; }
@@ -296,8 +303,11 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
   .project-card:nth-child(n) { grid-column: auto; width: 100%; margin: 0; }
   .project-card-copy { gap: 16px; font-size: 12px; }
   .services-heading { padding-block: 52px; }
-  .service { padding-block: 44px; }
-  .skills { padding-left: 16px; }
+  .services-heading p { font-size: 16px; }
+  .service { padding-block: 52px; }
+  .service h3 { margin-bottom: 36px; }
+  .skills li { height: 62px; grid-template-columns: 40px minmax(0,1fr); gap: 8px; }
+  .skill-index,.skill-name { font-size: 20px; }
   .mobile-menu { padding-top: calc(64px + clamp(34px,7vh,56px)); padding-bottom: 24px; }
   .mobile-menu-nav a { padding-block: 12px; font-size: clamp(32px,10vw,42px); }
   .mobile-menu-actions { margin-top: 24px; }

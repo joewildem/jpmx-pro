@@ -61,6 +61,7 @@ const pages = defineCollection({
     linkedInLabel: z.string(),
     resumeLabel: z.string(),
     servicesTitle: z.string(),
+    servicesDescription: z.string(),
     services: z.array(z.object({ title: z.string(), skills: z.array(z.string()) })),
     stats: z.array(z.string()),
     contactEyebrow: z.string(),
