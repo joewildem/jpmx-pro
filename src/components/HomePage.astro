@@ -5,6 +5,8 @@ import Footer from './Footer.astro';
 import ProjectCard from './ProjectCard.astro';
 import ProjectMarquee from './ProjectMarquee.astro';
 import Contact from './Contact.astro';
+import HugeIcon from './HugeIcon.astro';
+import { ArrowUpRight01Icon } from '@hugeicons/core-free-icons';
 import type { CollectionEntry } from 'astro:content';
 type Home = CollectionEntry<'pages'>['data'];
 type Project = CollectionEntry<'projects'>['data'];
@@ -69,7 +71,7 @@ const heroTitleAfterName = heroNameIndex >= 0 ? heroTitleLead.slice(heroNameInde
             <p>{page.servicesDescription}</p>
             <a class="button button--secondary services-cta" href="mailto:hello@jpmx.pro">
               {locale === 'es' ? 'Hablemos' : 'Get in touch'}
-              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 15 15 5M7 5h8v8" /></svg>
+              <HugeIcon icon={ArrowUpRight01Icon} size={18} />
             </a>
           </div>
         </div>

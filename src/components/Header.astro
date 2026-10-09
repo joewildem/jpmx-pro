@@ -1,4 +1,6 @@
 ---
+import HugeIcon from './HugeIcon.astro';
+import { Cancel01Icon, Menu01Icon } from '@hugeicons/core-free-icons';
 interface Props { locale: 'es'|'en'; projectSlug?: string; page?: 'about'; }
 const { locale, projectSlug, page } = Astro.props;
 const home = locale === 'es' ? '/' : '/en/';
@@ -29,7 +31,10 @@ const enHref = projectSlug ? `/en/projects/${projectSlug}` : page === 'about' ? 
         data-open-label={locale === 'es' ? 'Abrir menú' : 'Open menu'}
         data-close-label={locale === 'es' ? 'Cerrar menú' : 'Close menu'}
       >
-        <span class="menu-toggle-icon" aria-hidden="true"><i></i><i></i></span>
+        <span class="menu-toggle-icon" aria-hidden="true">
+          <HugeIcon icon={Menu01Icon} class="menu-icon menu-icon--open" size={24} />
+          <HugeIcon icon={Cancel01Icon} class="menu-icon menu-icon--close" size={24} />
+        </span>
       </button>
     </div>
   </div>

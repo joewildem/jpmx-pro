@@ -3,6 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
 import Contact from './Contact.astro';
+import HugeIcon from './HugeIcon.astro';
+import { ArrowUpRight01Icon } from '@hugeicons/core-free-icons';
 import type { CollectionEntry } from 'astro:content';
 type Home = CollectionEntry<'pages'>['data'];
 type Project = CollectionEntry<'projects'>['data'];
@@ -47,7 +49,7 @@ const images = project.images;
     <section class="case-section container">
       <div class="case-copy" data-reveal><h2>{project.impact.title}</h2><p>{project.impact.description}</p><div class="metrics">{project.impact.metrics.map((metric) => <div class="metric"><span>{metric.label}</span><strong>{metric.value}</strong></div>)}</div></div>
     </section>
-    {related && <section class="case-section container"><h2 style="margin-bottom:36px">{labels.related}</h2><a class="related-card" href={`${locale === 'en' ? '/en' : ''}/projects/${related.projectSlug}`}><img src={related.cover.src} alt="" /><div><span class="eyebrow">{related.category}</span><h3>{related.title}</h3></div><span aria-hidden="true">↗</span></a></section>}
+    {related && <section class="case-section container"><h2 style="margin-bottom:36px">{labels.related}</h2><a class="related-card" href={`${locale === 'en' ? '/en' : ''}/projects/${related.projectSlug}`}><img src={related.cover.src} alt="" /><div><span class="eyebrow">{related.category}</span><h3>{related.title}</h3></div><HugeIcon icon={ArrowUpRight01Icon} size={24} /></a></section>}
     <Contact page={page} />
   </main>
   <Footer locale={locale} />

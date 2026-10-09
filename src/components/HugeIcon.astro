@@ -1,0 +1,40 @@
+---
+type IconElement = readonly [string, { readonly [key: string]: string | number }];
+interface Props {
+  icon: readonly IconElement[];
+  class?: string;
+  size?: number;
+  strokeWidth?: number;
+}
+
+const { icon, class: className, size = 24, strokeWidth } = Astro.props;
+
+const normalizeAttributes = (attributes: IconElement[1]) =>
+  Object.fromEntries(
+    Object.entries(attributes)
+      .filter(([name]) => name !== 'key')
+      .map(([name, value]) => [
+        name.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`),
+        name === 'strokeWidth' && strokeWidth ? String(strokeWidth) : value,
+      ]),
+  );
+---
+<svg
+  class:list={['huge-icon', className]}
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  aria-hidden="true"
+  focusable="false"
+>
+  {icon.map(([element, attributes]) => {
+    const normalized = normalizeAttributes(attributes);
+    if (element === 'path') return <path {...normalized} />;
+    if (element === 'circle') return <circle {...normalized} />;
+    if (element === 'rect') return <rect {...normalized} />;
+    if (element === 'line') return <line {...normalized} />;
+    if (element === 'polyline') return <polyline {...normalized} />;
+    return null;
+  })}
+</svg>

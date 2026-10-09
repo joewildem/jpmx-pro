@@ -35,7 +35,7 @@
   ],
   "linkedInLabel": "Conectemos en LinkedIn",
   "resumeLabel": "Descargar mi CV",
-  "servicesTitle": "What I do",
+  "servicesTitle": "Lo que hago",
   "servicesDescription": "Combino estrategia, diseño de producto, sistemas y desarrollo front-end para convertir problemas complejos en experiencias claras, coherentes y preparadas para crecer.",
   "services": [
     {"title":"Product Design","skills":["UX Research","User Flows","Wireframing","Interaction Design","Usability Testing","Prototyping"]},
