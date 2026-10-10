@@ -1,17 +1,77 @@
 ---
+import ContactGradient from './ContactGradient';
+import HugeIcon from './HugeIcon.astro';
+import { Behance01Icon, DribbbleIcon, Linkedin01Icon } from '@hugeicons/core-free-icons';
+
 const { locale } = Astro.props;
-const home = locale === 'es' ? '/' : '/en/';
-const about = locale === 'es' ? '/about' : '/en/about';
+const copy = locale === 'es'
+  ? {
+      eyebrow: '¿Tienes un proyecto en mente?',
+      title: 'construyámoslo juntos',
+      titleLabel: 'Escribir a Joe Palomino',
+      location: 'Ciudad de México',
+      privacy: 'Privacidad',
+      socialLabel: 'Redes sociales',
+    }
+  : {
+      eyebrow: 'Have a project in mind?',
+      title: "let’s build it together",
+      titleLabel: 'Email Joe Palomino',
+      location: 'Mexico City',
+      privacy: 'Privacy',
+      socialLabel: 'Social media',
+    };
+
+const socialItems = [
+  { label: 'LinkedIn', icon: Linkedin01Icon },
+  { label: 'Behance', icon: Behance01Icon },
+  { label: 'Dribbble', icon: DribbbleIcon },
+];
 ---
-<footer class="site-footer">
+<footer class="site-footer" id="contact">
+  <ContactGradient client:visible />
   <div class="footer-inner">
-    <span>© Joe Palomino {new Date().getFullYear()}</span>
-    <nav class="footer-links" aria-label={locale === 'es' ? 'Navegación de pie' : 'Footer navigation'}>
-      <a href="#top">{locale === 'es' ? 'Ir arriba' : 'Back to top'}</a>
-      <a href={about}>{locale === 'es' ? 'Acerca de' : 'About'}</a>
-      <a href={`${home}#projects`}>{locale === 'es' ? 'Proyectos' : 'Projects'}</a>
-      <a href={`${home}#services`}>{locale === 'es' ? 'Servicios' : 'Services'}</a>
-    </nav>
-    <span>{locale === 'es' ? 'De México 🇲🇽 con amor' : 'From Mexico 🇲🇽 with love'}</span>
+    <div class="footer-contact" data-reveal>
+      <p>{copy.eyebrow}</p>
+      <a class="footer-contact-link" href="mailto:hello@jpmx.pro" aria-label={copy.titleLabel}>
+        {copy.title}
+      </a>
+    </div>
+
+    <div class="footer-meta">
+      <div class="footer-details">
+        <span>© Joe Palomino 2026</span>
+        <span>{copy.location}, <time data-cdmx-time datetime="">--:--</time></span>
+        <span>{copy.privacy}</span>
+      </div>
+      <div class="footer-socials" aria-label={copy.socialLabel}>
+        {socialItems.map((item) => (
+          <span class="footer-social">
+            <HugeIcon icon={item.icon} size={18} />
+            <span>{item.label}</span>
+          </span>
+        ))}
+      </div>
+    </div>
   </div>
 </footer>
+
+<script>
+  const mexicoCityTime = new Intl.DateTimeFormat('es-MX', {
+    timeZone: 'America/Mexico_City',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+
+  const updateMexicoCityTime = () => {
+    const now = new Date();
+    document.querySelectorAll<HTMLTimeElement>('[data-cdmx-time]').forEach((element) => {
+      element.textContent = mexicoCityTime.format(now);
+      element.dateTime = now.toISOString();
+    });
+  };
+
+  updateMexicoCityTime();
+  window.setInterval(updateMexicoCityTime, 30_000);
+</script>

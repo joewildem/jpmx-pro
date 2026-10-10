@@ -5,7 +5,6 @@ import Footer from './Footer.astro';
 import ProjectCard from './ProjectCard.astro';
 import ProjectMarquee from './ProjectMarquee.astro';
 import StatsMarquee from './StatsMarquee.astro';
-import Contact from './Contact.astro';
 import HugeIcon from './HugeIcon.astro';
 import { ArrowUpRight01Icon } from '@hugeicons/core-free-icons';
 import type { CollectionEntry } from 'astro:content';
@@ -94,7 +93,6 @@ const heroTitleAfterName = heroNameIndex >= 0 ? heroTitleLead.slice(heroNameInde
       </div>
     </section>
     <StatsMarquee stats={page.stats} />
-    <Contact page={page} />
   </main>
   <Footer locale={locale} />
 </BaseLayout>
