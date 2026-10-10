@@ -1,9 +1,9 @@
 import { GradFlow } from 'gradflow';
 
 const config = {
-  color1: { r: 6, g: 20, b: 12 },
+  color1: { r: 0, g: 0, b: 0 },
   color2: { r: 0, g: 0, b: 0 },
-  color3: { r: 33, g: 33, b: 33 },
+  color3: { r: 28, g: 28, b: 28 },
   speed: 0.8,
   scale: 1,
   type: 'silk' as const,
