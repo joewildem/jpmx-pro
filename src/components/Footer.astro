@@ -1,7 +1,7 @@
 ---
 import ContactGradient from './ContactGradient';
 import HugeIcon from './HugeIcon.astro';
-import { Behance01Icon, DribbbleIcon, Linkedin01Icon } from '@hugeicons/core-free-icons';
+import { InstagramIcon, Linkedin01Icon } from '@hugeicons/core-free-icons';
 
 const { locale } = Astro.props;
 const copy = locale === 'es'
@@ -24,8 +24,7 @@ const copy = locale === 'es'
 
 const socialItems = [
   { label: 'LinkedIn', icon: Linkedin01Icon },
-  { label: 'Behance', icon: Behance01Icon },
-  { label: 'Dribbble', icon: DribbbleIcon },
+  { label: 'Instagram', icon: InstagramIcon },
 ];
 ---
 <footer class="site-footer" id="contact">
