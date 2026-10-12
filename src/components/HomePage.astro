@@ -107,19 +107,22 @@ const heroTitleAfterName = heroNameIndex >= 0 ? heroTitleLead.slice(heroNameInde
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (!reduceMotion) {
-    document.querySelectorAll<HTMLElement>('[data-project-reveal]').forEach((card) => {
-      gsap.from(card, {
+    const projectCards = gsap.utils.toArray<HTMLElement>('[data-project-reveal]');
+
+    if (projectCards.length > 0) {
+      gsap.from(projectCards, {
         opacity: 0,
         y: 40,
         duration: 0.6,
         ease: 'power2.out',
+        stagger: 0.15,
         scrollTrigger: {
-          trigger: card,
+          trigger: projectCards[0],
           start: 'top 80%',
           once: true,
         },
       });
-    });
+    }
   }
 
   document.querySelectorAll<HTMLElement>('[data-activity-rotator]').forEach((track) => {
