@@ -141,8 +141,8 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
 .service h3 { margin-bottom: 44px; font: 400 38px/38px var(--display); letter-spacing: normal; }
 .skills { padding: 0; margin: 0; font-family: 'IBM Plex Sans Variable', sans-serif; letter-spacing: normal; list-style: none; }
 .skills li { position: relative; isolation: isolate; display: grid; height: 76px; overflow: hidden; padding-inline-start: 20px; border-bottom: 1px solid rgba(238,238,238,.2); grid-template-columns: 49px minmax(0,1fr); column-gap: 12px; align-items: center; transition: border-color .3s ease; }
-.skills li::before { content: ''; position: absolute; z-index: -1; inset: 0; background: #eee; transform: scaleX(0); transform-origin: left center; transition: transform .55s cubic-bezier(.16,1,.3,1); }
-.skill-index,.skill-name { position: relative; z-index: 1; font-size: 26px; font-weight: 400; line-height: 1; transition: color .24s cubic-bezier(.16,1,.3,1); }
+.skills li::before { content: ''; position: absolute; z-index: -1; inset: 0; background: #eee; transform: scaleX(0); transform-origin: left center; transition: transform .9s cubic-bezier(.16,1,.3,1); }
+.skill-index,.skill-name { position: relative; z-index: 1; font-size: 26px; font-weight: 400; line-height: 1; transition: color .35s cubic-bezier(.16,1,.3,1); }
 .skill-index { color: #737373; }
 .skill-name { color: #eee; }
 .skills li:hover { border-color: #eee; }
