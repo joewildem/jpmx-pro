@@ -430,6 +430,24 @@ export class FluidSimulation {
     this.start();
   }
 
+  splatAt(clientX: number, clientY: number) {
+    const normalizedX = clientX / Math.max(window.innerWidth, 1);
+    const normalizedY = 1 - clientY / Math.max(window.innerHeight, 1);
+    const x = normalizedX * this.aspect.x;
+    const y = normalizedY;
+    const angle = Math.random() * Math.PI * 2;
+    const force = 0.008;
+
+    this.pointer.set(x, y, Math.cos(angle) * force, Math.sin(angle) * force);
+    this.previousPointer.set(x, y);
+    this.hasPointer = true;
+    this.splatColor.setHSL((performance.now() * 0.0001) % 1, 1, 0.5).multiplyScalar(0.15);
+    this.hasSplat = true;
+    this.lastInput = performance.now();
+    this.canvas.classList.add('is-active');
+    this.start();
+  }
+
   resize = () => {
     if (this.disposed) return;
     this.renderer.setSize(window.innerWidth, window.innerHeight, false);

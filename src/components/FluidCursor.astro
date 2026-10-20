@@ -14,9 +14,18 @@
             simulation.move(event.clientX, event.clientY);
           }
         };
+        const click = (event: MouseEvent) => {
+          const target = event.target instanceof Element ? event.target : null;
+          const interactiveTarget = target?.closest(
+            'a, button, input, select, textarea, label, [role="button"], [data-cursor="clickable"], [tabindex]:not([tabindex="-1"])',
+          );
+
+          if (!interactiveTarget) simulation.splatAt(event.clientX, event.clientY);
+        };
         const visibility = () => (document.hidden ? simulation.stop() : simulation.start());
 
         window.addEventListener('pointermove', move, { passive: true });
+        window.addEventListener('click', click, { passive: true });
         window.addEventListener('resize', simulation.resize, { passive: true });
         window.addEventListener('blur', simulation.resetPointer);
         document.documentElement.addEventListener('mouseleave', simulation.resetPointer);
