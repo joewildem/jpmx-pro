@@ -225,6 +225,14 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
   .now-bar .container { font-size: 16px; }
 }
 
+@media (max-width: 1279px) and (min-width: 768px) and (orientation: landscape) {
+  :root { --now-bar-height: 80px; }
+  .now-status { flex-direction: row; align-items: center; gap: .45em; }
+  .now-activity-window { height: 1.1em; }
+  .now-activity { flex-basis: 1.1em; height: 1.1em; white-space: nowrap; }
+  .scroll-cue { display: flex; gap: 10px; }
+}
+
 @media (max-width: 767px) {
   .hero-meta .container,.availability--hero { font: 400 12px/1.2 var(--display); }
   .hero h1 { font-size: clamp(30px,7.8vw,44px); line-height: 1.05; }
