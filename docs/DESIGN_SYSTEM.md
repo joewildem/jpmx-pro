@@ -18,13 +18,13 @@ This document records the visual language, reusable patterns, and interaction be
 | Layout | `--gutter`, `--inner-padding`, `--hero-content-padding`, `--page` |
 | Controls | `--button-font-size: 18px`, `--button-height: 48px` |
 | Hero structure | `--hero-meta-height: 80px`, `--now-bar-height: 80px` |
-| Fonts | `--display: 'Space Grotesk Variable'`, `--body: 'Inter Variable'` |
+| Fonts | `--display: 'Space Grotesk Variable'`, `--body: 'Inter Variable'`, `--mono: 'Geist Mono Variable'` |
 
 The layout variables use `clamp()` for fluid desktop sizing and have smaller overrides below `768px`. `--page` derives the main page width from the two gutters.
 
 ### Typography and local visual values
 
-`Space Grotesk` is the shared display face for headings, controls, the 80px desktop services statement, and default service-card titles; the opening clause of the services statement switches to regular italic `Newsreader`. `Inter` is the global body face. `IBM Plex Sans` is used locally for navigation and descriptive copy. `Newsreader` is also used for editorial display elements such as the brand treatment, hero name, project marquee, service-card titles on hover, and footer contact link. Font files are loaded by [BaseLayout.astro](../src/layouts/BaseLayout.astro).
+`Space Grotesk` is the shared display face for headings, controls, the 80px desktop services statement, and default service-card titles; the opening clause of the services statement switches to regular italic `Newsreader`. `Inter` is the global body face. `IBM Plex Sans` is used locally for navigation and descriptive copy. `Geist Mono` is used for hero location and availability metadata, the current-activity and scroll-cue bar, the services eyebrow and indices, and footer eyebrow, metadata, privacy, and social labels. `Newsreader` is also used for editorial display elements such as the brand treatment, hero name, project marquee, service-card titles on hover, and footer contact link. Font files are loaded by [BaseLayout.astro](../src/layouts/BaseLayout.astro).
 
 The stylesheet also contains intentional local values rather than additional tokens: near-white `#eee`, surfaces such as `#151515`, `#141414`, and `#222`, footer text `#aaa`, skill index `#737373`, status green `#0ccf30`, and ticker start `#ff7c48`. Do not treat them as a formal color scale without an explicit decision.
 
