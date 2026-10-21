@@ -24,7 +24,7 @@ The layout variables use `clamp()` for fluid desktop sizing and have smaller ove
 
 ### Typography and local visual values
 
-`Space Grotesk` is the shared display face for headings, controls, the services statement, and service-card titles; `Inter` is the global body face. `IBM Plex Sans` is used locally for navigation and descriptive copy. `Newsreader` is used for editorial italic display elements such as the brand treatment, hero name, project marquee, and footer contact link. Font files are loaded by [BaseLayout.astro](../src/layouts/BaseLayout.astro).
+`Space Grotesk` is the shared display face for headings, controls, the 80px desktop services statement, and default service-card titles; `Inter` is the global body face. `IBM Plex Sans` is used locally for navigation and descriptive copy. `Newsreader` is used for editorial display elements such as the brand treatment, hero name, project marquee, service-card titles on hover, and footer contact link. Font files are loaded by [BaseLayout.astro](../src/layouts/BaseLayout.astro).
 
 The stylesheet also contains intentional local values rather than additional tokens: near-white `#eee`, surfaces such as `#151515`, `#141414`, and `#222`, footer text `#aaa`, skill index `#737373`, status green `#0ccf30`, and ticker start `#ff7c48`. Do not treat them as a formal color scale without an explicit decision.
 
@@ -88,7 +88,7 @@ Projects use [ProjectCard.astro](../src/components/ProjectCard.astro). Published
 | [FluidCursor](../src/components/FluidCursor.astro) | Full-viewport fluid WebGL canvas with active opacity state. | Mounted globally; mouse/pen uses continuous movement and background clicks, while touch uses background taps. |
 | [ContactGradient](../src/components/ContactGradient.tsx) | React/GradFlow visual background. | Footer only, hydrated with `client:visible`. |
 | `data-reveal` | Fade-and-rise reveal pattern. | Applied across page sections and case-study content. |
-| Service cards | Numbered, non-linking cards with descriptions and skill pills; fine-pointer hover fills the active card orange and dims its siblings. | Home services section. |
+| Service cards | Non-linking cards with accent numbers, medium-weight descriptions, and skill pills; fine-pointer hover fills the active card orange, changes its title to Newsreader, and dims its siblings. | Home services section. |
 
 [HugeIcon.astro](../src/components/HugeIcon.astro) renders icons from the Hugeicons package. [GlobeMark.astro](../src/components/GlobeMark.astro) is the recurring ticker separator. Component-specific styling is centralized in [src/styles/global.css](../src/styles/global.css), not colocated with the component files.
 
@@ -102,7 +102,7 @@ Projects use [ProjectCard.astro](../src/components/ProjectCard.astro). Published
 | Status rotator | Timed vertical changes through duplicated item list. | JavaScript timeouts: 4.5s hold, `.6s` CSS transform transition, 650ms reset timing. | Does not run with reduced motion. |
 | Scroll cue | Loads a remote SVG animation. | `lottie-web`; `lottie.host` animation path. | Autoplay and loop are disabled with reduced motion. |
 | Mobile menu | Overlay clipping, icon swap, and staged link/action/footer entries. | CSS; main clip transition `.65s cubic-bezier(.76,0,.24,1)`. | Global reduced-motion rule shortens transitions. |
-| Service cards | Fine-pointer hover fills the active card from bottom to top and lowers sibling opacity. | CSS transform `.8s cubic-bezier(.16,1,.3,1)`; sibling opacity `.32`. | Hover treatment is restricted to `hover: hover` and `pointer: fine`; global reduced-motion rules shorten the transitions. |
+| Service cards | Fine-pointer hover fills the active card from bottom to top, changes the title from Space Grotesk to Newsreader, and lowers sibling opacity. | CSS transform `.8s cubic-bezier(.16,1,.3,1)`; sibling opacity `.32`. | Hover treatment is restricted to `hover: hover` and `pointer: fine`; global reduced-motion rules shorten the transitions. |
 | Project and stats marquees | Scroll direction changes target velocity; `IntersectionObserver` controls transform updates. | Perpetual `requestAnimationFrame`; 34/44/54px/s for project marquee and 42/56/68px/s for ticker by viewport. | Initialization is skipped with reduced motion. |
 | Custom cursor | Pointer movement interpolates toward the target and updates semantic visual states. | Perpetual `requestAnimationFrame`; factor `0.24`. | Fine pointer only; hidden for coarse/no-hover input. |
 | Fluid cursor in `main` | Mouse/pen movement and non-interactive background clicks create fluid splats. A stationary touch tap also creates a splat; scrolling gestures and interactive controls are ignored. | Dynamically imports the Three.js simulation; desktop uses the default renderer profile, while touch loads on first valid tap with reduced render-target resolution and pressure iterations. Bloom and sunrays remain enabled, and rendering continues for up to 6.5s after input. | Available on fine and coarse pointers. Touch taps allow up to 12px movement and 700ms duration. Disabled by reduced motion. |
