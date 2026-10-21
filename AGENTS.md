@@ -41,28 +41,31 @@ Request approval before introducing major dependencies, frameworks, or architect
 Codex may autonomously:
 
 - Inspect and analyze the repository.
+- Work directly on `main` for normal Astro portfolio development while `jpmx.pro` remains hosted on Framer.
+- Synchronize `main` safely with the latest `origin/main` through fast-forward-only updates.
 - Implement requested functionality.
 - Modify necessary files and components.
 - Perform task-related refactoring.
 - Run builds, checks, and tests.
 - Fix implementation errors.
-- Create task-specific local branches.
 - Create focused local commits after successful validation.
+- Push validated commits to `origin/main` after the required pre-push safety checks.
 - Update documentation for material decisions.
+
+Create task-specific branches only when explicitly requested or when direct work on `main` is not safe.
 
 Codex must obtain explicit approval before:
 
-- Pushing commits or branches to GitHub.
 - Creating or modifying pull requests.
 - Merging branches.
-- Triggering production deployments.
 - Changing deployment configuration.
+- Migrating `jpmx.pro` from Framer to the Astro/Cloudflare Pages site.
 - Introducing significant architectural changes.
 - Modifying authentication, authorization, or security-sensitive integrations.
 - Performing destructive Git operations.
 - Deleting unrelated functionality or content.
 
-Approval for one operation does not authorize subsequent operations.
+This is a standing authorization for normal Astro development only while `jpmx.pro` remains on Framer. It does not authorize the operations listed above.
 
 Do not request confirmation for routine implementation decisions within the approved task.
 
@@ -71,14 +74,17 @@ Do not request confirmation for routine implementation decisions within the appr
 For each development task:
 
 1. Inspect relevant files and current Git status.
-2. Identify existing conventions and dependencies.
-3. Implement the smallest maintainable solution.
-4. Preserve unrelated functionality and user changes.
-5. Run applicable validation.
-6. Update documentation when required.
-7. Review the final diff.
-8. Create a focused local commit when safe.
-9. Report results, limitations, and pending approvals.
+2. Run `git fetch origin` and inspect `origin/main`.
+3. Confirm that the workspace is clean and that `main` can be synchronized safely without losing local work.
+4. Identify existing conventions and dependencies.
+5. Implement the smallest maintainable solution.
+6. Preserve unrelated functionality and user changes.
+7. Run applicable validation.
+8. Update documentation when required.
+9. Review the final diff.
+10. Create a focused local commit when safe.
+11. Fetch `origin` again, verify that `origin/main` has not advanced beyond the local commit base, and push to `origin/main` without force.
+12. Report results, limitations, the published SHA, and the remote status.
 
 Clarify genuinely ambiguous requirements before significant implementation.
 
@@ -88,26 +94,20 @@ Do not expand task scope for optional improvements.
 
 GitHub is the authoritative remote repository.
 
-`main` is the production branch.
+While `jpmx.pro` remains on Framer, `main` is the integration branch for the Astro portfolio and its automatic Cloudflare Pages deployment to the development site. Review this policy before migrating the public domain.
 
-For Codex development, prefer task-specific branches:
-
-- `feat/` for new functionality.
-- `fix/` for bug fixes.
-- `refactor/` for internal improvements.
-- `docs/` for documentation.
-- `chore/` for maintenance.
+For normal Astro development, Codex works directly on `main`. Branches and pull requests are optional workflows that require an explicit request.
 
 Before editing:
 
 - Check the active branch and working tree.
+- Run `git fetch origin` and inspect the latest `origin/main`.
 - Preserve existing user modifications.
-- Do not modify `main` directly through automatic development work.
-- Create a task branch when working from `main`, if safe.
-- Reuse an existing task branch when continuing the same task.
-- Stop if unrelated changes cannot be safely separated.
+- Confirm that no unrelated changes, local commits, divergence, or conflicts would make synchronizing `main` unsafe.
+- Synchronize `main` only with a fast-forward update when it is safe to do so.
+- Stop if unrelated changes cannot be safely separated or preserved.
 
-### Automatic local commits
+### Automatic commits and pushes
 
 After successful validation:
 
@@ -115,7 +115,10 @@ After successful validation:
 - Review staged changes before committing.
 - Use descriptive commit messages.
 - Create focused local commits.
-- Report the branch, commit SHA, and final Git status.
+- Run `git fetch origin` again before pushing and confirm that `origin/main` has not advanced in a way that would overwrite published work.
+- Push with `git push origin main` only; never force-push.
+- If the push is rejected, stop and report the result without rebasing, resetting, or rewriting history.
+- Report the published SHA and final Git status.
 
 Never include unrelated modifications or generated artifacts such as:
 
@@ -127,11 +130,11 @@ Never include unrelated modifications or generated artifacts such as:
 
 If validation fails or Git state is ambiguous, do not automatically commit.
 
-Never push, merge, force-push, reset destructively, or clean the repository without the required authorization.
+Never force-push, merge, reset destructively, or clean the repository automatically. Do not overwrite work published by another conversation.
 
 Distinguish explicitly between workspace changes, local commits, remote commits, merged changes, and deployed changes.
 
-A local commit is not a GitHub backup.
+A local commit is not a GitHub backup until its push to `origin/main` succeeds.
 
 ### Decap CMS exception
 
@@ -315,7 +318,7 @@ At the end of implementation tasks, report:
 4. Documentation updated, if applicable.
 5. Current branch and local commit SHA.
 6. Unresolved problems or optional recommendations.
-7. Pending approval for remote publication.
+7. Published SHA, push result, and any remaining approval required for out-of-scope operations.
 
 Never claim that code is synchronized, merged, or deployed without verification.
 
@@ -330,6 +333,6 @@ A development task is complete when:
 - Material documentation changes are recorded.
 - A focused local commit is created when safe.
 - Git status is accurately reported.
-- Remote operations remain subject to explicit authorization.
+- Validated normal Astro changes are published to `origin/main` under this standing policy; other remote operations remain subject to explicit authorization.
 
 If completion is blocked, explain the limitation and preserve the safest available repository state.
