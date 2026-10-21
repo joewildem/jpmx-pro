@@ -132,9 +132,10 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
 .services-section { padding: 0 0 clamp(96px,10vw,160px); border-top: 1px solid var(--line); scroll-margin-top: 64px; }
 .services-shell { border-inline: 1px solid var(--line); }
 .services-heading { padding: clamp(72px,8vw,128px) var(--inner-padding); border-bottom: 1px solid var(--line); }
-.services-eyebrow { margin: 0 0 clamp(36px,4vw,64px); color: var(--muted); font: 500 12px/1.2 'IBM Plex Sans Variable', sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+.services-eyebrow { margin: 0 0 clamp(20px,2.2vw,32px); color: var(--accent); font: 500 12px/1.2 'IBM Plex Sans Variable', sans-serif; letter-spacing: .12em; text-transform: uppercase; }
 .services-statement { max-width: 1220px; margin: 0; color: #eee; font: 400 80px/.98 var(--display); letter-spacing: -.045em; }
 .services-statement-word { white-space: nowrap; }
+.services-statement-word--editorial { font-family: 'Newsreader Variable', serif; font-style: italic; font-weight: 300; font-variation-settings: 'opsz' 72; letter-spacing: -.035em; }
 .services-statement-char { color: inherit; }
 .services-list { display: grid; min-width: 0; border-bottom: 1px solid var(--line); grid-template-columns: repeat(4,minmax(0,1fr)); }
 .service { position: relative; isolation: isolate; display: flex; min-width: 0; min-height: 380px; overflow: hidden; padding: 32px; border-right: 1px solid var(--line); flex-direction: column; color: #eee; transition: opacity .45s ease, color .45s ease; }
@@ -342,7 +343,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
   .project-card-copy { gap: 16px; font-size: 12px; }
   .services-section { padding: 0 0 64px; }
   .services-heading { padding-block: 56px; }
-  .services-eyebrow { margin-bottom: 32px; }
+  .services-eyebrow { margin-bottom: 20px; }
   .services-statement { font-size: clamp(36px,10.5vw,48px); }
   .service { min-height: 320px; padding-block: 28px; }
   .service-copy { margin-top: 28px; }

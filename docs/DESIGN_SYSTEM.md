@@ -24,7 +24,7 @@ The layout variables use `clamp()` for fluid desktop sizing and have smaller ove
 
 ### Typography and local visual values
 
-`Space Grotesk` is the shared display face for headings, controls, the 80px desktop services statement, and default service-card titles; `Inter` is the global body face. `IBM Plex Sans` is used locally for navigation and descriptive copy. `Newsreader` is used for editorial display elements such as the brand treatment, hero name, project marquee, service-card titles on hover, and footer contact link. Font files are loaded by [BaseLayout.astro](../src/layouts/BaseLayout.astro).
+`Space Grotesk` is the shared display face for headings, controls, the 80px desktop services statement, and default service-card titles; the opening clause of the services statement switches to light italic `Newsreader`. `Inter` is the global body face. `IBM Plex Sans` is used locally for navigation and descriptive copy. `Newsreader` is also used for editorial display elements such as the brand treatment, hero name, project marquee, service-card titles on hover, and footer contact link. Font files are loaded by [BaseLayout.astro](../src/layouts/BaseLayout.astro).
 
 The stylesheet also contains intentional local values rather than additional tokens: near-white `#eee`, surfaces such as `#151515`, `#141414`, and `#222`, footer text `#aaa`, skill index `#737373`, status green `#0ccf30`, and ticker start `#ff7c48`. Do not treat them as a formal color scale without an explicit decision.
 

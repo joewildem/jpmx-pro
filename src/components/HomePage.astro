@@ -19,6 +19,11 @@ const heroNameIndex = heroTitleLead.indexOf(heroName);
 const heroTitleBeforeName = heroNameIndex >= 0 ? heroTitleLead.slice(0, heroNameIndex) : heroTitleLead;
 const heroTitleAfterName = heroNameIndex >= 0 ? heroTitleLead.slice(heroNameIndex + heroName.length) : '';
 const servicesStatementWords = page.servicesDescription.split(' ');
+const servicesStatementLeadSeparator = locale === 'es' ? ' para ' : ' for ';
+const servicesStatementLeadEnd = page.servicesDescription.indexOf(servicesStatementLeadSeparator);
+const servicesStatementLeadWordCount = servicesStatementLeadEnd >= 0
+  ? page.servicesDescription.slice(0, servicesStatementLeadEnd).split(' ').length
+  : 0;
 ---
 <BaseLayout title={page.seoTitle} description={page.seoDescription} locale={locale} path={locale === 'es' ? '/' : '/en/'}>
   <div id="top"></div>
@@ -71,7 +76,7 @@ const servicesStatementWords = page.servicesDescription.split(' ');
             <span class="services-statement-visual" aria-hidden="true">
               {servicesStatementWords.map((word, wordIndex) => (
                 <>
-                  <span class="services-statement-word">
+                  <span class:list={['services-statement-word', { 'services-statement-word--editorial': wordIndex < servicesStatementLeadWordCount }]}>
                     {Array.from(word).map((character) => <span class="services-statement-char">{character}</span>)}
                   </span>
                   {wordIndex < servicesStatementWords.length - 1 && ' '}
