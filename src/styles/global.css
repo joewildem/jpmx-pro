@@ -132,8 +132,8 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
 .about-images img { height: 520px; object-fit: cover; border-radius: 24px; }
 .services-section { padding: 0 0 clamp(96px,10vw,160px); border-top: 1px solid var(--line); scroll-margin-top: 64px; }
 .services-shell { border-inline: 1px solid var(--line); }
-.services-heading { padding: clamp(72px,8vw,128px) var(--inner-padding); border-bottom: 1px solid var(--line); }
-.services-eyebrow { margin: 0 0 clamp(20px,2.2vw,32px); color: var(--accent); font: 500 12px/1.2 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+.services-heading { width: 100vw; padding: clamp(72px,8vw,128px) calc(var(--gutter) + var(--inner-padding)); margin-left: calc(50% - 50vw); border-bottom: 1px solid var(--line); }
+.services-eyebrow { margin: 0 0 clamp(20px,2.2vw,32px); color: var(--accent); font-family: var(--mono); font-size: 14px; font-weight: 400; line-height: normal; letter-spacing: .72px; text-transform: uppercase; }
 .services-statement { max-width: 1220px; margin: 0; color: #eee; font: 400 80px/.98 var(--display); letter-spacing: -.045em; }
 .services-statement-word { white-space: nowrap; }
 .services-statement-word--editorial { font-family: 'Newsreader Variable', serif; font-style: italic; font-weight: 400; font-variation-settings: 'opsz' 72; letter-spacing: -.035em; }
@@ -168,7 +168,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
 .site-footer { position: relative; isolation: isolate; display: flex; width: 100%; height: 470px; min-height: 470px; overflow: hidden; border-top: 0; background: var(--bg); }
 .footer-inner { position: relative; z-index: 1; display: grid; width: var(--page); height: 100%; padding: 0 var(--inner-padding) 40px; margin-inline: auto; grid-template-rows: minmax(0,1fr) auto; }
 .footer-contact { display: flex; align-self: center; flex-direction: column; align-items: flex-start; }
-.footer-contact p { margin: 0 0 24px; color: #aaa; font: 500 16px/1.2 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+.footer-contact p { margin: 0 0 24px; color: #aaa; font-family: var(--mono); font-size: 14px; font-weight: 400; line-height: normal; letter-spacing: .72px; text-transform: uppercase; }
 .footer-contact-link { display: block; max-width: 100%; color: #eee; font: italic 350 clamp(64px,9.15vw,132px)/.9 'Newsreader Variable', serif; font-variation-settings: 'opsz' 72; letter-spacing: -.055em; text-decoration: underline; text-decoration-thickness: .035em; text-underline-offset: .1em; white-space: nowrap; transition: color .35s ease; }
 .footer-contact-link:hover,.footer-contact-link:focus-visible { color: var(--accent); }
 .footer-contact-link:focus-visible { outline: 1px solid currentColor; outline-offset: 10px; }
@@ -289,7 +289,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
   .about-images { order: 2; }
   .about-images img { height: 360px; border-radius: 14px; }
   .services-section { padding: 0 0 80px; }
-  .services-heading { padding: 72px var(--inner-padding); }
+  .services-heading { padding: 72px calc(var(--gutter) + var(--inner-padding)); }
   .services-statement { font-size: clamp(42px,7.2vw,64px); }
   .services-list { grid-template-columns: 1fr; }
   .service { min-height: 340px; padding: 32px var(--inner-padding); border-right: 0; border-bottom: 1px solid var(--line); }
@@ -353,7 +353,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
   .mobile-menu-footer a { font-size: 16px; }
   .site-footer { height: 470px; min-height: 470px; }
   .footer-inner { padding-block: 0 24px; }
-  .footer-contact p { margin-bottom: 18px; font-size: 12px; }
+  .footer-contact p { margin-bottom: 18px; }
   .footer-contact-link { font-size: clamp(43px,13vw,62px); line-height: .92; }
   .footer-details { align-items: flex-start; flex-direction: column; gap: 10px; font-size: 12px; }
   .footer-socials { width: 100%; flex-wrap: wrap; }
