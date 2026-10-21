@@ -141,17 +141,17 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
 .service-index { color: var(--accent); font: 500 12px/1.2 'IBM Plex Sans Variable', sans-serif; letter-spacing: .12em; transition: color .45s ease; }
 .service-copy { margin-top: clamp(36px,3vw,48px); }
 .service h3 { margin: 0; font: 400 clamp(30px,2.65vw,38px)/1 var(--display); letter-spacing: -.035em; }
-.service-description { display: -webkit-box; max-width: 310px; min-height: 4.5em; overflow: hidden; margin: 20px 0 0; color: var(--muted); font: 500 16px/1.5 'IBM Plex Sans Variable', sans-serif; transition: color .45s ease; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
-.service-skills { display: flex; padding: 0; margin: auto 0 0; flex-wrap: wrap; gap: 8px; font-family: 'IBM Plex Sans Variable', sans-serif; list-style: none; }
-.service-skills li { padding: 8px 12px; border: 1px solid rgba(238,238,238,.22); border-radius: 999px; color: #aaa; font-size: 12px; font-weight: 500; line-height: 1.1; transition: border-color .45s ease, color .45s ease; }
+.service-description { display: -webkit-box; max-width: 310px; min-height: 4.5em; overflow: hidden; margin: 20px 0 0; color: var(--muted); font: 400 16px/1.5 'IBM Plex Sans Variable', sans-serif; transition: color .45s ease; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+.service-skills { display: flex; padding: 0; margin: 28px 0 0; flex-wrap: wrap; gap: 8px; font-family: 'IBM Plex Sans Variable', sans-serif; list-style: none; }
+.service-skills li { padding: 8px 12px; border: 1px solid rgba(238,238,238,.22); border-radius: 999px; color: #aaa; font-size: 12px; font-weight: 400; line-height: 1.1; transition: border-color .45s ease, background-color .45s ease, color .45s ease; }
 
 @media (hover: hover) and (pointer: fine) {
   .services-list:has(.service:hover) .service:not(:hover) { opacity: .32; }
   .service:hover { color: #0b0b0b; }
   .service:hover::before { transform: scaleY(1); }
-  .service:hover h3 { font-family: 'Newsreader Variable', serif; font-variation-settings: 'opsz' 72; letter-spacing: -.02em; }
-  .service:hover .service-index,.service:hover .service-description,.service:hover .service-skills li { color: #0b0b0b; }
-  .service:hover .service-skills li { border-color: rgba(11,11,11,.35); }
+  .service:hover h3 { font-family: 'Newsreader Variable', serif; font-style: italic; font-variation-settings: 'opsz' 72; letter-spacing: -.02em; }
+  .service:hover .service-index,.service:hover .service-description { color: #0b0b0b; }
+  .service:hover .service-skills li { border-color: #eee; background-color: #eee; color: #0b0b0b; }
 }
 .ticker { overflow: hidden; width: 100%; height: 200px; background: linear-gradient(180deg,#ff7c48 0%,var(--accent) 100%); }
 .ticker-track { display: flex; width: max-content; height: 100%; will-change: transform; }

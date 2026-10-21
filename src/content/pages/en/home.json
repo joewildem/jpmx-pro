@@ -36,12 +36,12 @@
   "linkedInLabel": "Connect on LinkedIn",
   "resumeLabel": "Download my résumé",
   "servicesTitle": "What I do",
-  "servicesDescription": "I combine strategy, product design, systems thinking, and front-end development to turn complex problems into clear, cohesive experiences built to scale.",
+  "servicesDescription": "Strategy, product design, systems thinking, and front-end development for turning complex problems into clear, cohesive experiences built to scale.",
   "services": [
-    {"title":"Product Design","description":"I design clear, useful digital products, from research and user flows to prototypes ready for validation.","skills":["UX Research","User Flows","Wireframing","Interaction Design","Usability Testing","Prototyping"]},
-    {"title":"Design Systems","description":"I build scalable systems that connect tokens, components, and documentation to keep every experience consistent.","skills":["Tokens","Components","Documentation","Guidelines","Accessibility","Libraries"]},
-    {"title":"Web Development","description":"I turn designs into fast, responsive web experiences with thoughtful motion and maintainable code.","skills":["HTML","CSS / Tailwind","Web Animations","Astro","React","Low-code Build"]},
-    {"title":"Graphic Design","description":"I create identities and visual assets that combine art direction, storytelling, and editorial composition.","skills":["Art Direction","Branding","Editorial Design","Social Media","Layout & Composition","Visual Identity"]}
+    {"title":"Product Design","description":"End-to-end digital product design, from research and user flows to prototypes ready for validation.","skills":["UX Research","User Flows","Wireframing","Interaction Design","Usability Testing","Prototyping"]},
+    {"title":"Design Systems","description":"Scalable systems connecting tokens, components, and documentation to keep experiences consistent.","skills":["Tokens","Components","Documentation","Guidelines","Accessibility","Libraries"]},
+    {"title":"Web Development","description":"Development of fast, responsive web experiences with thoughtful motion and maintainable code.","skills":["HTML","CSS / Tailwind","Web Animations","Astro","React","Low-code Build"]},
+    {"title":"Graphic Design","description":"Visual identities and assets combining art direction, storytelling, and editorial composition.","skills":["Art Direction","Branding","Editorial Design","Social Media","Layout & Composition","Visual Identity"]}
   ],
   "stats": ["Senior Product Designer", "50+ projects delivered", "6 years of experience", "15+ satisfied clients"],
   "contactEyebrow": "Have a project in mind?",
