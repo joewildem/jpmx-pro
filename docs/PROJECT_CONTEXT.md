@@ -65,11 +65,13 @@ Route generation filters projects with `draft: true`; only published projects re
 
 New UI strings and content structures must remain equivalent across Spanish and English. Content changes must remain compatible with both the Zod schemas and the Decap CMS form configuration.
 
+Each home-page service contains a localized title, short description, and skill list. `HomePage` renders the skills as visual pills; Decap CMS exposes the section description and all three service fields for both locales.
+
 ## 7. Components, interactions, and visual system
 
 The principal page components are [HomePage.astro](../src/components/HomePage.astro), [AboutPage.astro](../src/components/AboutPage.astro), and [ProjectPage.astro](../src/components/ProjectPage.astro). [Header.astro](../src/components/Header.astro) provides desktop and accessible mobile navigation; [Footer.astro](../src/components/Footer.astro) provides contact content and the contact gradient.
 
-The home page includes GSAP project-card reveals, a rotating availability message, a Lottie scroll cue, and project/statistics marquees that react to scroll direction. `CustomCursor` supplies pointer states for fine pointers. In `main`, `FluidCursor` mounts the Three.js-based fluid background simulation for supported fine-pointer devices and responds to pointer movement; it does not register click interaction. `ContactGradient` is a visible-on-demand React island powered by GradFlow.
+The home page includes GSAP project-card reveals, a rotating availability message, a Lottie scroll cue, service cards with a bottom-to-top hover fill, and project/statistics marquees that react to scroll direction. `CustomCursor` supplies pointer states for fine pointers. In `main`, `FluidCursor` mounts the Three.js-based fluid background simulation and responds to mouse/pen movement, background clicks, and deliberate touch taps. `ContactGradient` is a visible-on-demand React island powered by GradFlow.
 
 Motion code checks reduced-motion preferences where implemented. Shared visual language, responsive layout, typography, and component styling live primarily in [src/styles/global.css](../src/styles/global.css).
 
@@ -111,7 +113,7 @@ The actual Pages project, deployment history, domains, environment-variable valu
 
 - `getHomepageProjects()` selects `dina` for the home-page preview list without filtering `draft`. `ProjectCard` renders draft entries as non-linking articles. This differs from the README's broader statement that drafts do not appear publicly and should be clarified before changing draft behavior.
 - The fluid background supports mouse/pen movement, non-interactive background clicks, and deliberate touch taps in `main`. Touch input initializes WebGL on the first valid tap, uses a reduced simulation profile, and ignores scrolling gestures and interactive controls.
-- The `pages` Zod schema requires `servicesDescription`, while the current Decap home-page form does not expose that field. CMS changes to this area should be tested against the build and schema.
+- The `pages` Zod schema and Decap home-page form both expose `servicesDescription` plus each service title, description, and skill list.
 - No automated test suite is tracked. The GitHub Actions `Quality` workflow runs `npm ci` and `npm run build` for pull requests to `main` and pushes to `main`; external branch enforcement remains dashboard configuration that cannot be verified from the repository.
 - Bundle-size and third-party dependency warnings should be evaluated separately; they are not resolved by this document.
 

@@ -38,10 +38,10 @@
   "servicesTitle": "Lo que hago",
   "servicesDescription": "Combino estrategia, diseño de producto, sistemas y desarrollo front-end para convertir problemas complejos en experiencias claras, coherentes y preparadas para crecer.",
   "services": [
-    {"title":"Product Design","skills":["UX Research","User Flows","Wireframing","Interaction Design","Usability Testing","Prototyping"]},
-    {"title":"Design Systems","skills":["Tokens","Components","Documentation","Guidelines","Accessibility","Libraries"]},
-    {"title":"Web Development","skills":["HTML","CSS / Tailwind","Web Animations","Astro","React","Low-code Build"]},
-    {"title":"Graphic Design","skills":["Art Direction","Branding","Editorial Design","Social Media","Layout & Composition","Visual Identity"]}
+    {"title":"Product Design","description":"Diseño productos digitales claros y útiles, desde la investigación y los flujos hasta prototipos listos para validar.","skills":["UX Research","User Flows","Wireframing","Interaction Design","Usability Testing","Prototyping"]},
+    {"title":"Design Systems","description":"Construyo sistemas escalables que conectan tokens, componentes y documentación para mantener cada experiencia consistente.","skills":["Tokens","Components","Documentation","Guidelines","Accessibility","Libraries"]},
+    {"title":"Web Development","description":"Convierto diseños en experiencias web rápidas y responsivas, con animaciones cuidadas y código mantenible.","skills":["HTML","CSS / Tailwind","Web Animations","Astro","React","Low-code Build"]},
+    {"title":"Graphic Design","description":"Creo identidades y piezas visuales que combinan dirección de arte, narrativa y composición editorial.","skills":["Art Direction","Branding","Editorial Design","Social Media","Layout & Composition","Visual Identity"]}
   ],
   "stats": ["Senior Product Designer", "+50 proyectos completados", "6 años de experiencia", "+15 clientes satisfechos"],
   "contactEyebrow": "¿Tienes un proyecto en mente?",

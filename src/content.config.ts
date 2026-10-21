@@ -62,7 +62,7 @@ const pages = defineCollection({
     resumeLabel: z.string(),
     servicesTitle: z.string(),
     servicesDescription: z.string(),
-    services: z.array(z.object({ title: z.string(), skills: z.array(z.string()) })),
+    services: z.array(z.object({ title: z.string(), description: z.string(), skills: z.array(z.string()) })),
     stats: z.array(z.string()),
     contactEyebrow: z.string(),
     contactTitle: z.string(),

@@ -44,11 +44,13 @@ collections:
           - {label: Texto LinkedIn, name: linkedInLabel, widget: string}
           - {label: Texto CV, name: resumeLabel, widget: string}
           - {label: Título servicios, name: servicesTitle, widget: string}
+          - {label: Descripción servicios, name: servicesDescription, widget: text}
           - label: Servicios
             name: services
             widget: list
             fields:
               - {label: Título, name: title, widget: string}
+              - {label: Descripción, name: description, widget: text}
               - {label: Habilidades, name: skills, widget: list, field: {label: Habilidad, name: skill, widget: string}}
           - {label: Métricas, name: stats, widget: list, field: {label: Métrica, name: stat, widget: string}}
           - {label: Pre-título contacto, name: contactEyebrow, widget: string}
