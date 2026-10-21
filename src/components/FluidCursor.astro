@@ -4,36 +4,109 @@
   const canvas = document.querySelector<HTMLCanvasElement>('.fluid-cursor');
   const precisePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const interactiveSelector =
+    'a, button, input, select, textarea, label, [role="button"], [data-cursor="clickable"], [tabindex]:not([tabindex="-1"])';
 
-  if (canvas && precisePointer.matches && !reducedMotion.matches) {
-    import('../lib/fluid/FluidSimulation')
-      .then(({ FluidSimulation }) => {
-        const simulation = new FluidSimulation(canvas);
-        const move = (event: PointerEvent) => {
-          if (!event.pointerType || event.pointerType === 'mouse' || event.pointerType === 'pen') {
-            simulation.move(event.clientX, event.clientY);
-          }
-        };
-        const click = (event: MouseEvent) => {
-          const target = event.target instanceof Element ? event.target : null;
-          const interactiveTarget = target?.closest(
-            'a, button, input, select, textarea, label, [role="button"], [data-cursor="clickable"], [tabindex]:not([tabindex="-1"])',
-          );
+  if (canvas && !reducedMotion.matches) {
+    type Simulation = import('../lib/fluid/FluidSimulation').FluidSimulation;
+    type TouchStart = { pointerId: number; x: number; y: number; startedAt: number };
 
-          if (!interactiveTarget) simulation.splatAt(event.clientX, event.clientY);
-        };
-        const visibility = () => (document.hidden ? simulation.stop() : simulation.start());
+    let simulation: Simulation | null = null;
+    let simulationPromise: Promise<Simulation | null> | null = null;
+    let touchStart: TouchStart | null = null;
+    let lastTouchEnd = 0;
 
-        window.addEventListener('pointermove', move, { passive: true });
-        window.addEventListener('click', click, { passive: true });
-        window.addEventListener('resize', simulation.resize, { passive: true });
-        window.addEventListener('blur', simulation.resetPointer);
-        document.documentElement.addEventListener('mouseleave', simulation.resetPointer);
-        document.addEventListener('visibilitychange', visibility);
-      })
-      .catch((error) => {
-        canvas.remove();
-        console.warn('The fluid cursor is not supported on this device.', error);
+    const isInteractive = (target: EventTarget | null) =>
+      target instanceof Element && Boolean(target.closest(interactiveSelector));
+
+    const loadSimulation = () => {
+      simulationPromise ??= import('../lib/fluid/FluidSimulation')
+        .then(({ FluidSimulation }) => {
+          simulation = new FluidSimulation(canvas, {
+            performanceProfile: precisePointer.matches ? 'default' : 'touch',
+          });
+          return simulation;
+        })
+        .catch((error) => {
+          canvas.remove();
+          console.warn('The fluid cursor is not supported on this device.', error);
+          return null;
+        });
+
+      return simulationPromise;
+    };
+
+    const move = (event: PointerEvent) => {
+      if (!event.pointerType || event.pointerType === 'mouse' || event.pointerType === 'pen') {
+        simulation?.move(event.clientX, event.clientY);
+        return;
+      }
+
+      if (
+        event.pointerType === 'touch' &&
+        touchStart?.pointerId === event.pointerId &&
+        Math.hypot(event.clientX - touchStart.x, event.clientY - touchStart.y) > 12
+      ) {
+        touchStart = null;
+      }
+    };
+
+    const pointerDown = (event: PointerEvent) => {
+      if (event.pointerType !== 'touch') return;
+
+      touchStart = null;
+      if (!event.isPrimary || isInteractive(event.target)) return;
+
+      touchStart = {
+        pointerId: event.pointerId,
+        x: event.clientX,
+        y: event.clientY,
+        startedAt: performance.now(),
+      };
+    };
+
+    const pointerUp = (event: PointerEvent) => {
+      if (event.pointerType !== 'touch' || touchStart?.pointerId !== event.pointerId) return;
+
+      const gesture = touchStart;
+      touchStart = null;
+      lastTouchEnd = performance.now();
+
+      const moved = Math.hypot(event.clientX - gesture.x, event.clientY - gesture.y);
+      const elapsed = lastTouchEnd - gesture.startedAt;
+      if (moved > 12 || elapsed > 700 || isInteractive(event.target)) return;
+
+      void loadSimulation().then((activeSimulation) => {
+        activeSimulation?.splatAt(event.clientX, event.clientY);
       });
+    };
+
+    const click = (event: MouseEvent) => {
+      if (!precisePointer.matches || performance.now() - lastTouchEnd < 800 || isInteractive(event.target)) return;
+
+      void loadSimulation().then((activeSimulation) => {
+        activeSimulation?.splatAt(event.clientX, event.clientY);
+      });
+    };
+
+    const cancelTouch = (event: PointerEvent) => {
+      if (touchStart?.pointerId === event.pointerId) touchStart = null;
+    };
+    const visibility = () => (document.hidden ? simulation?.stop() : simulation?.start());
+
+    window.addEventListener('pointerdown', pointerDown, { passive: true });
+    window.addEventListener('pointermove', move, { passive: true });
+    window.addEventListener('pointerup', pointerUp, { passive: true });
+    window.addEventListener('pointercancel', cancelTouch, { passive: true });
+    window.addEventListener('click', click, { passive: true });
+    window.addEventListener('resize', () => simulation?.resize(), { passive: true });
+    window.addEventListener('blur', () => {
+      touchStart = null;
+      simulation?.resetPointer();
+    });
+    document.documentElement.addEventListener('mouseleave', () => simulation?.resetPointer());
+    document.addEventListener('visibilitychange', visibility);
+
+    if (precisePointer.matches) void loadSimulation();
   }
 </script>

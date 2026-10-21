@@ -85,7 +85,7 @@ Projects use [ProjectCard.astro](../src/components/ProjectCard.astro). Published
 | [ProjectMarquee](../src/components/ProjectMarquee.astro) | Oversized editorial project label in duplicated continuous groups. | Home projects section. |
 | [StatsMarquee](../src/components/StatsMarquee.astro) | Orange metrics ticker with `GlobeMark` separator. | Home page. |
 | [CustomCursor](../src/components/CustomCursor.astro) | Default ring, clickable dot, accent dot, and 90px project-arrow state. | Mounted globally on fine pointers. |
-| [FluidCursor](../src/components/FluidCursor.astro) | Full-viewport fluid WebGL canvas with active opacity state. | Mounted globally on supported fine pointers. |
+| [FluidCursor](../src/components/FluidCursor.astro) | Full-viewport fluid WebGL canvas with active opacity state. | Mounted globally; mouse/pen uses continuous movement and background clicks, while touch uses background taps. |
 | [ContactGradient](../src/components/ContactGradient.tsx) | React/GradFlow visual background. | Footer only, hydrated with `client:visible`. |
 | `data-reveal` | Fade-and-rise reveal pattern. | Applied across page sections and case-study content. |
 | Service skill rows | Numbered hover sweep from dark to near-white. | Home services section. |
@@ -104,10 +104,10 @@ Projects use [ProjectCard.astro](../src/components/ProjectCard.astro). Published
 | Mobile menu | Overlay clipping, icon swap, and staged link/action/footer entries. | CSS; main clip transition `.65s cubic-bezier(.76,0,.24,1)`. | Global reduced-motion rule shortens transitions. |
 | Project and stats marquees | Scroll direction changes target velocity; `IntersectionObserver` controls transform updates. | Perpetual `requestAnimationFrame`; 34/44/54px/s for project marquee and 42/56/68px/s for ticker by viewport. | Initialization is skipped with reduced motion. |
 | Custom cursor | Pointer movement interpolates toward the target and updates semantic visual states. | Perpetual `requestAnimationFrame`; factor `0.24`. | Fine pointer only; hidden for coarse/no-hover input. |
-| Fluid cursor in `main` | Mouse/pen movement creates fluid splats. | Dynamically imports Three.js simulation; high-performance renderer, bloom and sunrays; rendering remains active for up to 6.5s after input. | Fine pointer only; disabled by reduced motion and on coarse/no-hover input. |
+| Fluid cursor in `main` | Mouse/pen movement and non-interactive background clicks create fluid splats. A stationary touch tap also creates a splat; scrolling gestures and interactive controls are ignored. | Dynamically imports the Three.js simulation; desktop uses the default renderer profile, while touch loads on first valid tap with reduced render-target resolution and pressure iterations. Bloom and sunrays remain enabled, and rendering continues for up to 6.5s after input. | Available on fine and coarse pointers. Touch taps allow up to 12px movement and 700ms duration. Disabled by reduced motion. |
 | Contact gradient | Footer gradient is mounted when visible. | React `GradFlow`, `client:visible`. | No direct reduced-motion condition is implemented in the local component. |
 
-`feat/fluid-background-click` adds background-click splats but is not merged into `main`; it is pending functionality and not part of the documented published interaction set.
+Background-click splats and touch-tap splats are integrated behavior in `main`.
 
 ## 8. Accessibility considerations
 
@@ -119,7 +119,7 @@ Projects use [ProjectCard.astro](../src/components/ProjectCard.astro). Published
 - Buttons, navigation links, mobile-menu links, and the footer email link have explicit focus-visible styling.
 - Decorative cursor, fluid canvas, icons where appropriate, and Lottie container use `aria-hidden`; the status rotator uses `aria-live="polite"`.
 - Project images use content-provided alternative text; the decorative image in a related-project card uses an empty alt value.
-- A global reduced-motion rule, component-level reduced-motion checks, and coarse-pointer cursor disabling are present.
+- A global reduced-motion rule and component-level reduced-motion checks are present. The custom cursor remains disabled for coarse pointers; the fluid canvas supports deliberate touch taps.
 
 ### Validation still needed
 
@@ -130,11 +130,11 @@ Projects use [ProjectCard.astro](../src/components/ProjectCard.astro). Published
 
 ## 9. Known findings and maintenance
 
-### Observed findings — 2026-10-20
+### Observed findings — 2026-10-21
 
 - CSS color, layout, and button variables exist, but many local visual values remain inline in the stylesheet; no complete formal token scale is implemented.
 - `CustomCursor` and both marquee components keep their animation-frame loops scheduled after initialization. Marquees avoid transform updates while out of view, but their loops are not cancelled. This is a performance observation, not a change request.
 - The Lottie animation depends on `lottie.host`. The contact gradient has no local reduced-motion check.
-- The draft-preview behavior and the pending fluid-click branch are documented in [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md).
+- The draft-preview behavior and current fluid interaction modes are documented in [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md).
 
 Update this document when committed work changes shared visual foundations, responsive rules, reusable components, or interactions integrated into `main`. Keep implementation workflow rules in [AGENTS.md](../AGENTS.md), and keep architecture/content behavior in [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md).

@@ -107,12 +107,12 @@ The actual Pages project, deployment history, domains, environment-variable valu
 - Dina and Pet Love Story exist in both locales as drafts.
 - The site includes static SEO metadata, canonical URLs, alternate-language links, a sitemap, a CMS shell, and GitHub OAuth Functions.
 
-### Diagnostic snapshot — 2026-10-20
+### Diagnostic snapshot — 2026-10-21
 
 - `getHomepageProjects()` selects `dina` for the home-page preview list without filtering `draft`. `ProjectCard` renders draft entries as non-linking articles. This differs from the README's broader statement that drafts do not appear publicly and should be clarified before changing draft behavior.
-- Click interaction for the fluid background was developed in `feat/fluid-background-click` but is not merged into `main`. It must not be described as published behavior until it is integrated.
+- The fluid background supports mouse/pen movement, non-interactive background clicks, and deliberate touch taps in `main`. Touch input initializes WebGL on the first valid tap, uses a reduced simulation profile, and ignores scrolling gestures and interactive controls.
 - The `pages` Zod schema requires `servicesDescription`, while the current Decap home-page form does not expose that field. CMS changes to this area should be tested against the build and schema.
-- No automated test suite, GitHub Actions workflow, or other CI configuration is tracked in the repository.
+- No automated test suite is tracked. The GitHub Actions `Quality` workflow runs `npm ci` and `npm run build` for pull requests to `main` and pushes to `main`; external branch enforcement remains dashboard configuration that cannot be verified from the repository.
 - Bundle-size and third-party dependency warnings should be evaluated separately; they are not resolved by this document.
 
 ## 12. Related documentation and maintenance

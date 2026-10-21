@@ -359,5 +359,5 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
 }
 
 @media (hover: none), (pointer: coarse) {
-  .fluid-cursor,.custom-cursor { display: none; }
+  .custom-cursor { display: none; }
 }

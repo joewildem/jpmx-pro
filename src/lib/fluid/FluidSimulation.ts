@@ -46,6 +46,15 @@ const SIMULATION = {
   sunraysWeight: 1,
 } as const;
 
+const TOUCH_SIMULATION = {
+  ...SIMULATION,
+  simResolution: 96,
+  dyeResolution: 512,
+  pressureIterations: 12,
+  bloomResolution: 128,
+  sunraysResolution: 96,
+};
+
 const VERTEX_SHADER = `
   precision highp float;
   attribute vec2 position;
@@ -323,6 +332,7 @@ export class FluidSimulation {
   private lastInput = 0;
   private lastFrame = performance.now();
   private disposed = false;
+  private config: typeof SIMULATION | typeof TOUCH_SIMULATION = SIMULATION;
 
   private advection = createPass(ADVECTION_SHADER, {
     source: null,
@@ -372,7 +382,12 @@ export class FluidSimulation {
     bloomIntensity: SIMULATION.bloomIntensity,
   });
 
-  constructor(private canvas: HTMLCanvasElement) {
+  constructor(
+    private canvas: HTMLCanvasElement,
+    options: { performanceProfile?: 'default' | 'touch' } = {},
+  ) {
+    const touchProfile = options.performanceProfile === 'touch';
+    this.config = touchProfile ? TOUCH_SIMULATION : SIMULATION;
     this.renderer = new WebGLRenderer({
       canvas,
       alpha: true,
@@ -381,7 +396,7 @@ export class FluidSimulation {
     });
     this.renderer.autoClear = true;
     this.renderer.setClearColor(0x000000, 0);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, touchProfile ? 1 : 1.25));
     this.renderer.toneMapping = NoToneMapping;
 
     const context = this.renderer.getContext();
@@ -389,10 +404,10 @@ export class FluidSimulation {
       throw new Error('Floating-point render targets are not available.');
     }
 
-    const { width, height } = this.getResolution(SIMULATION.simResolution);
-    const dyeSize = this.getResolution(SIMULATION.dyeResolution);
-    const bloomSize = this.getResolution(SIMULATION.bloomResolution);
-    const sunraysSize = this.getResolution(SIMULATION.sunraysResolution);
+    const { width, height } = this.getResolution(this.config.simResolution);
+    const dyeSize = this.getResolution(this.config.dyeResolution);
+    const bloomSize = this.getResolution(this.config.bloomResolution);
+    const sunraysSize = this.getResolution(this.config.sunraysResolution);
     this.velocity = new DoubleTarget(width, height);
     this.color = new DoubleTarget(dyeSize.width, dyeSize.height);
     this.pressure = new DoubleTarget(width, height);
@@ -451,10 +466,10 @@ export class FluidSimulation {
   resize = () => {
     if (this.disposed) return;
     this.renderer.setSize(window.innerWidth, window.innerHeight, false);
-    const { width, height } = this.getResolution(SIMULATION.simResolution);
-    const dyeSize = this.getResolution(SIMULATION.dyeResolution);
-    const bloomSize = this.getResolution(SIMULATION.bloomResolution);
-    const sunraysSize = this.getResolution(SIMULATION.sunraysResolution);
+    const { width, height } = this.getResolution(this.config.simResolution);
+    const dyeSize = this.getResolution(this.config.dyeResolution);
+    const bloomSize = this.getResolution(this.config.bloomResolution);
+    const sunraysSize = this.getResolution(this.config.sunraysResolution);
     this.resolution.set(width, height);
     this.aspect.set(window.innerWidth / Math.max(window.innerHeight, 1), 1);
     this.velocity.resize(width, height);
@@ -567,7 +582,7 @@ export class FluidSimulation {
     this.draw(this.clearPass, this.pressure.write);
     this.pressure.swap();
 
-    for (let iteration = 0; iteration < SIMULATION.pressureIterations; iteration += 1) {
+    for (let iteration = 0; iteration < this.config.pressureIterations; iteration += 1) {
       this.pressurePass.material.uniforms.pressure.value = this.pressure.read.texture;
       this.pressurePass.material.uniforms.divergence.value = this.divergence.texture;
       this.draw(this.pressurePass, this.pressure.write);
