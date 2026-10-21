@@ -26,6 +26,7 @@ body { margin: 0; background: var(--bg); color: var(--text); font: 400 15px/1.55
 main,.site-footer { position: relative; z-index: 1; }
 a { color: inherit; text-decoration: none; }
 img { display: block; width: 100%; height: auto; }
+.visually-hidden { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; overflow: hidden !important; clip: rect(0,0,0,0) !important; clip-path: inset(50%) !important; white-space: nowrap !important; border: 0 !important; }
 p { color: var(--muted); margin: 0 0 1rem; }
 h1,h2,h3,h4 { font-family: var(--display); font-weight: 400; line-height: 1.08; margin: 0; }
 h1 { font-size: clamp(2.5rem, 5vw, 5rem); letter-spacing: -.045em; }
@@ -133,6 +134,8 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
 .services-heading { padding: clamp(72px,8vw,128px) var(--inner-padding); border-bottom: 1px solid var(--line); }
 .services-eyebrow { margin: 0 0 clamp(36px,4vw,64px); color: var(--muted); font: 500 12px/1.2 'IBM Plex Sans Variable', sans-serif; letter-spacing: .12em; text-transform: uppercase; }
 .services-statement { max-width: 1220px; margin: 0; color: #eee; font: 400 80px/.98 var(--display); letter-spacing: -.045em; }
+.services-statement-word { white-space: nowrap; }
+.services-statement-char { color: inherit; }
 .services-list { display: grid; min-width: 0; border-bottom: 1px solid var(--line); grid-template-columns: repeat(4,minmax(0,1fr)); }
 .service { position: relative; isolation: isolate; display: flex; min-width: 0; min-height: 420px; overflow: hidden; padding: 32px; border-right: 1px solid var(--line); flex-direction: column; color: #eee; transition: opacity .45s ease, color .45s ease; }
 .service:last-child { border-right: 0; }

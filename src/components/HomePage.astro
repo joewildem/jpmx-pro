@@ -18,6 +18,7 @@ const heroName = 'Joe Palomino';
 const heroNameIndex = heroTitleLead.indexOf(heroName);
 const heroTitleBeforeName = heroNameIndex >= 0 ? heroTitleLead.slice(0, heroNameIndex) : heroTitleLead;
 const heroTitleAfterName = heroNameIndex >= 0 ? heroTitleLead.slice(heroNameIndex + heroName.length) : '';
+const servicesStatementWords = page.servicesDescription.split(' ');
 ---
 <BaseLayout title={page.seoTitle} description={page.seoDescription} locale={locale} path={locale === 'es' ? '/' : '/en/'}>
   <div id="top"></div>
@@ -65,7 +66,19 @@ const heroTitleAfterName = heroNameIndex >= 0 ? heroTitleLead.slice(heroNameInde
       <div class="container services-shell">
         <header class="services-heading" data-reveal>
           <h2 class="services-eyebrow">{page.servicesTitle}</h2>
-          <p class="services-statement">{page.servicesDescription}</p>
+          <p class="services-statement" data-scroll-highlight>
+            <span class="visually-hidden">{page.servicesDescription}</span>
+            <span class="services-statement-visual" aria-hidden="true">
+              {servicesStatementWords.map((word, wordIndex) => (
+                <>
+                  <span class="services-statement-word">
+                    {Array.from(word).map((character) => <span class="services-statement-char">{character}</span>)}
+                  </span>
+                  {wordIndex < servicesStatementWords.length - 1 && ' '}
+                </>
+              ))}
+            </span>
+          </p>
         </header>
         <div class="services-list">
           {page.services.map((service, index) => (
@@ -114,6 +127,27 @@ const heroTitleAfterName = heroNameIndex >= 0 ? heroTitleLead.slice(heroNameInde
         },
       });
     }
+
+    document.querySelectorAll<HTMLElement>('[data-scroll-highlight]').forEach((statement) => {
+      const characters = gsap.utils.toArray<HTMLElement>('.services-statement-char', statement);
+      if (characters.length === 0) return;
+
+      statement.classList.add('is-scroll-highlighted');
+      gsap.fromTo(characters, {
+        color: '#454545',
+      }, {
+        color: '#eeeeee',
+        duration: 1,
+        ease: 'none',
+        stagger: 0.04,
+        scrollTrigger: {
+          trigger: statement,
+          start: 'top 72%',
+          end: 'bottom 32%',
+          scrub: true,
+        },
+      });
+    });
   }
 
   document.querySelectorAll<HTMLElement>('[data-activity-rotator]').forEach((track) => {
