@@ -45,6 +45,7 @@ const pages = defineCollection({
     locale: z.enum(['es', 'en']),
     seoTitle: z.string(),
     seoDescription: z.string(),
+    portfolioLabel: z.string(),
     location: z.string(),
     availability: z.string(),
     heroTitle: z.string(),

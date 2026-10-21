@@ -28,6 +28,7 @@ collections:
           - {label: Idioma, name: locale, widget: hidden, default: es}
           - {label: Título SEO, name: seoTitle, widget: string}
           - {label: Descripción SEO, name: seoDescription, widget: text}
+          - {label: Etiqueta de portafolio, name: portfolioLabel, widget: string}
           - {label: Ubicación, name: location, widget: string}
           - {label: Disponibilidad, name: availability, widget: string}
           - {label: Título principal, name: heroTitle, widget: string}

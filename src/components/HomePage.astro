@@ -30,10 +30,15 @@ const servicesStatementLeadWordCount = servicesStatementLeadEnd >= 0
   <Header locale={locale} />
   <main>
     <div class="hero-viewport">
-      <div class="hero-meta"><div class="container"><span>{page.location}</span><span class="availability availability--meta">{page.availability}</span></div></div>
+      <div class="hero-meta">
+        <div class="container">
+          <span class="hero-meta-portfolio">{page.portfolioLabel}</span>
+          <span class="availability availability--meta">{page.availability}</span>
+          <span class="hero-meta-location">{page.location}</span>
+        </div>
+      </div>
       <section class="hero">
         <div class="hero-content container" data-reveal>
-          <p class="availability availability--hero">{page.availability}</p>
           <h1>
             <span>{heroTitleBeforeName}{heroNameIndex >= 0 && <span class="hero-name">{heroName}</span>}{heroTitleAfterName}</span>
             {heroTitleRole && <span>{heroTitleRole}</span>}
