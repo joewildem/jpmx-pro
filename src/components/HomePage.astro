@@ -133,7 +133,7 @@ const heroTitleAfterName = heroNameIndex >= 0 ? heroTitleLead.slice(heroNameInde
     const moveToItem = () => {
       const item = track.firstElementChild;
       if (!(item instanceof HTMLElement)) return;
-      track.style.transform = `translateY(${-index * item.offsetHeight}px)`;
+      track.style.transform = `translateY(${-index * item.getBoundingClientRect().height}px)`;
     };
 
     const showNextItem = () => {
