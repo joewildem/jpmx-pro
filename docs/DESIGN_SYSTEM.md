@@ -32,7 +32,7 @@ Shared visual treatments include 1px line borders, pill-shaped controls with `bo
 
 ## 3. Layout and responsive rules
 
-The shared `.container` uses `width: var(--page)` and automatic inline margins. Sections use top borders and `clamp(80px, 11vw, 160px)` vertical padding. The hero is a three-row viewport layout: metadata, centered main content, and a status bar.
+The shared `.container` uses `width: var(--page)` and automatic inline margins. Sections use top borders and `clamp(80px, 11vw, 160px)` vertical padding. The hero is a three-row viewport layout: metadata, centered main content, and a status bar. Its height uses `100svh` (with a `100vh` fallback) so collapsing tablet and mobile browser chrome does not resize the grid during the initial scroll gesture.
 
 Confirmed responsive ranges in [src/styles/global.css](../src/styles/global.css):
 
@@ -45,7 +45,7 @@ Confirmed responsive ranges in [src/styles/global.css](../src/styles/global.css)
 | `max-width: 809px` | Replaces desktop navigation with the mobile menu; changes projects to two columns; stacks about content and service cards into single-column layouts; adapts case-study grids. |
 | `max-width: 479px` | Changes project cards to one column and further compacts buttons, hero metadata, menu, services, and footer. |
 | `hover: hover` and `pointer: fine` | Hides the native cursor for interactive elements. |
-| `hover: none` or `pointer: coarse` | Hides the custom cursor; the fluid canvas remains available for deliberate touch taps. |
+| `hover: none` or `pointer: coarse` | Hides the custom cursor; the fluid canvas remains available for touch taps and continuous finger movement. |
 | `prefers-reduced-motion: reduce` | Reduces global animation/transition duration and simplifies visual effects. |
 
 Desktop project cards use an asymmetric three-column grid. At `809px` or below, they use two columns and the third card spans both columns; at `479px` or below, all cards use one column. Services use a full-width introduction followed by four cards, change to two columns below `1280px`, and stack into one column below `810px`. Case-study metadata changes from four to two columns below `809px`.
@@ -85,7 +85,7 @@ Projects use [ProjectCard.astro](../src/components/ProjectCard.astro). Published
 | [ProjectMarquee](../src/components/ProjectMarquee.astro) | Oversized editorial project label in duplicated continuous groups. | Home projects section. |
 | [StatsMarquee](../src/components/StatsMarquee.astro) | Orange metrics ticker with `GlobeMark` separator. | Home page. |
 | [CustomCursor](../src/components/CustomCursor.astro) | Default ring, clickable dot, accent dot, and 90px project-arrow state. | Mounted globally on fine pointers. |
-| [FluidCursor](../src/components/FluidCursor.astro) | Full-viewport fluid WebGL canvas with active opacity state. | Mounted globally; mouse/pen uses continuous movement and background clicks, while touch uses background taps. |
+| [FluidCursor](../src/components/FluidCursor.astro) | Full-viewport fluid WebGL canvas with active opacity state. | Mounted globally; mouse/pen uses continuous movement and background clicks, while touch supports both background taps and continuous finger movement. |
 | [ContactGradient](../src/components/ContactGradient.tsx) | React/GradFlow visual background. | Footer only, hydrated with `client:visible`. |
 | `data-reveal` | Fade-and-rise reveal pattern. | Applied across page sections and case-study content. |
 | Service cards | Non-linking cards with accent numbers, regular-weight descriptions, and skill pills; fine-pointer hover fills the active card orange, changes its title to italic Newsreader, gives the pills a dark outline and text, and dims its siblings. | Home services section. |
@@ -106,10 +106,10 @@ Projects use [ProjectCard.astro](../src/components/ProjectCard.astro). Published
 | Service cards | Fine-pointer hover fills the active card from bottom to top, changes the title from Space Grotesk to italic Newsreader, switches pills to a dark outline and text, and lowers sibling opacity. | CSS transform `.8s cubic-bezier(.16,1,.3,1)`; sibling opacity `.32`. | Hover treatment is restricted to `hover: hover` and `pointer: fine`; global reduced-motion rules shorten the transitions. |
 | Project and stats marquees | Scroll direction changes target velocity; `IntersectionObserver` controls transform updates. | Perpetual `requestAnimationFrame`; 34/44/54px/s for project marquee and 48/64/78px/s for ticker by viewport. | Initialization is skipped with reduced motion. |
 | Custom cursor | Pointer movement interpolates toward the target and updates semantic visual states. | Perpetual `requestAnimationFrame`; factor `0.24`. | Fine pointer only; hidden for coarse/no-hover input. |
-| Fluid cursor in `main` | Mouse/pen movement and non-interactive background clicks create fluid splats. A stationary touch tap also creates a splat; scrolling gestures and interactive controls are ignored. | Dynamically imports the Three.js simulation; desktop uses the default renderer profile, while touch loads on first valid tap with reduced render-target resolution and pressure iterations. Bloom and sunrays remain enabled, and rendering continues for up to 6.5s after input. | Available on fine and coarse pointers. Touch taps allow up to 12px movement and 700ms duration. Disabled by reduced motion. |
+| Fluid cursor in `main` | Mouse/pen movement and non-interactive background clicks create fluid splats. A stationary touch tap creates an impulse, while continuous finger movement feeds the same fluid trail without preventing the page's native scroll. Interactive controls are ignored. | Dynamically imports the Three.js simulation; desktop uses the default renderer profile, while touch loads on first eligible contact with reduced render-target resolution and pressure iterations. Bloom and sunrays remain enabled, and rendering continues for up to 6.5s after input. | Available on fine and coarse pointers. Touch taps allow up to 12px movement and 700ms duration; touch listeners remain passive. Disabled by reduced motion. |
 | Contact gradient | Footer gradient is mounted when visible. | React `GradFlow`, `client:visible`. | No direct reduced-motion condition is implemented in the local component. |
 
-Background-click splats and touch-tap splats are integrated behavior in `main`.
+Background-click splats, touch-tap splats, and passive touch-drag trails are integrated behavior in `main`.
 
 ## 8. Accessibility considerations
 
@@ -121,7 +121,7 @@ Background-click splats and touch-tap splats are integrated behavior in `main`.
 - Buttons, navigation links, mobile-menu links, and the footer email link have explicit focus-visible styling.
 - Decorative cursor, fluid canvas, icons where appropriate, and Lottie container use `aria-hidden`; the status rotator uses `aria-live="polite"`.
 - Project images use content-provided alternative text; the decorative image in a related-project card uses an empty alt value.
-- A global reduced-motion rule and component-level reduced-motion checks are present. The custom cursor remains disabled for coarse pointers; the fluid canvas supports deliberate touch taps.
+- A global reduced-motion rule and component-level reduced-motion checks are present. The custom cursor remains disabled for coarse pointers; the fluid canvas supports deliberate touch taps and passive touch-drag trails.
 
 ### Validation still needed
 

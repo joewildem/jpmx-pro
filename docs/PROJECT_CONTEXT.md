@@ -71,7 +71,7 @@ Each home-page service contains a localized title, short description, and skill 
 
 The principal page components are [HomePage.astro](../src/components/HomePage.astro), [AboutPage.astro](../src/components/AboutPage.astro), and [ProjectPage.astro](../src/components/ProjectPage.astro). [Header.astro](../src/components/Header.astro) provides desktop and accessible mobile navigation; [Footer.astro](../src/components/Footer.astro) provides contact content and the contact gradient.
 
-The home page includes GSAP project-card reveals, a rotating availability message, a Lottie scroll cue, service cards with a bottom-to-top hover fill, and project/statistics marquees that react to scroll direction. `CustomCursor` supplies pointer states for fine pointers. In `main`, `FluidCursor` mounts the Three.js-based fluid background simulation and responds to mouse/pen movement, background clicks, and deliberate touch taps. `ContactGradient` is a visible-on-demand React island powered by GradFlow.
+The home page includes GSAP project-card reveals, a rotating availability message, a Lottie scroll cue, service cards with a bottom-to-top hover fill, and project/statistics marquees that react to scroll direction. `CustomCursor` supplies pointer states for fine pointers. In `main`, `FluidCursor` mounts the Three.js-based fluid background simulation and responds to mouse/pen movement, background clicks, deliberate touch taps, and passive touch-drag trails that preserve native page scrolling. `ContactGradient` is a visible-on-demand React island powered by GradFlow.
 
 Motion code checks reduced-motion preferences where implemented. Shared visual language, responsive layout, typography, and component styling live primarily in [src/styles/global.css](../src/styles/global.css).
 
@@ -109,10 +109,10 @@ The actual Pages project, deployment history, domains, environment-variable valu
 - Dina and Pet Love Story exist in both locales as drafts.
 - The site includes static SEO metadata, canonical URLs, alternate-language links, a sitemap, a CMS shell, and GitHub OAuth Functions.
 
-### Diagnostic snapshot — 2026-10-21
+### Diagnostic snapshot — 2026-10-22
 
 - `getHomepageProjects()` selects `dina` for the home-page preview list without filtering `draft`. `ProjectCard` renders draft entries as non-linking articles. This differs from the README's broader statement that drafts do not appear publicly and should be clarified before changing draft behavior.
-- The fluid background supports mouse/pen movement, non-interactive background clicks, and deliberate touch taps in `main`. Touch input initializes WebGL on the first valid tap, uses a reduced simulation profile, and ignores scrolling gestures and interactive controls.
+- The fluid background supports mouse/pen movement, non-interactive background clicks, deliberate touch taps, and passive touch-drag trails in `main`. Touch input initializes WebGL on the first eligible contact, uses a reduced simulation profile, preserves native scrolling, and ignores gestures that begin on interactive controls.
 - The `pages` Zod schema and Decap home-page form both expose `servicesDescription` plus each service title, description, and skill list.
 - No automated test suite is tracked. The GitHub Actions `Quality` workflow runs `npm ci` and `npm run build` for pull requests to `main` and pushes to `main`; external branch enforcement remains dashboard configuration that cannot be verified from the repository.
 - Bundle-size and third-party dependency warnings should be evaluated separately; they are not resolved by this document.
