@@ -44,7 +44,7 @@ const servicesStatementLeadWordCount = servicesStatementLeadEnd >= 0
             {heroTitleRole && (
               <span class="hero-role" aria-hidden="true">
                 <span class="hero-role-measure">{heroTitleRole}</span>
-                <span class="hero-role-scramble" data-scramble-role>{heroTitleRole}</span>
+                <span class="hero-role-scramble" data-scramble-role data-scramble-text={heroTitleRole}></span>
               </span>
             )}
           </h1>
@@ -125,22 +125,23 @@ const servicesStatementLeadWordCount = servicesStatementLeadEnd >= 0
   gsap.registerPlugin(ScrollTrigger);
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const heroRole = document.querySelector<HTMLElement>('[data-scramble-role]');
+  const roleText = heroRole?.dataset.scrambleText?.trim();
+
+  if (reduceMotion && heroRole && roleText) {
+    heroRole.textContent = roleText;
+  }
 
   if (!reduceMotion) {
-    const heroRole = document.querySelector<HTMLElement>('[data-scramble-role]');
+    if (heroRole && roleText) {
+      const scrambler = new Scrambler();
+      const handleScramble = (text: string) => {
+        heroRole.textContent = text;
+      };
 
-    if (heroRole) {
-      const roleText = heroRole.textContent?.trim();
-      if (roleText) {
-        const scrambler = new Scrambler();
-        const handleScramble = (text: string) => {
-          heroRole.textContent = text;
-        };
-
-        window.setTimeout(() => {
-          scrambler.scramble(roleText, handleScramble);
-        }, 900);
-      }
+      window.requestAnimationFrame(() => {
+        scrambler.scramble(roleText, handleScramble);
+      });
     }
 
     const projectCards = gsap.utils.toArray<HTMLElement>('[data-project-reveal]');
