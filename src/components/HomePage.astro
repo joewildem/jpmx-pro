@@ -120,6 +120,7 @@ const servicesStatementLeadWordCount = servicesStatementLeadEnd >= 0
   import { gsap } from 'gsap';
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
   import lottie from 'lottie-web/build/player/lottie_light';
+  import Scrambler from 'scrambling-text';
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -131,37 +132,13 @@ const servicesStatementLeadWordCount = servicesStatementLeadEnd >= 0
     if (heroRole) {
       const roleText = heroRole.textContent?.trim();
       if (roleText) {
-        const finalCharacters = Array.from(roleText);
-        const shuffleCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        const duration = 1_400;
-        const frameDuration = 42;
+        const scrambler = new Scrambler();
+        const handleScramble = (text: string) => {
+          heroRole.textContent = text;
+        };
 
         window.setTimeout(() => {
-          let previousFrame = -1;
-
-          const shuffle = (startTime: number, currentTime: number) => {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const currentFrame = Math.floor(elapsed / frameDuration);
-
-            if (currentFrame !== previousFrame) {
-              const revealedCharacters = Math.floor(progress * finalCharacters.length);
-              heroRole.textContent = finalCharacters.map((character, index) => {
-                if (character === ' ' || index < revealedCharacters) return character;
-                return shuffleCharacters[Math.floor(Math.random() * shuffleCharacters.length)];
-              }).join('');
-              previousFrame = currentFrame;
-            }
-
-            if (progress < 1) {
-              window.requestAnimationFrame((nextTime) => shuffle(startTime, nextTime));
-              return;
-            }
-
-            heroRole.textContent = roleText;
-          };
-
-          window.requestAnimationFrame((startTime) => shuffle(startTime, startTime));
+          scrambler.scramble(roleText, handleScramble);
         }, 900);
       }
     }

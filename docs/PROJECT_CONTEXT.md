@@ -19,7 +19,7 @@ GitHub is the configured repository and content backend. Decap CMS is served at 
 - Node.js 24 and npm; `npm run build` runs `astro check` followed by the production build.
 - React for the `ContactGradient` interactive island; Astro is used for static page and component composition.
 - Astro Content Collections, JSON files, and Zod schemas for content validation.
-- GSAP, Lottie, Three.js, GradFlow, and Hugeicons for interactions, motion, WebGL, gradients, and icons.
+- GSAP, Scrambling Text, Lottie, Three.js, GradFlow, and Hugeicons for interactions, motion, WebGL, gradients, and icons.
 - Decap CMS, Cloudflare Pages Functions, and GitHub OAuth for editorial administration.
 - Sharp for the image-optimization script.
 
@@ -71,7 +71,7 @@ Each home-page service contains a localized title, short description, and skill 
 
 The principal page components are [HomePage.astro](../src/components/HomePage.astro), [AboutPage.astro](../src/components/AboutPage.astro), and [ProjectPage.astro](../src/components/ProjectPage.astro). [Header.astro](../src/components/Header.astro) provides desktop and accessible mobile navigation; [Footer.astro](../src/components/Footer.astro) provides contact content and the contact gradient.
 
-The home page includes a local character-shuffle entrance for the hero role, GSAP project-card reveals, a rotating availability message, a Lottie scroll cue, service cards with a bottom-to-top hover fill, and project/statistics marquees that react to scroll direction. `CustomCursor` supplies pointer states for fine pointers. In `main`, `FluidCursor` mounts the Three.js-based fluid background simulation and responds to mouse/pen movement, background clicks, deliberate touch taps, and passive touch-drag trails that preserve native page scrolling. `ContactGradient` is a visible-on-demand React island powered by GradFlow.
+The home page includes a `scrambling-text` entrance for the hero role, GSAP project-card reveals, a rotating availability message, a Lottie scroll cue, service cards with a bottom-to-top hover fill, and project/statistics marquees that react to scroll direction. `CustomCursor` supplies pointer states for fine pointers. In `main`, `FluidCursor` mounts the Three.js-based fluid background simulation and responds to mouse/pen movement, background clicks, deliberate touch taps, and passive touch-drag trails that preserve native page scrolling. `ContactGradient` is a visible-on-demand React island powered by GradFlow.
 
 Motion code checks reduced-motion preferences where implemented. Shared visual language, responsive layout, typography, and component styling live primarily in [src/styles/global.css](../src/styles/global.css).
 
