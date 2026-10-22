@@ -14,7 +14,7 @@ This document records the visual language, reusable patterns, and interaction be
 
 | Area | Existing values |
 | --- | --- |
-| Color | `--bg: #0b0b0b`, `--surface: #111`, `--text: #f0f0f0`, `--muted: #a6a6a6`, `--line: rgba(255,255,255,.1)`, `--accent: #f55c1b` |
+| Color | `--bg: #111010`, `--surface: #111`, `--text: #f0f0f0`, `--muted: #a6a6a6`, `--line: rgba(255,255,255,.1)`, `--accent: #f55c1b` |
 | Layout | `--gutter`, `--inner-padding`, `--hero-content-padding`, `--page` |
 | Controls | `--button-font-size: 18px`, `--button-height: 48px` |
 | Hero structure | `--hero-meta-height: 80px`, `--now-bar-height: 80px` |
