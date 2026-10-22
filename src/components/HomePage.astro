@@ -41,7 +41,12 @@ const servicesStatementLeadWordCount = servicesStatementLeadEnd >= 0
         <div class="hero-content container" data-reveal>
           <h1 aria-label={page.heroTitle}>
             <span aria-hidden="true">{heroTitleBeforeName}{heroNameIndex >= 0 && <span class="hero-name">{heroName}</span>}{heroTitleAfterName}</span>
-            {heroTitleRole && <span data-scramble-role aria-hidden="true">{heroTitleRole}</span>}
+            {heroTitleRole && (
+              <span class="hero-role" aria-hidden="true">
+                <span class="hero-role-measure">{heroTitleRole}</span>
+                <span class="hero-role-scramble" data-scramble-role>{heroTitleRole}</span>
+              </span>
+            )}
           </h1>
           <p class="hero-description">{page.heroDescription}</p>
           <div class="button-row"><a class="button button--secondary" href="#projects">{page.primaryCta}</a><a class="button button--primary" href="mailto:hello@jpmx.pro">{page.contactCta}</a></div>
@@ -129,7 +134,7 @@ const servicesStatementLeadWordCount = servicesStatementLeadEnd >= 0
       if (roleText) {
         gsap.to(heroRole, {
           duration: 1.4,
-          delay: 0.45,
+          delay: 0.9,
           ease: 'none',
           scrambleText: {
             text: roleText,
