@@ -34,14 +34,14 @@ const servicesStatementLeadWordCount = servicesStatementLeadEnd >= 0
         <div class="container">
           <span class="hero-meta-portfolio">{page.portfolioLabel}</span>
           <span class="availability availability--meta">{page.availability}</span>
-          <span class="hero-meta-location">{page.location}, <time data-cdmx-time datetime="">--:--</time></span>
+          <span class="hero-meta-location">{page.location} // <time data-cdmx-time data-time-seconds datetime="">--:--:--</time></span>
         </div>
       </div>
       <section class="hero">
         <div class="hero-content container" data-reveal>
-          <h1>
-            <span>{heroTitleBeforeName}{heroNameIndex >= 0 && <span class="hero-name">{heroName}</span>}{heroTitleAfterName}</span>
-            {heroTitleRole && <span>{heroTitleRole}</span>}
+          <h1 aria-label={page.heroTitle}>
+            <span aria-hidden="true">{heroTitleBeforeName}{heroNameIndex >= 0 && <span class="hero-name">{heroName}</span>}{heroTitleAfterName}</span>
+            {heroTitleRole && <span data-scramble-role aria-hidden="true">{heroTitleRole}</span>}
           </h1>
           <p class="hero-description">{page.heroDescription}</p>
           <div class="button-row"><a class="button button--secondary" href="#projects">{page.primaryCta}</a><a class="button button--primary" href="mailto:hello@jpmx.pro">{page.contactCta}</a></div>
@@ -113,14 +113,34 @@ const servicesStatementLeadWordCount = servicesStatementLeadEnd >= 0
 
 <script>
   import { gsap } from 'gsap';
+  import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
   import lottie from 'lottie-web/build/player/lottie_light';
 
-  gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin);
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (!reduceMotion) {
+    const heroRole = document.querySelector<HTMLElement>('[data-scramble-role]');
+
+    if (heroRole) {
+      const roleText = heroRole.textContent?.trim();
+      if (roleText) {
+        gsap.to(heroRole, {
+          duration: 1.4,
+          delay: 0.45,
+          ease: 'none',
+          scrambleText: {
+            text: roleText,
+            chars: 'upperAndLowerCase',
+            speed: 0.65,
+            tweenLength: false,
+          },
+        });
+      }
+    }
+
     const projectCards = gsap.utils.toArray<HTMLElement>('[data-project-reveal]');
 
     if (projectCards.length > 0) {

@@ -62,15 +62,24 @@ const socialItems = [
     minute: '2-digit',
     hour12: false,
   });
+  const mexicoCityTimeWithSeconds = new Intl.DateTimeFormat('es-MX', {
+    timeZone: 'America/Mexico_City',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  });
 
   const updateMexicoCityTime = () => {
     const now = new Date();
     document.querySelectorAll<HTMLTimeElement>('[data-cdmx-time]').forEach((element) => {
-      element.textContent = mexicoCityTime.format(now);
+      element.textContent = element.hasAttribute('data-time-seconds')
+        ? mexicoCityTimeWithSeconds.format(now)
+        : mexicoCityTime.format(now);
       element.dateTime = now.toISOString();
     });
   };
 
   updateMexicoCityTime();
-  window.setInterval(updateMexicoCityTime, 30_000);
+  window.setInterval(updateMexicoCityTime, 1_000);
 </script>

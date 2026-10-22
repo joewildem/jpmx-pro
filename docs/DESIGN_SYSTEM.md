@@ -68,7 +68,7 @@ All button patterns share flex alignment, a variable height, display typography,
 
 ## 5. Page composition and patterns
 
-The home page is composed by [HomePage.astro](../src/components/HomePage.astro): hero, availability/status bar, project marquee and cards, services, statistics ticker, and shared footer. The hero centers a large two-line display treatment, an IBM Plex description, and contact/project actions.
+The home page is composed by [HomePage.astro](../src/components/HomePage.astro): hero, availability/status bar, project marquee and cards, services, statistics ticker, and shared footer. The hero centers a large two-line display treatment, an IBM Plex description, and contact/project actions. Its location metadata presents Toluca and a Mexico City-zone clock with seconds, separated by `//`.
 
 Projects use [ProjectCard.astro](../src/components/ProjectCard.astro). Published projects render as links with image-scale hover behavior. Draft projects render as non-linking preview articles. The home-page selection currently includes Afore Móvil, Calimax, and Dina; Dina is a draft preview without a public detail route. See [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) for the content-routing distinction.
 
@@ -97,6 +97,7 @@ Projects use [ProjectCard.astro](../src/components/ProjectCard.astro). Published
 | Interaction | Trigger and behavior | Timing / technology | Device and reduced-motion handling |
 | --- | --- | --- | --- |
 | General reveal | `IntersectionObserver` adds `.is-visible` to `data-reveal` elements. | CSS opacity/translate transition: `.75s`; transform easing `cubic-bezier(.2,.7,.2,1)`. | Reduced motion makes the elements immediately visible. |
+| Hero role scramble | On initial page entry, the visual “Senior Product Designer” line resolves from mixed-case scrambled characters to its final text. The heading keeps a stable accessible name while the visual span changes. | GSAP `ScrambleTextPlugin`: `1.4s`, `0.45s` delay, no easing, `upperAndLowerCase` characters, speed `.65`. | Runs once on both localized home pages and is skipped with reduced motion. |
 | Project-card reveal | ScrollTrigger reveals project cards. | GSAP: `y: 40`, `0.6s`, `power2.out`, `.15s` stagger; starts at `top 80%`, once. | Does not run when reduced motion is set. |
 | Services statement highlight | Once the complete editorial heading reaches the center of the viewport, it is pinned while scrolling progressively changes its characters from gray to near-white. The block is released after the color sequence; reversing the scroll pins it again and reverses the highlight. | GSAP ScrollTrigger with `pin`, `scrub`, character stagger `.04`, and a scroll distance of `max(110vh, 720px)`. | The visual character spans are hidden from assistive technology in favor of the complete semantic text. The pin and animation are skipped and the statement remains near-white with reduced motion. |
 | Availability dot | Alternates visual opacity. | CSS `availability-pulse`, `1.3s`, `cubic-bezier(.34,1.56,.64,1)`. | Static under reduced motion. |
