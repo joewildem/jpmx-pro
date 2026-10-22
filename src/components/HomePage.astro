@@ -118,11 +118,10 @@ const servicesStatementLeadWordCount = servicesStatementLeadEnd >= 0
 
 <script>
   import { gsap } from 'gsap';
-  import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
   import lottie from 'lottie-web/build/player/lottie_light';
 
-  gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin);
+  gsap.registerPlugin(ScrollTrigger);
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -132,17 +131,38 @@ const servicesStatementLeadWordCount = servicesStatementLeadEnd >= 0
     if (heroRole) {
       const roleText = heroRole.textContent?.trim();
       if (roleText) {
-        gsap.to(heroRole, {
-          duration: 1.4,
-          delay: 0.9,
-          ease: 'none',
-          scrambleText: {
-            text: roleText,
-            chars: 'upperAndLowerCase',
-            speed: 0.65,
-            tweenLength: false,
-          },
-        });
+        const finalCharacters = Array.from(roleText);
+        const shuffleCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const duration = 1_400;
+        const frameDuration = 42;
+
+        window.setTimeout(() => {
+          let previousFrame = -1;
+
+          const shuffle = (startTime: number, currentTime: number) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const currentFrame = Math.floor(elapsed / frameDuration);
+
+            if (currentFrame !== previousFrame) {
+              const revealedCharacters = Math.floor(progress * finalCharacters.length);
+              heroRole.textContent = finalCharacters.map((character, index) => {
+                if (character === ' ' || index < revealedCharacters) return character;
+                return shuffleCharacters[Math.floor(Math.random() * shuffleCharacters.length)];
+              }).join('');
+              previousFrame = currentFrame;
+            }
+
+            if (progress < 1) {
+              window.requestAnimationFrame((nextTime) => shuffle(startTime, nextTime));
+              return;
+            }
+
+            heroRole.textContent = roleText;
+          };
+
+          window.requestAnimationFrame((startTime) => shuffle(startTime, startTime));
+        }, 900);
       }
     }
 
