@@ -134,7 +134,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.6rem); letter-spacing: -.035em; }
 .about-images img { height: 520px; object-fit: cover; border-radius: 24px; }
 .services-section { padding: 0 0 clamp(96px,10vw,160px); border-top: 1px solid var(--line); scroll-margin-top: 64px; }
 .services-shell { border-inline: 1px solid var(--line); }
-.services-heading { width: 100vw; padding: clamp(72px,8vw,128px) calc(var(--gutter) + var(--inner-padding)); margin-left: calc(50% - 50vw); border-bottom: 1px solid var(--line); }
+.services-heading { display: flex; width: 100vw; min-height: calc(100vh - 64px); min-height: calc(100dvh - 64px); padding: clamp(72px,8vw,128px) calc(var(--gutter) + var(--inner-padding)); margin-left: calc(50% - 50vw); border-bottom: 1px solid var(--line); flex-direction: column; justify-content: center; }
 .services-eyebrow { margin: 0 0 clamp(20px,2.2vw,32px); color: var(--accent); font-family: var(--mono); font-size: 14px; font-weight: 400; line-height: normal; letter-spacing: .72px; text-transform: uppercase; }
 .services-statement { max-width: 1220px; margin: 0; color: #eee; font: 400 80px/.98 var(--display); letter-spacing: -.045em; }
 .services-statement-word { white-space: nowrap; }

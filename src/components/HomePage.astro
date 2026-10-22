@@ -92,7 +92,7 @@ const servicesStatementLeadWordCount = servicesStatementLeadEnd >= 0
         </header>
         <div class="services-list">
           {page.services.map((service, index) => (
-            <article class="service" aria-labelledby={`service-${index}`} data-reveal>
+            <article class="service" aria-labelledby={`service-${index}`}>
               <span class="service-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
               <div class="service-copy">
                 <h3 id={`service-${index}`}>{service.title}</h3>
@@ -153,7 +153,7 @@ const servicesStatementLeadWordCount = servicesStatementLeadEnd >= 0
         stagger: 0.04,
         scrollTrigger: {
           trigger: heading,
-          start: 'center center',
+          start: 'top top+=64',
           end: () => `+=${Math.max(window.innerHeight * 1.1, 720)}`,
           scrub: true,
           pin: heading,
